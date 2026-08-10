@@ -1844,6 +1844,55 @@
             }
         }
 
+        // ========================================================
+        // TỰ ĐỘNG LẤY DỮ LIỆU ĐỘNG TỪ SUPABASE KHI MỞ TRANG
+        // ========================================================
+        window.addEventListener('DOMContentLoaded', async () => {
+            if (supabaseClient) {
+                // Check active session
+                const { data: { session } } = await supabaseClient.auth.getSession();
+                if (session && session.user) {
+                    updateUserUI(session.user);
+                }
+                // Load Dynamic Data
+                loadQuotesFromSupabase();
+            }
+        });
+
+        async function loadQuotesFromSupabase() {
+            if (!supabaseClient) return;
+            try {
+                const { data: quotes, error } = await supabaseClient
+                    .from('bible_quotes')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (error || !quotes || quotes.length === 0) return;
+
+                const grid = document.getElementById('quotesGrid');
+                if (!grid) return;
+
+                // Render dynamic quotes from Supabase
+                let html = '';
+                quotes.forEach(q => {
+                    html += `
+                    <div class="quote-card" data-cat="${q.category}">
+                        <p class="quote-body scripture-font">"${q.scripture_text}"</p>
+                        <div class="quote-footer">
+                            <span class="quote-ref-text">${q.reference}</span>
+                            <div>
+                                <button class="icon-btn" onclick="copyText('${q.scripture_text} - ${q.reference}')" title="Sao chép"><i class="fa-regular fa-copy"></i></button>
+                                <button class="icon-btn" onclick="shareQuote('${q.reference}', '${q.scripture_text}')" title="Chia sẻ"><i class="fa-solid fa-share-nodes"></i></button>
+                            </div>
+                        </div>
+                    </div>`;
+                });
+                grid.innerHTML = html;
+            } catch (err) {
+                console.log("Dùng dữ liệu mặc định:", err);
+            }
+        }
+
         // Toast Notification System
         function showToast(message) {
             const toast = document.getElementById('toast');
