@@ -1275,50 +1275,155 @@
             </div>
         </section>
 
-        <!-- 7. ADMIN MANAGEMENT DASHBOARD SECTION (TRANG QUẢN TRỊ ADMIN) -->
+        <!-- 7. ADMIN MANAGEMENT DASHBOARD SECTION (TRANG QUẢN TRỊ ADMIN TOÀN DIỆN) -->
         <section id="admin" class="section">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title"><i class="fa-solid fa-sliders"></i> Bảng Quản Trị Nội Dung (Admin)</h2>
-                    <p class="section-subtitle">Thêm mới & Quản lý Bài suy ngẫm, Video bài giảng và Trích dẫn Kinh Thánh</p>
+                    <h2 class="section-title"><i class="fa-solid fa-sliders"></i> Bảng Quản Trị Nền Tảng (Admin Dashboard)</h2>
+                    <p class="section-subtitle">Quản lý toàn bộ 5 chuyên mục nội dung trên website & đồng bộ dữ liệu tới Supabase CSDL</p>
                 </div>
 
-                <!-- Admin Tabs -->
-                <div style="display: flex; gap: 12px; margin-bottom: 30px; justify-content: center; flex-wrap: wrap;">
-                    <button class="cat-btn active" onclick="switchAdminSubTab('addQuote', this)">+ Thêm Câu Gốc mới</button>
-                    <button class="cat-btn" onclick="switchAdminSubTab('addBlog', this)">+ Thêm Bài Suy Ngẫm mới</button>
-                    <button class="cat-btn" onclick="switchAdminSubTab('addVideo', this)">+ Thêm Video mới</button>
+                <!-- Admin Sub-Navigation Tabs -->
+                <div style="display: flex; gap: 10px; margin-bottom: 30px; justify-content: center; flex-wrap: wrap;">
+                    <button class="cat-btn active" id="btnAdminQuotes" onclick="switchAdminTab('adminQuotes')"><i class="fa-solid fa-quote-left"></i> Quản Lý Câu Gốc</button>
+                    <button class="cat-btn" id="btnAdminPlans" onclick="switchAdminTab('adminPlans')"><i class="fa-solid fa-route"></i> Quản Lý Lộ Trình</button>
+                    <button class="cat-btn" id="btnAdminQuizzes" onclick="switchAdminTab('adminQuizzes')"><i class="fa-solid fa-list-check"></i> Quản Lý Trắc Nghiệm</button>
+                    <button class="cat-btn" id="btnAdminReflections" onclick="switchAdminTab('adminReflections')"><i class="fa-solid fa-feather-pointed"></i> Quản Lý Suy Ngẫm</button>
+                    <button class="cat-btn" id="btnAdminVideos" onclick="switchAdminTab('adminVideos')"><i class="fa-solid fa-circle-play"></i> Quản Lý Video</button>
                 </div>
 
-                <!-- Admin Action Card -->
-                <div class="quiz-container" style="max-width: 700px;">
-                    <!-- SubTab 1: Add Quote -->
-                    <form id="adminQuoteForm" onsubmit="adminSaveQuote(event)">
-                        <h3 style="color: var(--primary); margin-bottom: 20px;">Thêm Trích Dẫn Kinh Thánh Mới</h3>
-                        <div style="margin-bottom: 16px;">
-                            <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Nội dung câu gốc:</label>
-                            <textarea id="adminQuoteText" required class="essay-input" placeholder="Ví dụ: Lời Chúa là ngọn đèn cho chân tôi..."></textarea>
-                        </div>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
-                            <div>
-                                <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Địa danh Kinh Thánh:</label>
-                                <input type="text" id="adminQuoteRef" required class="essay-input" style="height: 46px;" placeholder="Ví dụ: Thi-thiên 119:105">
+                <!-- Admin Action Card Container -->
+                <div class="quiz-container" style="max-width: 800px;">
+                    
+                    <!-- TAB 1: QUẢN LÝ CÂU GỐC & TRÍCH DẪN -->
+                    <div id="adminQuotes" class="admin-tab-content" style="display: block;">
+                        <form id="adminQuoteForm" onsubmit="adminSaveQuote(event)">
+                            <h3 style="color: var(--primary); margin-bottom: 16px;"><i class="fa-solid fa-quote-left"></i> Thêm Trích Dẫn Kinh Thánh Mới</h3>
+                            <div style="margin-bottom: 16px;">
+                                <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Nội dung câu gốc Kinh Thánh:</label>
+                                <textarea id="adminQuoteText" required class="essay-input" placeholder="Ví dụ: Lời Chúa là ngọn đèn cho chân tôi..."></textarea>
                             </div>
-                            <div>
-                                <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Chủ đề:</label>
-                                <select id="adminQuoteCat" class="essay-input" style="height: 46px; padding: 10px;">
-                                    <option value="faith">Đức Tin (Faith)</option>
-                                    <option value="love">Tình Yêu (Love)</option>
-                                    <option value="hope">Hy Vọng (Hope)</option>
-                                    <option value="peace">Bình An (Peace)</option>
-                                </select>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+                                <div>
+                                    <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Địa danh Kinh Thánh (Tham chiếu):</label>
+                                    <input type="text" id="adminQuoteRef" required class="essay-input" style="height: 46px;" placeholder="Ví dụ: Thi-thiên 119:105">
+                                </div>
+                                <div>
+                                    <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Chủ đề phân loại:</label>
+                                    <select id="adminQuoteCat" class="essay-input" style="height: 46px; padding: 10px;">
+                                        <option value="faith">Đức Tin (Faith)</option>
+                                        <option value="love">Tình Yêu (Love)</option>
+                                        <option value="hope">Hy Vọng (Hope)</option>
+                                        <option value="peace">Bình An (Peace)</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Luu Vào CSDL Supabase</button>
-                    </form>
+                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Lưu Câu Gốc Vào Supabase</button>
+                        </form>
+                    </div>
+
+                    <!-- TAB 2: QUẢN LÝ LỘ TRÌNH ĐỌC KINH THÁNH -->
+                    <div id="adminPlans" class="admin-tab-content" style="display: none;">
+                        <form id="adminPlanForm" onsubmit="adminSavePlan(event)">
+                            <h3 style="color: var(--primary); margin-bottom: 16px;"><i class="fa-solid fa-route"></i> Thêm Ngày Đọc Mới Vào Lộ Trình</h3>
+                            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 16px; margin-bottom: 16px;">
+                                <div>
+                                    <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Thứ tự Ngày (Day Number):</label>
+                                    <input type="number" id="adminPlanDayNum" required min="1" class="essay-input" style="height: 46px;" placeholder="Ví dụ: 7">
+                                </div>
+                                <div>
+                                    <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Tiêu đề bài học:</label>
+                                    <input type="text" id="adminPlanTitle" required class="essay-input" style="height: 46px;" placeholder="Ví dụ: Ma-thi-ơ Chương 14 - 15">
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 16px;">
+                                <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Phân đoạn Kinh Thánh tương ứng:</label>
+                                <input type="text" id="adminPlanPassage" required class="essay-input" style="height: 46px;" placeholder="Ví dụ: Ma-thi-ơ 14-15">
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Mô tả vắn tắt bài học:</label>
+                                <textarea id="adminPlanDesc" required class="essay-input" placeholder="Ví dụ: Phép lạ hóa 5 ổ bánh 2 con cá & Chúa đi trên mặt nước"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Thêm Ngày Đọc Mới</button>
+                        </form>
+                    </div>
+
+                    <!-- TAB 3: QUẢN LÝ BÀI KIỂM TRA TRẮC NGHIỆM -->
+                    <div id="adminQuizzes" class="admin-tab-content" style="display: none;">
+                        <form id="adminQuizForm" onsubmit="adminSaveQuiz(event)">
+                            <h3 style="color: var(--primary); margin-bottom: 16px;"><i class="fa-solid fa-list-check"></i> Thêm Câu Hỏi Kiểm Tra Mới</h3>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+                                <div>
+                                    <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Định dạng câu hỏi:</label>
+                                    <select id="adminQuizType" class="essay-input" style="height: 46px; padding: 10px;">
+                                        <option value="multiple_choice">Trắc Nghiệm 1 Đáp Án (Multiple Choice)</option>
+                                        <option value="true_false">Đúng / Sai (True / False)</option>
+                                        <option value="essay">Tự Luận / Suy Ngẫm (Essay)</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Đáp án đúng (Ví dụ: B hoặc True):</label>
+                                    <input type="text" id="adminQuizCorrect" class="essay-input" style="height: 46px;" placeholder="Ví dụ: B">
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 16px;">
+                                <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Nội dung câu hỏi:</label>
+                                <textarea id="adminQuizQuestion" required class="essay-input" placeholder="Ví dụ: Ai là người đã nhận 10 điều rơm trên núi Si-nai?"></textarea>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Lời giải thích chi tiết (Explanation):</label>
+                                <textarea id="adminQuizExp" class="essay-input" placeholder="Ví dụ: Môi-se nhận 10 điều rơm được ghi trong Xuất Ê-díp-tô Ký 20."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Thêm Câu Hỏi Mới</button>
+                        </form>
+                    </div>
+
+                    <!-- TAB 4: QUẢN LÝ BÀI SUY NGẪM / TĨNH NGUYỆN -->
+                    <div id="adminReflections" class="admin-tab-content" style="display: none;">
+                        <form id="adminReflectionForm" onsubmit="adminSaveReflection(event)">
+                            <h3 style="color: var(--primary); margin-bottom: 16px;"><i class="fa-solid fa-feather-pointed"></i> Đăng Bài Suy Ngẫm / Tĩnh Nguyện</h3>
+                            <div style="margin-bottom: 16px;">
+                                <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Tiêu đề bài suy ngẫm:</label>
+                                <input type="text" id="adminReflectTitle" required class="essay-input" style="height: 46px;" placeholder="Ví dụ: Lắng Nghe Tiếng Chúa Giữa Dông Bão">
+                            </div>
+                            <div style="margin-bottom: 16px;">
+                                <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">URL Hình Ảnh Minh Họa (Unsplash/Web):</label>
+                                <input type="url" id="adminReflectImage" required class="essay-input" style="height: 46px;" placeholder="https://images.unsplash.com/photo-...">
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Nội dung bài viết tĩnh nguyện ngắn:</label>
+                                <textarea id="adminReflectExcerpt" required class="essay-input" style="height: 120px;" placeholder="Viết tóm tắt hoặc bài tĩnh nguyện tại đây..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Đăng Bài Suy Ngẫm</button>
+                        </form>
+                    </div>
+
+                    <!-- TAB 5: QUẢN LÝ THƯ VIỆN VIDEO -->
+                    <div id="adminVideos" class="admin-tab-content" style="display: none;">
+                        <form id="adminVideoForm" onsubmit="adminSaveVideo(event)">
+                            <h3 style="color: var(--primary); margin-bottom: 16px;"><i class="fa-solid fa-circle-play"></i> Thêm Video Minh Họa Mới</h3>
+                            <div style="margin-bottom: 16px;">
+                                <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Tiêu đề Video:</label>
+                                <input type="text" id="adminVideoTitle" required class="essay-input" style="height: 46px;" placeholder="Ví dụ: Phim Hoạt Hình Kinh Thánh Môi-se">
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+                                <div>
+                                    <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Tác giả / Nguồn Video:</label>
+                                    <input type="text" id="adminVideoAuthor" required class="essay-input" style="height: 46px;" placeholder="Ví dụ: The Bible Project">
+                                </div>
+                                <div>
+                                    <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Mã YouTube Video ID (Ví dụ: GQI72THyOKE):</label>
+                                    <input type="text" id="adminVideoYtId" required class="essay-input" style="height: 46px;" placeholder="Ví dụ: GQI72THyOKE">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Thêm Video Vào Thư Viện</button>
+                        </form>
+                    </div>
+
                 </div>
             </div>
         </section>
+
 
     </main>
 
@@ -1586,7 +1691,28 @@
             }
         }
 
-        // Admin Action: Save Quote into Supabase DB
+        // Switch Admin Sub-Tabs
+        function switchAdminTab(adminTabId) {
+            document.querySelectorAll('.admin-tab-content').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            document.querySelectorAll('#admin .cat-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            const targetTab = document.getElementById(adminTabId);
+            if (targetTab) {
+                targetTab.style.display = 'block';
+            }
+
+            if (adminTabId === 'adminQuotes') document.getElementById('btnAdminQuotes').classList.add('active');
+            if (adminTabId === 'adminPlans') document.getElementById('btnAdminPlans').classList.add('active');
+            if (adminTabId === 'adminQuizzes') document.getElementById('btnAdminQuizzes').classList.add('active');
+            if (adminTabId === 'adminReflections') document.getElementById('btnAdminReflections').classList.add('active');
+            if (adminTabId === 'adminVideos') document.getElementById('btnAdminVideos').classList.add('active');
+        }
+
+        // Admin Action 1: Save Quote into Supabase DB
         async function adminSaveQuote(event) {
             event.preventDefault();
             const text = document.getElementById('adminQuoteText').value;
@@ -1604,11 +1730,117 @@
                     .insert([{ scripture_text: text, reference: ref, category: cat }]);
                 
                 if (error) throw error;
-                showToast("Đã thêm thành công Câu Gốc mới vào Supabase DB!");
+                showToast("Đã thêm Câu Gốc mới thành công vào CSDL!");
                 document.getElementById('adminQuoteForm').reset();
                 switchTab('quotes');
             } catch (err) {
                 showToast("Lỗi lưu dữ liệu: " + err.message);
+            }
+        }
+
+        // Admin Action 2: Save Plan Day into Supabase DB
+        async function adminSavePlan(event) {
+            event.preventDefault();
+            const dayNum = parseInt(document.getElementById('adminPlanDayNum').value);
+            const title = document.getElementById('adminPlanTitle').value;
+            const passage = document.getElementById('adminPlanPassage').value;
+            const desc = document.getElementById('adminPlanDesc').value;
+
+            if (!supabaseClient) {
+                showToast("Chưa kết nối CSDL Supabase!");
+                return;
+            }
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from('reading_plans')
+                    .insert([{ day_number: dayNum, title: title, passage: passage, description: desc }]);
+                
+                if (error) throw error;
+                showToast("Đã thêm Ngày đọc mới vào Lộ trình!");
+                document.getElementById('adminPlanForm').reset();
+                switchTab('plans');
+            } catch (err) {
+                showToast("Lỗi lưu lộ trình: " + err.message);
+            }
+        }
+
+        // Admin Action 3: Save Quiz into Supabase DB
+        async function adminSaveQuiz(event) {
+            event.preventDefault();
+            const type = document.getElementById('adminQuizType').value;
+            const question = document.getElementById('adminQuizQuestion').value;
+            const correct = document.getElementById('adminQuizCorrect').value;
+            const exp = document.getElementById('adminQuizExp').value;
+
+            if (!supabaseClient) {
+                showToast("Chưa kết nối CSDL Supabase!");
+                return;
+            }
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from('quizzes')
+                    .insert([{ question_type: type, question: question, correct_answer: correct, explanation: exp }]);
+                
+                if (error) throw error;
+                showToast("Đã thêm Câu hỏi trắc nghiệm mới!");
+                document.getElementById('adminQuizForm').reset();
+                switchTab('quizzes');
+            } catch (err) {
+                showToast("Lỗi lưu bài kiểm tra: " + err.message);
+            }
+        }
+
+        // Admin Action 4: Save Reflection into Supabase DB
+        async function adminSaveReflection(event) {
+            event.preventDefault();
+            const title = document.getElementById('adminReflectTitle').value;
+            const img = document.getElementById('adminReflectImage').value;
+            const excerpt = document.getElementById('adminReflectExcerpt').value;
+
+            if (!supabaseClient) {
+                showToast("Chưa kết nối CSDL Supabase!");
+                return;
+            }
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from('reflections')
+                    .insert([{ title: title, image_url: img, excerpt: excerpt }]);
+                
+                if (error) throw error;
+                showToast("Đã đăng Bài suy ngẫm mới!");
+                document.getElementById('adminReflectionForm').reset();
+                switchTab('reflections');
+            } catch (err) {
+                showToast("Lỗi đăng bài suy ngẫm: " + err.message);
+            }
+        }
+
+        // Admin Action 5: Save Video into Supabase DB
+        async function adminSaveVideo(event) {
+            event.preventDefault();
+            const title = document.getElementById('adminVideoTitle').value;
+            const author = document.getElementById('adminVideoAuthor').value;
+            const ytId = document.getElementById('adminVideoYtId').value;
+
+            if (!supabaseClient) {
+                showToast("Chưa kết nối CSDL Supabase!");
+                return;
+            }
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from('media_videos')
+                    .insert([{ title: title, author: author, youtube_video_id: ytId }]);
+                
+                if (error) throw error;
+                showToast("Đã thêm Video mới vào Thư viện!");
+                document.getElementById('adminVideoForm').reset();
+                switchTab('media');
+            } catch (err) {
+                showToast("Lỗi lưu Video: " + err.message);
             }
         }
 
