@@ -1860,7 +1860,7 @@
         }
 
         // ========================================================
-        // TỰ ĐỘNG LẤY DỮ LIỆU ĐỘNG TỪ SUPABASE KHI MỞ TRANG
+        // TỰ ĐỘNG LẤY DỮ LIỆU ĐỘNG TỪ SUPABASE KHI MỞ TRANG & QUẢN LÝ ADMIN
         // ========================================================
         window.addEventListener('DOMContentLoaded', async () => {
             if (supabaseClient) {
@@ -1869,13 +1869,20 @@
                 if (session && session.user) {
                     updateUserUI(session.user);
                 }
-                // Load Dynamic Data
-                loadQuotesFromSupabase();
+                // Load Dynamic Data to User UI
+                loadAllDynamicDataFromSupabase();
             }
         });
 
-        async function loadQuotesFromSupabase() {
+        async function loadAllDynamicDataFromSupabase() {
             if (!supabaseClient) return;
+            loadQuotesFromSupabase();
+            loadReflectionsFromSupabase();
+            loadVideosFromSupabase();
+            loadAdminDataLists();
+        }
+
+        async function loadQuotesFromSupabase() {
             try {
                 const { data: quotes, error } = await supabaseClient
                     .from('bible_quotes')
@@ -1883,11 +1890,9 @@
                     .order('created_at', { ascending: false });
 
                 if (error || !quotes || quotes.length === 0) return;
-
                 const grid = document.getElementById('quotesGrid');
                 if (!grid) return;
 
-                // Render dynamic quotes from Supabase
                 let html = '';
                 quotes.forEach(q => {
                     html += `
@@ -1903,8 +1908,79 @@
                     </div>`;
                 });
                 grid.innerHTML = html;
+            } catch (err) { console.log(err); }
+        }
+
+        async function loadReflectionsFromSupabase() {
+            try {
+                const { data: items, error } = await supabaseClient
+                    .from('reflections')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (error || !items || items.length === 0) return;
+                const grid = document.querySelector('#reflections .blog-grid');
+                if (!grid) return;
+
+                let html = '';
+                items.forEach(item => {
+                    html += `
+                    <article class="blog-card">
+                        <img src="${item.image_url || 'https://images.unsplash.com/photo-1507692049790-de58290a4334'}" alt="${item.title}" class="blog-img">
+                        <div class="blog-content">
+                            <span class="blog-date"><i class="fa-regular fa-calendar"></i> ${new Date(item.created_at || Date.now()).toLocaleDateString('vi-VN')}</span>
+                            <h3 class="blog-title">${item.title}</h3>
+                            <p class="blog-excerpt">${item.excerpt || ''}</p>
+                            <a href="#read" class="btn btn-outline" style="align-self: flex-start;" onclick="alert('Xem chi tiết bài viết!')">Đọc Thêm</a>
+                        </div>
+                    </article>`;
+                });
+                grid.innerHTML = html;
+            } catch (err) { console.log(err); }
+        }
+
+        async function loadVideosFromSupabase() {
+            try {
+                const { data: vids, error } = await supabaseClient
+                    .from('media_videos')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (error || !vids || vids.length === 0) return;
+                const grid = document.querySelector('#media .video-grid');
+                if (!grid) return;
+
+                let html = '';
+                vids.forEach(v => {
+                    html += `
+                    <div class="video-card">
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube-nocookie.com/embed/${v.youtube_video_id}" title="${v.title}" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">${v.title}</h3>
+                            <p class="video-author"><i class="fa-brands fa-youtube"></i> ${v.author || 'The Bible Project'}</p>
+                        </div>
+                    </div>`;
+                });
+                grid.innerHTML = html;
+            } catch (err) { console.log(err); }
+        }
+
+        // Admin Delete Action Generic
+        async function adminDeleteItem(tableName, id) {
+            if (!confirm("Thầy có chắc chắn muốn xóa bản ghi này khỏi CSDL Supabase không?")) return;
+            try {
+                const { error } = await supabaseClient
+                    .from(tableName)
+                    .delete()
+                    .eq('id', id);
+
+                if (error) throw error;
+                showToast("Đã xóa bản ghi thành công khỏi CSDL!");
+                loadAllDynamicDataFromSupabase();
             } catch (err) {
-                console.log("Dùng dữ liệu mặc định:", err);
+                showToast("Lỗi xóa bản ghi: " + err.message);
             }
         }
 
