@@ -1685,9 +1685,24 @@
 
         function updateUserUI(user) {
             if (user) {
-                document.getElementById('navAuthBtn').innerHTML = `<i class="fa-solid fa-user-check"></i> ${user.email.split('@')[0]}`;
-                document.getElementById('navAdminBtn').style.display = "flex"; // Hiện nút Admin
+                // Hiển thị Email và Nút Đăng Xuất trên Header
+                document.getElementById('navAuthBtn').innerHTML = `<i class="fa-solid fa-user-check"></i> ${user.email.split('@')[0]} (<span onclick="handleLogout(event)" style="text-decoration:underline; cursor:pointer;">Đăng Xuất</span>)`;
+                document.getElementById('navAdminBtn').style.display = "flex"; // Hiện nút Quản Lý Admin
                 localStorage.setItem('bible_user_id', user.id);
+            } else {
+                document.getElementById('navAuthBtn').innerHTML = `<i class="fa-solid fa-user-lock"></i> Đăng Nhập`;
+                document.getElementById('navAdminBtn').style.display = "none"; // Ẩn nút Admin khi Đăng xuất
+            }
+        }
+
+        async function handleLogout(event) {
+            if (event) event.stopPropagation();
+            if (supabaseClient) {
+                await supabaseClient.auth.signOut();
+                currentUser = null;
+                updateUserUI(null);
+                showToast("Đã đăng xuất tài khoản an toàn!");
+                switchTab('home');
             }
         }
 
