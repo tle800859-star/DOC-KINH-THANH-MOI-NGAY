@@ -1,1185 +1,1626 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Đọc Kinh Thánh Mỗi Ngày - Bình An & Lời Chúa Mỗi Ngày</title>
-  <meta name="description" content="Nền tảng giúp bạn duy trì thói quen học và đọc Kinh Thánh mỗi ngày với lộ trình chi tiết, bài học suy ngẫm, câu gốc và kiểm tra kiến thức.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-main: #FDFBF7;
-      --bg-card: #FFFFFF;
-      --bg-subtle: #F4EFE6;
-      --text-main: #2D3748;
-      --text-muted: #64748B;
-      --primary: #2C5E8A;
-      --primary-hover: #1E4466;
-      --primary-light: #EBF3FA;
-      --accent-gold: #C59B27;
-      --accent-gold-light: #FDF8EC;
-      --success: #22C55E;
-      --danger: #EF4444;
-      --border-color: #E2E8F0;
-      --radius-sm: 8px;
-      --radius-md: 14px;
-      --radius-lg: 20px;
-      --shadow-sm: 0 2px 8px rgba(44, 94, 138, 0.05);
-      --shadow-md: 0 8px 24px rgba(44, 94, 138, 0.08);
-      --shadow-lg: 0 16px 32px rgba(44, 94, 138, 0.12);
-      --font-heading: 'Merriweather', serif;
-      --font-body: 'Plus Jakarta Sans', sans-serif;
-      --base-font-size: 16px;
-    }
-
-    body.dark-mode {
-      --bg-main: #121824;
-      --bg-card: #1E293B;
-      --bg-subtle: #0F172A;
-      --text-main: #F1F5F9;
-      --text-muted: #94A3B8;
-      --primary: #60A5FA;
-      --primary-hover: #93C5FD;
-      --primary-light: #1E293B;
-      --border-color: #334155;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      font-size: var(--base-font-size);
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background-color: var(--bg-main);
-      color: var(--text-main);
-      font-family: var(--font-body);
-      line-height: 1.6;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    /* HEADER & NAV */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border-color);
-      transition: background 0.3s;
-    }
-    body.dark-mode header {
-      background: rgba(30, 41, 59, 0.92);
-    }
-
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem 1.5rem;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-      color: var(--primary);
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 1.25rem;
-    }
-
-    .logo-icon {
-      width: 40px;
-      height: 40px;
-      background: var(--primary-light);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary);
-      font-size: 1.2rem;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-main);
-      font-weight: 500;
-      font-size: 0.95rem;
-      padding: 0.5rem 0.75rem;
-      border-radius: var(--radius-sm);
-      transition: all 0.2s;
-    }
-
-    .nav-links a:hover, .nav-links a.active {
-      color: var(--primary);
-      background: var(--primary-light);
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .btn-icon {
-      background: var(--bg-subtle);
-      border: 1px solid var(--border-color);
-      color: var(--text-main);
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      transition: all 0.2s;
-    }
-
-    .btn-icon:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-    }
-
-    .mobile-toggle {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      color: var(--text-main);
-      cursor: pointer;
-    }
-
-    /* MAIN CONTAINER */
-    main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem 1.5rem;
-    }
-
-    /* HERO SECTION */
-    .hero {
-      background: linear-gradient(135deg, var(--primary-light) 0%, var(--bg-card) 100%);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 3rem 2rem;
-      text-align: center;
-      margin-bottom: 3rem;
-      position: relative;
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: var(--accent-gold-light);
-      color: var(--accent-gold);
-      border: 1px solid rgba(197, 155, 39, 0.3);
-      padding: 0.35rem 1rem;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-    }
-
-    .hero h1 {
-      font-family: var(--font-heading);
-      font-size: 2.25rem;
-      color: var(--primary);
-      margin-bottom: 1rem;
-    }
-
-    .hero p {
-      color: var(--text-muted);
-      max-width: 680px;
-      margin: 0 auto 2rem auto;
-      font-size: 1.05rem;
-    }
-
-    /* VERSE OF THE DAY CARD */
-    .verse-card {
-      background: var(--bg-card);
-      border-left: 4px solid var(--accent-gold);
-      border-radius: var(--radius-md);
-      padding: 1.75rem;
-      margin: 0 auto 1.5rem auto;
-      max-width: 800px;
-      box-shadow: var(--shadow-md);
-      text-align: left;
-    }
-
-    .verse-text {
-      font-family: var(--font-heading);
-      font-size: 1.15rem;
-      font-style: italic;
-      color: var(--text-main);
-      margin-bottom: 0.75rem;
-    }
-
-    .verse-ref {
-      font-weight: 700;
-      color: var(--primary);
-      font-size: 0.95rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .verse-actions {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    /* BUTTONS */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.65rem 1.25rem;
-      border-radius: var(--radius-sm);
-      font-weight: 600;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      border: none;
-      text-decoration: none;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: #FFFFFF;
-    }
-    .btn-primary:hover {
-      background: var(--primary-hover);
-      transform: translateY(-1px);
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 1px solid var(--border-color);
-      color: var(--text-main);
-    }
-    .btn-outline:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-      background: var(--primary-light);
-    }
-
-    /* SECTION TITLES */
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 1.75rem;
-    }
-
-    .section-title {
-      font-family: var(--font-heading);
-      font-size: 1.6rem;
-      color: var(--text-main);
-    }
-    .section-subtitle {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-top: 0.25rem;
-    }
-
-    /* SECTIONS COMMON */
-    section {
-      margin-bottom: 3.5rem;
-    }
-
-    /* 1. READING PLANS */
-    .plans-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .plan-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 1.5rem;
-      box-shadow: var(--shadow-sm);
-      transition: all 0.25s;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .plan-card:hover {
-      box-shadow: var(--shadow-md);
-      transform: translateY(-3px);
-      border-color: var(--primary);
-    }
-
-    .plan-tag {
-      align-self: flex-start;
-      background: var(--primary-light);
-      color: var(--primary);
-      padding: 0.25rem 0.75rem;
-      border-radius: 12px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-    }
-
-    .plan-card h3 {
-      font-family: var(--font-heading);
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .plan-card p {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-bottom: 1.25rem;
-      flex-grow: 1;
-    }
-
-    .plan-progress-bar {
-      height: 6px;
-      background: var(--bg-subtle);
-      border-radius: 3px;
-      margin-bottom: 0.75rem;
-      overflow: hidden;
-    }
-
-    .plan-progress-fill {
-      height: 100%;
-      background: var(--primary);
-      width: 0%;
-      transition: width 0.3s ease;
-    }
-
-    .plan-days-list {
-      margin-top: 1rem;
-      border-top: 1px solid var(--border-color);
-      padding-top: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      max-height: 160px;
-      overflow-y: auto;
-    }
-
-    .day-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.4rem 0.6rem;
-      border-radius: var(--radius-sm);
-      font-size: 0.9rem;
-      background: var(--bg-subtle);
-    }
-
-    .day-item.done {
-      text-decoration: line-through;
-      opacity: 0.7;
-      background: rgba(34, 197, 94, 0.1);
-    }
-
-    .day-checkbox {
-      width: 18px;
-      height: 18px;
-      cursor: pointer;
-      accent-color: var(--primary);
-    }
-
-    /* 2. QUIZ SECTION */
-    .quiz-container {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .quiz-question-box {
-      margin-bottom: 1.5rem;
-    }
-
-    .question-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: flex-start;
-      gap: 0.5rem;
-    }
-
-    .question-type-badge {
-      background: var(--accent-gold-light);
-      color: var(--accent-gold);
-      padding: 0.15rem 0.5rem;
-      border-radius: 4px;
-      font-size: 0.75rem;
-      font-weight: 700;
-    }
-
-    .options-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .option-label {
-      display: flex;
-      align-items: center;
-      padding: 0.85rem 1.25rem;
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      cursor: pointer;
-      transition: all 0.2s;
-      background: var(--bg-subtle);
-    }
-
-    .option-label:hover {
-      border-color: var(--primary);
-      background: var(--primary-light);
-    }
-
-    .option-label input {
-      margin-right: 0.75rem;
-      accent-color: var(--primary);
-    }
-
-    .essay-textarea {
-      width: 100%;
-      padding: 1rem;
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-sm);
-      background: var(--bg-subtle);
-      color: var(--text-main);
-      font-family: var(--font-body);
-      min-height: 100px;
-      resize: vertical;
-    }
-
-    .quiz-feedback {
-      margin-top: 1rem;
-      padding: 1rem;
-      border-radius: var(--radius-sm);
-      display: none;
-      font-size: 0.95rem;
-    }
-    .quiz-feedback.correct {
-      display: block;
-      background: rgba(34, 197, 94, 0.15);
-      border: 1px solid var(--success);
-      color: #15803D;
-    }
-    .quiz-feedback.incorrect {
-      display: block;
-      background: rgba(239, 68, 68, 0.15);
-      border: 1px solid var(--danger);
-      color: #B91C1C;
-    }
-
-    /* 3. REFLECTIONS / DEVOTIONALS */
-    .blog-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .blog-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .blog-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .blog-img {
-      width: 100%;
-      height: 180px;
-      background-size: cover;
-      background-position: center;
-    }
-
-    .blog-content {
-      padding: 1.25rem;
-    }
-
-    .blog-meta {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 0.5rem;
-    }
-
-    .blog-card h4 {
-      font-family: var(--font-heading);
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .blog-card p {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    /* 4. MEDIA / VIDEO LIBRARY */
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .video-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .video-embed-container {
-      position: relative;
-      padding-bottom: 56.25%; /* 16:9 aspect ratio */
-      height: 0;
-      overflow: hidden;
-    }
-
-    .video-embed-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    .video-info {
-      padding: 1rem;
-    }
-
-    .video-info h4 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-    }
-
-    .video-info p {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    /* 5. BIBLE QUOTES GALLERY */
-    .quotes-filter {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      margin-bottom: 1.5rem;
-    }
-
-    .filter-btn {
-      background: var(--bg-subtle);
-      border: 1px solid var(--border-color);
-      padding: 0.4rem 1rem;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      cursor: pointer;
-      color: var(--text-main);
-      transition: all 0.2s;
-    }
-
-    .filter-btn.active, .filter-btn:hover {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-    }
-
-    .quotes-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.25rem;
-    }
-
-    .quote-item {
-      background: var(--bg-card);
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius-md);
-      padding: 1.25rem;
-      box-shadow: var(--shadow-sm);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .quote-content {
-      font-family: var(--font-heading);
-      font-style: italic;
-      font-size: 1rem;
-      margin-bottom: 1rem;
-    }
-
-    .quote-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 1px dashed var(--border-color);
-      padding-top: 0.75rem;
-    }
-
-    .quote-ref {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    /* FOOTER */
-    footer {
-      background: var(--bg-card);
-      border-top: 1px solid var(--border-color);
-      padding: 3rem 1.5rem 1.5rem 1.5rem;
-      margin-top: 4rem;
-    }
-
-    .footer-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .footer-col h4 {
-      font-family: var(--font-heading);
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-      color: var(--primary);
-    }
-
-    .footer-col p, .footer-col li {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-      list-style: none;
-      margin-bottom: 0.5rem;
-    }
-
-    .footer-col a {
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .footer-col a:hover {
-      color: var(--primary);
-    }
-
-    .footer-bottom {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border-color);
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    /* TOAST NOTIFICATION */
-    .toast {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--primary);
-      color: white;
-      padding: 0.75rem 1.25rem;
-      border-radius: var(--radius-sm);
-      box-shadow: var(--shadow-lg);
-      display: none;
-      z-index: 1000;
-      font-size: 0.9rem;
-    }
-
-    /* RESPONSIVE DESIGN */
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--bg-card);
-        flex-direction: column;
-        padding: 1rem;
-        border-bottom: 1px solid var(--border-color);
-        box-shadow: var(--shadow-md);
-      }
-      .nav-links.show {
-        display: flex;
-      }
-      .mobile-toggle {
-        display: block;
-      }
-      .hero h1 {
-        font-size: 1.75rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đọc Kinh Thánh Mỗi Ngày | Nền Tảng Học & Suy Ngẫm Lời Chúa</title>
+    <meta name="description" content="Nền tảng thân thiện giúp bạn duy trì thói quen đọc Kinh Thánh hàng ngày với lộ trình đọc, bài tập trắc nghiệm, suy ngẫm và video minh họa.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Supabase JS Client SDK v2 -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        :root {
+            --primary: #1b4965;
+            --primary-light: #62b6cb;
+            --accent: #cae9ff;
+            --bg-sand: #fbf9f5;
+            --bg-card: #ffffff;
+            --text-main: #2b2d42;
+            --text-muted: #5c677d;
+            --border-color: #e2e8f0;
+            --gold-accent: #d4af37;
+            --success: #38b000;
+            --danger: #e63946;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 10px 15px -3px rgba(27, 73, 101, 0.08), 0 4px 6px -2px rgba(27, 73, 101, 0.04);
+            --shadow-lg: 0 20px 25px -5px rgba(27, 73, 101, 0.12), 0 10px 10px -5px rgba(27, 73, 101, 0.04);
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-sand);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Typography Override for Scripture */
+        .scripture-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 76px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--primary);
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 10px rgba(27, 73, 101, 0.2);
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .logo-subtitle {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            display: block;
+            margin-top: -3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 30px;
+            transition: var(--transition);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary);
+            background-color: var(--accent);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.4rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Hero Banner / Verse of the Day */
+        .hero {
+            padding: 60px 0 40px;
+            background: linear-gradient(180deg, rgba(235, 244, 246, 0.6) 0%, rgba(251, 249, 245, 0) 100%);
+            text-align: center;
+        }
+
+        .verse-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 40px 30px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(98, 182, 203, 0.2);
+            position: relative;
+            max-width: 850px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .verse-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 120px;
+            font-family: 'Playfair Display', serif;
+            color: rgba(98, 182, 203, 0.15);
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .verse-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: var(--accent);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .verse-text {
+            font-size: 1.45rem;
+            color: var(--primary);
+            font-style: italic;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .verse-ref {
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .verse-actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #123347;
+            box-shadow: 0 4px 12px rgba(27, 73, 101, 0.25);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1.5px solid var(--primary-light);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--accent);
+        }
+
+        /* Section Layout */
+        .section {
+            padding: 60px 0;
+            display: none; /* Controlled by JS router */
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1rem;
+        }
+
+        /* 1. Reading Plans Section */
+        .plan-progress-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .progress-bar-container {
+            flex-grow: 1;
+            max-width: 500px;
+        }
+
+        .progress-title {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .progress-track {
+            height: 10px;
+            background-color: #e2e8f0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-light), var(--primary));
+            width: 33%;
+            border-radius: 5px;
+            transition: width 0.5s ease;
+        }
+
+        .reading-days-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .day-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .day-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .day-card.completed {
+            border-left: 4px solid var(--success);
+            background-color: rgba(56, 176, 0, 0.02);
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .day-badge {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            background: var(--accent);
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        .day-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .day-passage {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            user-select: none;
+        }
+
+        .checkbox-label input {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* 2. Quizzes Section */
+        .quiz-container {
+            max-width: 750px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 35px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .quiz-question-box {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .quiz-type-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary-light);
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .quiz-question {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .options-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-item {
+            padding: 12px 18px;
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.95rem;
+        }
+
+        .option-item:hover {
+            border-color: var(--primary-light);
+            background-color: rgba(98, 182, 203, 0.05);
+        }
+
+        .option-item input[type="radio"] {
+            accent-color: var(--primary);
+        }
+
+        .essay-input {
+            width: 100%;
+            height: 100px;
+            padding: 14px;
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: 0.95rem;
+            resize: vertical;
+            transition: var(--transition);
+        }
+
+        .essay-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(27, 73, 101, 0.1);
+        }
+
+        .explanation-box {
+            display: none;
+            margin-top: 15px;
+            padding: 14px;
+            border-radius: var(--radius-md);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .explanation-box.correct {
+            display: block;
+            background-color: rgba(56, 176, 0, 0.1);
+            color: #1b5e20;
+            border: 1px solid rgba(56, 176, 0, 0.3);
+        }
+
+        .explanation-box.incorrect {
+            display: block;
+            background-color: rgba(230, 57, 70, 0.1);
+            color: #b71c1c;
+            border: 1px solid rgba(230, 57, 70, 0.3);
+        }
+
+        /* 3. Reflections / Devotionals Section */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .blog-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .blog-date {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .blog-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .blog-excerpt {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 18px;
+            flex-grow: 1;
+        }
+
+        /* 4. Media Video Section */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 30px;
+        }
+
+        .video-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-info {
+            padding: 16px 20px;
+        }
+
+        .video-title {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .video-author {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* 5. Bible Quotes Collection */
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 35px;
+        }
+
+        .cat-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cat-btn.active, .cat-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .quotes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .quote-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+        }
+
+        .quote-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .quote-body {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--primary);
+            margin-bottom: 14px;
+            line-height: 1.5;
+        }
+
+        .quote-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 14px;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .quote-ref-text {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 6px;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .icon-btn:hover {
+            color: var(--primary);
+            background-color: var(--accent);
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 50px 0 25px;
+            margin-top: 80px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand p {
+            color: #94a3b8;
+            margin-top: 12px;
+            font-size: 0.9rem;
+            max-width: 350px;
+        }
+
+        .footer-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: white;
+            padding-left: 4px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 76px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: var(--shadow-md);
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .verse-text {
+                font-size: 1.2rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="nav-container">
-      <a href="#" class="logo">
-        <div class="logo-icon">📖</div>
-        <span>Đọc Kinh Thánh Mỗi Ngày</span>
-      </a>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#home" class="logo" onclick="switchTab('home')">
+                <div class="logo-icon"><i class="fa-solid fa-book-bible"></i></div>
+                <div>
+                    <span class="logo-text">Đọc Kinh Thánh</span>
+                    <span class="logo-subtitle">Mỗi Ngày</span>
+                </div>
+            </a>
+            
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
 
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#home" class="active">Trang Chủ</a></li>
-        <li><a href="#plans">Lộ Trình</a></li>
-        <li><a href="#quiz">Kiểm Tra</a></li>
-        <li><a href="#reflections">Suy Ngẫm</a></li>
-        <li><a href="#video">Video</a></li>
-        <li><a href="#quotes">Trích Dẫn</a></li>
-      </ul>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link active" onclick="switchTab('home')"><i class="fa-solid fa-house"></i> Trang Chủ</a></li>
+                <li><a href="#plans" class="nav-link" onclick="switchTab('plans')"><i class="fa-solid fa-route"></i> Lộ Trình</a></li>
+                <li><a href="#quizzes" class="nav-link" onclick="switchTab('quizzes')"><i class="fa-solid fa-list-check"></i> Kiểm Tra</a></li>
+                <li><a href="#reflections" class="nav-link" onclick="switchTab('reflections')"><i class="fa-solid fa-feather-pointed"></i> Suy Ngẫm</a></li>
+                <li><a href="#media" class="nav-link" onclick="switchTab('media')"><i class="fa-solid fa-circle-play"></i> Video</a></li>
+                <li><a href="#quotes" class="nav-link" onclick="switchTab('quotes')"><i class="fa-solid fa-quote-left"></i> Trích Dẫn</a></li>
+                <li><a href="#auth" class="nav-link" id="navAuthBtn" onclick="switchTab('auth')"><i class="fa-solid fa-user-lock"></i> Đăng Nhập</a></li>
+                <li><a href="#admin" class="nav-link" id="navAdminBtn" style="display:none;" onclick="switchTab('admin')"><i class="fa-solid fa-sliders"></i> Quản Trị Admin</a></li>
+            </ul>
+        </div>
+    </header>
 
-      <div class="nav-actions">
-        <button class="btn-icon" id="btnFontSize" title="Tăng/Giảm Cỡ Chữ">A</button>
-        <button class="btn-icon" id="btnTheme" title="Đổi Chế Độ Ban Đêm/Sáng">🌙</button>
-        <button class="mobile-toggle" id="mobileToggle">☰</button>
-      </div>
+    <!-- MAIN CONTENT AREA -->
+    <main>
+        
+        <!-- HOME / HERO SECTION -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <div class="container">
+                    <div class="verse-card">
+                        <span class="verse-tag"><i class="fa-solid fa-sun"></i> CÂU GỐC TRONG NGÀY (VERSE OF THE DAY)</span>
+                        <p class="verse-text scripture-font">"Lời Chúa là ngọn đèn cho chân tôi, là ánh sáng cho đường lối tôi."</p>
+                        <p class="verse-ref"> Thi-thiên 119:105</p>
+                        <div class="verse-actions">
+                            <button class="btn btn-primary" onclick="copyText('Lời Chúa là ngọn đèn cho chân tôi, là ánh sáng cho đường lối tôi. - Thi-thiên 119:105')">
+                                <i class="fa-regular fa-copy"></i> Sao chép câu gốc
+                            </button>
+                            <button class="btn btn-outline" onclick="shareQuote('Thi-thiên 119:105', 'Lời Chúa là ngọn đèn cho chân tôi...')">
+                                <i class="fa-solid fa-share-nodes"></i> Chia sẻ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container" style="padding-top: 40px;">
+                <div class="section-header">
+                    <h2 class="section-title">Bắt Đầu Hành Trình Của Bạn</h2>
+                    <p class="section-subtitle">Duy trì thói quen học và đọc Kinh Thánh dễ dàng mỗi ngày với lộ trình được thiết kế riêng cho người mới.</p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+                    <div class="day-card" style="text-align: center; padding: 30px 20px;">
+                        <i class="fa-solid fa-compass" style="font-size: 2.5rem; color: var(--primary-light); margin-bottom: 16px;"></i>
+                        <h3 style="color: var(--primary); margin-bottom: 8px;">Lộ Trình Tân Ước</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Đọc 27 sách Tân Ước trong 90 ngày với phân đoạn nhỏ mỗi ngày.</p>
+                        <button class="btn btn-primary" onclick="switchTab('plans')">Xem Lộ Trình</button>
+                    </div>
+
+                    <div class="day-card" style="text-align: center; padding: 30px 20px;">
+                        <i class="fa-solid fa-brain" style="font-size: 2.5rem; color: var(--primary-light); margin-bottom: 16px;"></i>
+                        <h3 style="color: var(--primary); margin-bottom: 8px;">Ôn Tập Kiến Thức</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Củng cố bài học qua các câu hỏi trắc nghiệm & tự luận ngắn.</p>
+                        <button class="btn btn-outline" onclick="switchTab('quizzes')">Làm Bài Kiểm Tra</button>
+                    </div>
+
+                    <div class="day-card" style="text-align: center; padding: 30px 20px;">
+                        <i class="fa-solid fa-heart" style="font-size: 2.5rem; color: var(--primary-light); margin-bottom: 16px;"></i>
+                        <h3 style="color: var(--primary); margin-bottom: 8px;">Bài Suy Ngẫm</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">Đọc các bài tĩnh nguyện ngắn giúp áp dụng lời Chúa vào đời sống.</p>
+                        <button class="btn btn-outline" onclick="switchTab('reflections')">Đọc Bài Suy Ngẫm</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1. READING PLANS SECTION -->
+        <section id="plans" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Lộ Trình Đọc Kinh Thánh</h2>
+                    <p class="section-subtitle">Lộ trình 30 Ngày Khám Phá Tân Ước dành cho người mới bắt đầu</p>
+                </div>
+
+                <!-- Progress Overview -->
+                <div class="plan-progress-card">
+                    <div>
+                        <h3 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 4px;">Tiến Độ Tân Ước (Tháng 1)</h3>
+                        <p style="color: var(--text-muted); font-size: 0.85rem;">Đã hoàn thành <span id="completedCount">2</span> / 6 bài học gần nhất</p>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-title">
+                            <span>Phần trăm hoàn thành</span>
+                            <span id="progressPercent">33%</span>
+                        </div>
+                        <div class="progress-track">
+                            <div class="progress-fill" id="progressBar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day Grid -->
+                <div class="reading-days-grid">
+                    <!-- Day 1 -->
+                    <div class="day-card completed" id="card-day-1">
+                        <div class="day-header">
+                            <span class="day-badge">Ngày 1</span>
+                            <i class="fa-solid fa-circle-check" style="color: var(--success);" id="icon-day-1"></i>
+                        </div>
+                        <h3 class="day-title">Ma-thi-ơ Chương 1 - 2</h3>
+                        <p class="day-passage"><i class="fa-solid fa-book-open"></i> Gia phả & Sự giáng sinh của Đức Chúa Jêsus</p>
+                        <label class="checkbox-label">
+                            <input type="checkbox" checked onchange="toggleDayProgress(1, this)"> Đã đọc xong
+                        </label>
+                    </div>
+
+                    <!-- Day 2 -->
+                    <div class="day-card completed" id="card-day-2">
+                        <div class="day-header">
+                            <span class="day-badge">Ngày 2</span>
+                            <i class="fa-solid fa-circle-check" style="color: var(--success);" id="icon-day-2"></i>
+                        </div>
+                        <h3 class="day-title">Ma-thi-ơ Chương 3 - 4</h3>
+                        <p class="day-passage"><i class="fa-solid fa-book-open"></i> Giăng Báp-tít & Sự chịu cám dỗ</p>
+                        <label class="checkbox-label">
+                            <input type="checkbox" checked onchange="toggleDayProgress(2, this)"> Đã đọc xong
+                        </label>
+                    </div>
+
+                    <!-- Day 3 -->
+                    <div class="day-card" id="card-day-3">
+                        <div class="day-header">
+                            <span class="day-badge">Ngày 3</span>
+                            <i class="fa-regular fa-circle" style="color: var(--text-muted);" id="icon-day-3"></i>
+                        </div>
+                        <h3 class="day-title">Ma-thi-ơ Chương 5 - 7</h3>
+                        <p class="day-passage"><i class="fa-solid fa-book-open"></i> Bài giảng trên núi (Phước lành & Cầu nguyện)</p>
+                        <label class="checkbox-label">
+                            <input type="checkbox" onchange="toggleDayProgress(3, this)"> Đã đọc xong
+                        </label>
+                    </div>
+
+                    <!-- Day 4 -->
+                    <div class="day-card" id="card-day-4">
+                        <div class="day-header">
+                            <span class="day-badge">Ngày 4</span>
+                            <i class="fa-regular fa-circle" style="color: var(--text-muted);" id="icon-day-4"></i>
+                        </div>
+                        <h3 class="day-title">Ma-thi-ơ Chương 8 - 9</h3>
+                        <p class="day-passage"><i class="fa-solid fa-book-open"></i> Các phép lạ chữa bệnh & kêu gọi Ma-thi-ơ</p>
+                        <label class="checkbox-label">
+                            <input type="checkbox" onchange="toggleDayProgress(4, this)"> Đã đọc xong
+                        </label>
+                    </div>
+
+                    <!-- Day 5 -->
+                    <div class="day-card" id="card-day-5">
+                        <div class="day-header">
+                            <span class="day-badge">Ngày 5</span>
+                            <i class="fa-regular fa-circle" style="color: var(--text-muted);" id="icon-day-5"></i>
+                        </div>
+                        <h3 class="day-title">Ma-thi-ơ Chương 10 - 11</h3>
+                        <p class="day-passage"><i class="fa-solid fa-book-open"></i> Sai 12 sứ đồ đi rao giảng</p>
+                        <label class="checkbox-label">
+                            <input type="checkbox" onchange="toggleDayProgress(5, this)"> Đã đọc xong
+                        </label>
+                    </div>
+
+                    <!-- Day 6 -->
+                    <div class="day-card" id="card-day-6">
+                        <div class="day-header">
+                            <span class="day-badge">Ngày 6</span>
+                            <i class="fa-regular fa-circle" style="color: var(--text-muted);" id="icon-day-6"></i>
+                        </div>
+                        <h3 class="day-title">Ma-thi-ơ Chương 12 - 13</h3>
+                        <p class="day-passage"><i class="fa-solid fa-book-open"></i> Chúa của ngày Sa-bát & Các ví dụ về Nước Thiên Đàng</p>
+                        <label class="checkbox-label">
+                            <input type="checkbox" onchange="toggleDayProgress(6, this)"> Đã đọc xong
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. QUIZZES SECTION -->
+        <section id="quizzes" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Kiểm Tra Kiến Thức</h2>
+                    <p class="section-subtitle">Ôn tập và củng cố bài học Kinh Thánh sau các phân đoạn đã đọc</p>
+                </div>
+
+                <div class="quiz-container">
+                    <form id="quizForm" onsubmit="submitQuiz(event)">
+                        <!-- Q1: Multiple Choice -->
+                        <div class="quiz-question-box">
+                            <span class="quiz-type-tag">Câu 1: Trắc Nghiệm (Multiple Choice)</span>
+                            <h3 class="quiz-question">Bài giảng trên núi của Chúa Jêsus được ghi chép trong phân đoạn nào của sách Ma-thi-ơ?</h3>
+                            <div class="options-group">
+                                <label class="option-item">
+                                    <input type="radio" name="q1" value="A"> A. Ma-thi-ơ chương 1 đến 3
+                                </label>
+                                <label class="option-item">
+                                    <input type="radio" name="q1" value="B"> B. Ma-thi-ơ chương 5 đến 7
+                                </label>
+                                <label class="option-item">
+                                    <input type="radio" name="q1" value="C"> C. Ma-thi-ơ chương 10 đến 12
+                                </label>
+                            </div>
+                            <div class="explanation-box" id="exp-q1"></div>
+                        </div>
+
+                        <!-- Q2: True / False -->
+                        <div class="quiz-question-box">
+                            <span class="quiz-type-tag">Câu 2: Đúng / Sai (True / False)</span>
+                            <h3 class="quiz-question">Đúng hay Sai: Giăng Báp-tít là người đã làm phép báp-têm cho Chúa Jêsus tại sông Giô-đanh?</h3>
+                            <div class="options-group">
+                                <label class="option-item">
+                                    <input type="radio" name="q2" value="True"> Đúng (True)
+                                </label>
+                                <label class="option-item">
+                                    <input type="radio" name="q2" value="False"> Sai (False)
+                                </label>
+                            </div>
+                            <div class="explanation-box" id="exp-q2"></div>
+                        </div>
+
+                        <!-- Q3: Essay -->
+                        <div class="quiz-question-box">
+                            <span class="quiz-type-tag">Câu 3: Suy Ngẫm & Tự Luận (Essay)</span>
+                            <h3 class="quiz-question">Qua câu Kinh Thánh "Lời Chúa là ngọn đèn cho chân tôi" (Thi-thiên 119:105), bạn ứng dụng lời Chúa vào quyết định hàng ngày như thế nào?</h3>
+                            <textarea class="essay-input" placeholder="Viết cảm nhận hoặc suy ngẫm của bạn tại đây..."></textarea>
+                            <div class="explanation-box correct" id="exp-q3" style="display:none;">
+                                💡 <strong>Gợi ý suy ngẫm:</strong> Lời Chúa định hướng cho từng bước đi nhỏ (ngọn đèn cho chân) và soi sáng bức tranh tương lai dài hạn (ánh sáng cho đường lối). Cầu nguyện và đọc Kinh Thánh trước khi đưa ra quyết định quan trọng.
+                            </div>
+                        </div>
+
+                        <div style="text-align: center; margin-top: 30px;">
+                            <button type="submit" class="btn btn-primary" style="padding: 12px 36px; font-size: 1rem;">
+                                <i class="fa-solid fa-check-double"></i> Chấm Điểm & Xem Đáp Án
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. REFLECTIONS / DEVOTIONALS SECTION -->
+        <section id="reflections" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Suy Ngẫm Cùng Kinh Thánh</h2>
+                    <p class="section-subtitle">Các bài viết tĩnh nguyện và bài học giúp bạn suy ngẫm sâu sắc hơn mỗi ngày</p>
+                </div>
+
+                <div class="blog-grid">
+                    <article class="blog-card">
+                        <img src="https://images.unsplash.com/photo-1507692049790-de58290a4334?auto=format&fit=crop&w=600&q=80" alt="Bình an trong Chúa" class="blog-img">
+                        <div class="blog-content">
+                            <span class="blog-date"><i class="fa-regular fa-calendar"></i> 05 Tháng 8, 2026</span>
+                            <h3 class="blog-title">Tìm Kiếm Sự Bình An Trong Thế Giới Vội Vã</h3>
+                            <p class="blog-excerpt">Sự bình an thật không đến từ việc hoàn cảnh xung quanh lặng sóng, mà đến từ sự hiện diện của Chúa trong tâm hồn bạn...</p>
+                            <a href="#read" class="btn btn-outline" style="align-self: flex-start;" onclick="alert('Tính năng mở rộng bài viết chi tiết!')">Đọc Thêm</a>
+                        </div>
+                    </article>
+
+                    <article class="blog-card">
+                        <img src="https://images.unsplash.com/photo-1499209974431-9dac3cea0047?auto=format&fit=crop&w=600&q=80" alt="Đức tin" class="blog-img">
+                        <div class="blog-content">
+                            <span class="blog-date"><i class="fa-regular fa-calendar"></i> 03 Tháng 8, 2026</span>
+                            <h3 class="blog-title">Hạt Giống Đức Tin Và Sức Mạnh Của Sự Kiên Trì</h3>
+                            <p class="blog-excerpt">Đức tin không cần phải lớn như ngọn núi, chỉ cần nhỏ như hạt cải nhưng sống động và bám rễ sâu vào Lời Ngài...</p>
+                            <a href="#read" class="btn btn-outline" style="align-self: flex-start;" onclick="alert('Tính năng mở rộng bài viết chi tiết!')">Đọc Thêm</a>
+                        </div>
+                    </article>
+
+                    <article class="blog-card">
+                        <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80" alt="Cầu nguyện" class="blog-img">
+                        <div class="blog-content">
+                            <span class="blog-date"><i class="fa-regular fa-calendar"></i> 01 Tháng 8, 2026</span>
+                            <h3 class="blog-title">Bí Quyết Xây Dựng Thói Quản Cầu Nguyện Buổi Sáng</h3>
+                            <p class="blog-excerpt">Dành 15 phút đầu tiên trong ngày để trò chuyện với Chúa sẽ thay đổi toàn bộ thái độ và góc nhìn của bạn trong cả ngày...</p>
+                            <a href="#read" class="btn btn-outline" style="align-self: flex-start;" onclick="alert('Tính năng mở rộng bài viết chi tiết!')">Đọc Thêm</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. MEDIA / VIDEO SECTION -->
+        <section id="media" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Thư Viện Video & Bài Giảng</h2>
+                    <p class="section-subtitle">Video minh họa Kinh Thánh, phim hoạt hình và bài giảng bổ ích</p>
+                </div>
+
+                <div class="video-grid">
+                    <div class="video-card">
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube-nocookie.com/embed/GQI72THyOKE" title="Tổng quan Ma-thi-ơ Phần 1" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">Tổng Quan Sách Ma-thi-ơ (Phần 1)</h3>
+                            <p class="video-author"><i class="fa-brands fa-youtube"></i> The Bible Project (Phụ đề Việt)</p>
+                        </div>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube-nocookie.com/embed/3D_39Zk9x8E" title="Bài Giảng Trên Núi" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">Ý Nghĩa Phước Lành Trong Bài Giảng Trên Núi</h3>
+                            <p class="video-author"><i class="fa-brands fa-youtube"></i> Kinh Thánh Minh Họa</p>
+                        </div>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube-nocookie.com/embed/LkW0G1M8n_4" title="Phim Hoạt Hình Kinh Thánh" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">Câu Chuyện Người Samari Nhân Lành</h3>
+                            <p class="video-author"><i class="fa-brands fa-youtube"></i> Hoạt Hình Kinh Thánh Cho Gia Đình</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. BIBLE QUOTES COLLECTION SECTION -->
+        <section id="quotes" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Trích Dẫn Kinh Thánh Hay</h2>
+                    <p class="section-subtitle">Bộ sưu tập các câu gốc truyền cảm hứng phân loại theo chủ đề</p>
+                </div>
+
+                <!-- Category Filters -->
+                <div class="category-filter">
+                    <button class="cat-btn active" onclick="filterQuotes('all', this)">Tất Cả</button>
+                    <button class="cat-btn" onclick="filterQuotes('faith', this)">Đức Tin</button>
+                    <button class="cat-btn" onclick="filterQuotes('love', this)">Tình Yêu</button>
+                    <button class="cat-btn" onclick="filterQuotes('hope', this)">Hy Vọng</button>
+                    <button class="cat-btn" onclick="filterQuotes('peace', this)">Bình An</button>
+                </div>
+
+                <!-- Quotes Grid -->
+                <div class="quotes-grid" id="quotesGrid">
+                    <!-- Quote 1 -->
+                    <div class="quote-card" data-cat="faith">
+                        <p class="quote-body scripture-font">"Vả, đức tin là sự quả quả quyết về những điều mình đang hy vọng, là bằng chứng của những điều mình chẳng xem thấy."</p>
+                        <div class="quote-footer">
+                            <span class="quote-ref-text">Hê-bơ-rơ 11:1</span>
+                            <div>
+                                <button class="icon-btn" onclick="copyText('Vả, đức tin là sự quả quả quyết về những điều mình đang hy vọng, là bằng chứng của những điều mình chẳng xem thấy. - Hê-bơ-rơ 11:1')" title="Sao chép"><i class="fa-regular fa-copy"></i></button>
+                                <button class="icon-btn" onclick="shareQuote('Hê-bơ-rơ 11:1', 'Vả, đức tin là...')" title="Chia sẻ"><i class="fa-solid fa-share-nodes"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quote 2 -->
+                    <div class="quote-card" data-cat="love">
+                        <p class="quote-body scripture-font">"Đức Chúa Trời đã yêu thương thế gian đến nỗi đã ban Con Một của Ngài, hầu cho hễ ai tin Con ấy không bị hư mất mà được sự sống đời đời."</p>
+                        <div class="quote-footer">
+                            <span class="quote-ref-text">Giăng 3:16</span>
+                            <div>
+                                <button class="icon-btn" onclick="copyText('Đức Chúa Trời đã yêu thương thế gian đến nỗi đã ban Con Một của Ngài, hầu cho hễ ai tin Con ấy không bị hư mất mà được sự sống đời đời. - Giăng 3:16')" title="Sao chép"><i class="fa-regular fa-copy"></i></button>
+                                <button class="icon-btn" onclick="shareQuote('Giăng 3:16', 'Đức Chúa Trời đã yêu thương...')" title="Chia sẻ"><i class="fa-solid fa-share-nodes"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quote 3 -->
+                    <div class="quote-card" data-cat="peace">
+                        <p class="quote-body scripture-font">"Ta để sự bình an lại cho các ngươi; Ta ban sự bình an của Ta cho các ngươi. Lòng các ngươi chớ bối rối và đừng sợ hãi."</p>
+                        <div class="quote-footer">
+                            <span class="quote-ref-text">Giăng 14:27</span>
+                            <div>
+                                <button class="icon-btn" onclick="copyText('Ta để sự bình an lại cho các ngươi; Ta ban sự bình an của Ta cho các ngươi. Lòng các ngươi chớ bối rối và đừng sợ hãi. - Giăng 14:27')" title="Sao chép"><i class="fa-regular fa-copy"></i></button>
+                                <button class="icon-btn" onclick="shareQuote('Giăng 14:27', 'Ta để sự bình an lại...')" title="Chia sẻ"><i class="fa-solid fa-share-nodes"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quote 4 -->
+                    <div class="quote-card" data-cat="hope">
+                        <p class="quote-body scripture-font">"Tôi làm được mọi sự nhờ Đấng ban năng lực cho tôi."</p>
+                        <div class="quote-footer">
+                            <span class="quote-ref-text">Phi-líp 4:13</span>
+                            <div>
+                                <button class="icon-btn" onclick="copyText('Tôi làm được mọi sự nhờ Đấng ban năng lực cho tôi. - Phi-líp 4:13')" title="Sao chép"><i class="fa-regular fa-copy"></i></button>
+                                <button class="icon-btn" onclick="shareQuote('Phi-líp 4:13', 'Tôi làm được mọi sự...')" title="Chia sẻ"><i class="fa-solid fa-share-nodes"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quote 5 -->
+                    <div class="quote-card" data-cat="love">
+                        <p class="quote-body scripture-font">"Tình yêu thương hay nhịn nhẫn; tình yêu thương hay nhân từ... Tình yêu thương chẳng bao giờ suy sụp."</p>
+                        <div class="quote-footer">
+                            <span class="quote-ref-text">1 Cô-rinh-tô 13:4,8</span>
+                            <div>
+                                <button class="icon-btn" onclick="copyText('Tình yêu thương hay nhịn nhẫn; tình yêu thương hay nhân từ... Tình yêu thương chẳng bao giờ suy sụp. - 1 Cô-rinh-tô 13:4,8')" title="Sao chép"><i class="fa-regular fa-copy"></i></button>
+                                <button class="icon-btn" onclick="shareQuote('1 Cô-rinh-tô 13:4,8', 'Tình yêu thương hay nhịn nhẫn...')" title="Chia sẻ"><i class="fa-solid fa-share-nodes"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quote 6 -->
+                    <div class="quote-card" data-cat="hope">
+                        <p class="quote-body scripture-font">"Đức Giê-hô-va là Đấng chăn giữ tôi; tôi sẽ chẳng thiếu thốn gì."</p>
+                        <div class="quote-footer">
+                            <span class="quote-ref-text">Thi-thiên 23:1</span>
+                            <div>
+                                <button class="icon-btn" onclick="copyText('Đức Giê-hô-va là Đấng chăn giữ tôi; tôi sẽ chẳng thiếu thốn gì. - Thi-thiên 23:1')" title="Sao chép"><i class="fa-regular fa-copy"></i></button>
+                                <button class="icon-btn" onclick="shareQuote('Thi-thiên 23:1', 'Đức Giê-hô-va là Đấng chăn giữ tôi...')" title="Chia sẻ"><i class="fa-solid fa-share-nodes"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. AUTHENTICATION SECTION (ĐĂNG NHẬP / ĐĂNG KÝ) -->
+        <section id="auth" class="section">
+            <div class="container">
+                <div class="quiz-container" style="max-width: 480px;">
+                    <div class="section-header" style="margin-bottom: 25px;">
+                        <h2 class="section-title" id="authFormTitle">Đăng Nhập Tài Khoản</h2>
+                        <p class="section-subtitle" id="authFormSub">Đồng bộ tiến độ đọc Kinh Thánh của bạn trên mọi thiết bị</p>
+                    </div>
+
+                    <form id="authForm" onsubmit="handleAuthSubmit(event)">
+                        <div style="margin-bottom: 16px;">
+                            <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Email:</label>
+                            <input type="email" id="authEmail" required class="essay-input" style="height: 46px;" placeholder="nhap.email@example.com">
+                        </div>
+
+                        <div style="margin-bottom: 20px;">
+                            <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Mật khẩu:</label>
+                            <input type="password" id="authPassword" required class="essay-input" style="height: 46px;" placeholder="••••••••">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 12px;">
+                            <i class="fa-solid fa-right-to-bracket"></i> <span id="authSubmitBtnText">Đăng Nhập</span>
+                        </button>
+                    </form>
+
+                    <div style="text-align: center; margin-top: 20px; font-size: 0.9rem;">
+                        <span id="authTogglePrompt">Chưa có tài khoản?</span>
+                        <a href="javascript:void(0)" onclick="toggleAuthMode()" id="authToggleLink" style="color: var(--primary); font-weight: 700; margin-left: 6px;">Tạo tài khoản mới</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. ADMIN MANAGEMENT DASHBOARD SECTION (TRANG QUẢN TRỊ ADMIN) -->
+        <section id="admin" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title"><i class="fa-solid fa-sliders"></i> Bảng Quản Trị Nội Dung (Admin)</h2>
+                    <p class="section-subtitle">Thêm mới & Quản lý Bài suy ngẫm, Video bài giảng và Trích dẫn Kinh Thánh</p>
+                </div>
+
+                <!-- Admin Tabs -->
+                <div style="display: flex; gap: 12px; margin-bottom: 30px; justify-content: center; flex-wrap: wrap;">
+                    <button class="cat-btn active" onclick="switchAdminSubTab('addQuote', this)">+ Thêm Câu Gốc mới</button>
+                    <button class="cat-btn" onclick="switchAdminSubTab('addBlog', this)">+ Thêm Bài Suy Ngẫm mới</button>
+                    <button class="cat-btn" onclick="switchAdminSubTab('addVideo', this)">+ Thêm Video mới</button>
+                </div>
+
+                <!-- Admin Action Card -->
+                <div class="quiz-container" style="max-width: 700px;">
+                    <!-- SubTab 1: Add Quote -->
+                    <form id="adminQuoteForm" onsubmit="adminSaveQuote(event)">
+                        <h3 style="color: var(--primary); margin-bottom: 20px;">Thêm Trích Dẫn Kinh Thánh Mới</h3>
+                        <div style="margin-bottom: 16px;">
+                            <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Nội dung câu gốc:</label>
+                            <textarea id="adminQuoteText" required class="essay-input" placeholder="Ví dụ: Lời Chúa là ngọn đèn cho chân tôi..."></textarea>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+                            <div>
+                                <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Địa danh Kinh Thánh:</label>
+                                <input type="text" id="adminQuoteRef" required class="essay-input" style="height: 46px;" placeholder="Ví dụ: Thi-thiên 119:105">
+                            </div>
+                            <div>
+                                <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Chủ đề:</label>
+                                <select id="adminQuoteCat" class="essay-input" style="height: 46px; padding: 10px;">
+                                    <option value="faith">Đức Tin (Faith)</option>
+                                    <option value="love">Tình Yêu (Love)</option>
+                                    <option value="hope">Hy Vọng (Hope)</option>
+                                    <option value="peace">Bình An (Peace)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Luu Vào CSDL Supabase</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast" id="toast">
+        <i class="fa-solid fa-circle-check"></i> <span id="toastMsg">Đã sao chép vào bộ nhớ tạm!</span>
     </div>
-  </header>
 
-  <!-- MAIN CONTENT -->
-  <main>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <div class="logo-icon" style="width: 36px; height: 36px; font-size: 1rem;"><i class="fa-solid fa-book-bible"></i></div>
+                        <span style="font-size: 1.15rem; font-weight: 700; color: white;">Đọc Kinh Thánh Mỗi Ngày</span>
+                    </div>
+                    <p>Nền tảng giúp bạn tìm kiếm sự bình an, nuôi dưỡng đức tin và xây dựng thói quen đọc Kinh Thánh vững chắc mỗi ngày.</p>
+                </div>
 
-    <!-- HERO SECTION -->
-    <section id="home" class="hero">
-      <div class="hero-badge">✨ Nền Tảng Học Kinh Thánh Cho Người Mới Bắt Đầu</div>
-      <h1>Nuôi Dưỡng Tâm Hồn Mỗi Ngày Cùng Lời Chúa</h1>
-      <p>Xây dựng thói quen đọc Kinh Thánh trang nhã, nhẹ nhàng và bình an. Theo dõi tiến trình dễ dàng và đào sâu kiến thức qua từng bài trắc nghiệm.</p>
+                <div>
+                    <h4 class="footer-title">Liên Kết Nhanh</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home" onclick="switchTab('home')">Trang Chủ</a></li>
+                        <li><a href="#plans" onclick="switchTab('plans')">Lộ Trình Đọc</a></li>
+                        <li><a href="#quizzes" onclick="switchTab('quizzes')">Bài Kiểm Tra</a></li>
+                        <li><a href="#reflections" onclick="switchTab('reflections')">Bài Suy Ngẫm</a></li>
+                    </ul>
+                </div>
 
-      <!-- VERSE OF THE DAY -->
-      <div class="verse-card">
-        <div class="verse-text">"Lời Chúa là ngọn đèn cho chân tôi, là ánh sáng cho đường lối tôi."</div>
-        <div class="verse-ref">
-          <span>— Thi Thiên 119:105</span>
-          <div class="verse-actions">
-            <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size: 0.8rem;" onclick="copyVerse('Lời Chúa là ngọn đèn cho chân tôi, là ánh sáng cho đường lối tôi. — Thi Thiên 119:105')">📋 Copy</button>
-          </div>
+                <div>
+                    <h4 class="footer-title">Chuyên Mục</h4>
+                    <ul class="footer-links">
+                        <li><a href="#media" onclick="switchTab('media')">Thư Viện Video</a></li>
+                        <li><a href="#quotes" onclick="switchTab('quotes')">Trích Dẫn Kinh Thánh</a></li>
+                        <li><a href="#home" onclick="switchTab('home')">Câu Gốc Trong Ngày</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Đọc Kinh Thánh Mỗi Ngày. Tất cả quyền được bảo lưu. Nguyện xin bình an của Chúa ở cùng bạn!</p>
+            </div>
         </div>
-      </div>
+    </footer>
 
-      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
-        <a href="#plans" class="btn btn-primary">Bắt Đầu Lộ Trình</a>
-        <a href="#quiz" class="btn btn-outline">Làm Bài Kiểm Tra</a>
-      </div>
-    </section>
-
-    <!-- 1. READING PLANS -->
-    <section id="plans">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Lộ Trình Đọc Kinh Thánh</h2>
-          <p class="section-subtitle">Được thiết kế riêng giúp bạn duy trì thói quen đọc sách mỗi ngày</p>
-        </div>
-      </div>
-
-      <div class="plans-grid">
-        <!-- PLAN 1 -->
-        <div class="plan-card">
-          <span class="plan-tag">Mới Bắt Đầu • 7 Ngày</span>
-          <h3>Lộ Trình Nhập Môn Tân Ước</h3>
-          <p>Tìm hiểu các chương căn bản về cuộc đời và sự giáng sinh của Chúa Giê-su qua sách Phúc Âm Ma-thi-ơ.</p>
-          <div class="plan-progress-bar">
-            <div class="plan-progress-fill" id="progressPlan1"></div>
-          </div>
-          <div style="font-size: 0.85rem; color: var(--text-muted); text-align: right;" id="statusPlan1">0 / 7 Ngày hoàn thành</div>
-
-          <div class="plan-days-list">
-            <div class="day-item"><label><input type="checkbox" class="day-checkbox" onchange="toggleDay(this, 'Plan1')"> Ngày 1: Ma-thi-ơ 1 - 2</label></div>
-            <div class="day-item"><label><input type="checkbox" class="day-checkbox" onchange="toggleDay(this, 'Plan1')"> Ngày 2: Ma-thi-ơ 3 - 4</label></div>
-            <div class="day-item"><label><input type="checkbox" class="day-checkbox" onchange="toggleDay(this, 'Plan1')"> Ngày 3: Ma-thi-ơ 5 (Bài giảng trên núi)</label></div>
-            <div class="day-item"><label><input type="checkbox" class="day-checkbox" onchange="toggleDay(this, 'Plan1')"> Ngày 4: Ma-thi-ơ 6 - 7</label></div>
-            <div class="day-item"><label><input type="checkbox" class="day-checkbox" onchange="toggleDay(this, 'Plan1')"> Ngày 5: Ma-thi-ơ 8 - 9</label></div>
-            <div class="day-item"><label><input type="checkbox" class="day-checkbox" onchange="toggleDay(this, 'Plan1')"> Ngày 6: Ma-thi-ơ 10 - 11</label></div>
-            <div class="day-item"><label><input type="checkbox" class="day-checkbox" onchange="toggleDay(this, 'Plan1')"> Ngày 7: Ma-thi-ơ 12 - 13</label></div>
-          </div>
-        </div>
-
-        <!-- PLAN 2 -->
-        <div class="plan-card">
-          <span class="plan-tag">Sự Khôn Ngoan • 30 Ngày</span>
-          <h3>Học Sách Châm Ngôn</h3>
-          <p>Thu nhận sự khôn ngoan nguyên thủy cho cuộc sống hàng ngày, cách ứng xử và sự bình an tâm hồn.</p>
-          <div class="plan-progress-bar">
-            <div class="plan-progress-fill" id="progressPlan2"></div>
-          </div>
-          <div style="font-size: 0.85rem; color: var(--text-muted); text-align: right;" id="statusPlan2">0 / 4 Ngày hoàn thành</div>
-
-          <div class="plan-days-list">
-            <div class="day-item"><label><input type="checkbox" class="day-checkbox" onchange="toggleDay(this, 'Plan2')"> Ngày 1: Châm Ngôn 1 (Mục đích của sự khôn ngoan)</label></div>
-            <div class="day-item"><label><input type="checkbox" class="day-checkbox" onchange="toggleDay(this, 'Plan2')"> Ngày 2: Châm Ngôn 2 (Phước hạnh khôn ngoan)</label></div>
-            <div class="day-item"><label><input type="checkbox" class="day-checkbox" onchange="toggleDay(this, 'Plan2')"> Ngày 3: Châm Ngôn 3 (Hết lòng tin cậy)</label></div>
-            <div class="day-item"><label><input type="checkbox" class="day-checkbox" onchange="toggleDay(this, 'Plan2')"> Ngày 4: Châm Ngôn 4 (Gìn giữ lòng mình)</label></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 2. QUIZ SECTION -->
-    <section id="quiz">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Kiểm Tra Kiến Thức</h2>
-          <p class="section-subtitle">Ôn tập lại các đoạn Kinh Thánh bạn đã đọc qua các dạng câu hỏi phong phú</p>
-        </div>
-      </div>
-
-      <div class="quiz-container">
-        <!-- QUESTION 1: MULTIPLE CHOICE -->
-        <div class="quiz-question-box">
-          <div class="question-title">
-            <span class="question-type-badge">Trắc Nghiệm</span>
-            <span>Câu 1: Trong sách Thi Thiên 119:105, Lời Chúa được so sánh với điều gì?</span>
-          </div>
-          <div class="options-list">
-            <label class="option-label"><input type="radio" name="q1" value="A"> A. Ngọn đèn cho chân và ánh sáng cho đường lối</label>
-            <label class="option-label"><input type="radio" name="q1" value="B"> B. Ngọn núi vững chãi che chở bão giông</label>
-            <label class="option-label"><input type="radio" name="q1" value="C"> C. Dòng nước mát lành trong sa mạc</label>
-          </div>
-          <div class="quiz-feedback" id="feedbackQ1"></div>
-        </div>
-
-        <!-- QUESTION 2: TRUE / FALSE -->
-        <div class="quiz-question-box" style="border-top: 1px solid var(--border-color); padding-top: 1.5rem;">
-          <div class="question-title">
-            <span class="question-type-badge">Đúng / Sai</span>
-            <span>Câu 2: Chúa Giê-su đã đọc Bài Giảng Trên Núi trong sách Ma-thi-ơ chương 5?</span>
-          </div>
-          <div class="options-list">
-            <label class="option-label"><input type="radio" name="q2" value="True"> Đúng</label>
-            <label class="option-label"><input type="radio" name="q2" value="False"> Sai</label>
-          </div>
-          <div class="quiz-feedback" id="feedbackQ2"></div>
-        </div>
-
-        <!-- QUESTION 3: ESSAY -->
-        <div class="quiz-question-box" style="border-top: 1px solid var(--border-color); padding-top: 1.5rem;">
-          <div class="question-title">
-            <span class="question-type-badge" style="background: var(--primary-light); color: var(--primary);">Tự Luận</span>
-            <span>Câu 3: Theo bạn, làm thế nào để duy trì sự bình an trong tâm hồn trước những lo âu cuộc sống?</span>
-          </div>
-          <textarea class="essay-textarea" placeholder="Nhập suy ngẫm của bạn tại đây..."></textarea>
-        </div>
-
-        <button class="btn btn-primary" onclick="gradeQuiz()">Chấm Điểm & Xem Đáp Án</button>
-      </div>
-    </section>
-
-    <!-- 3. REFLECTIONS / DEVOTIONALS -->
-    <section id="reflections">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Suy Ngẫm Cùng Kinh Thánh</h2>
-          <p class="section-subtitle">Những bài viết tĩnh nguyện sâu sắc giúp bạn nuôi dưỡng tâm linh mỗi ngày</p>
-        </div>
-      </div>
-
-      <div class="blog-grid">
-        <div class="blog-card">
-          <div class="blog-img" style="background-image: url('https://images.unsplash.com/photo-1509021436468-d51007467104?q=80&w=600&auto=format&fit=crop');"></div>
-          <div class="blog-content">
-            <div class="blog-meta">🌱 Tĩnh Nguyện • 5 Phút Đọc</div>
-            <h4>Học Cách Yêu Thương Trong Sự Kiên Nhẫn</h4>
-            <p>Tình yêu thương không chỉ là cảm xúc, mà là một sự lựa chọn chủ động mỗi ngày qua sự nhẫn nại và lòng nhân từ...</p>
-            <button class="btn btn-outline" style="font-size: 0.85rem;" onclick="showToast('Đang mở bài viết chi tiết...')">Đọc Tiếp →</button>
-          </div>
-        </div>
-
-        <div class="blog-card">
-          <div class="blog-img" style="background-image: url('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=600&auto=format&fit=crop');"></div>
-          <div class="blog-content">
-            <div class="blog-meta">🕊️ Bình An • 4 Phút Đọc</div>
-            <h4>Giao Buông Lo Âu Cho Đấng Tạo Hóa</h4>
-            <p>Giữa những xáo trộn của đời sống hiện đại, hãy dành một khoảng lặng tĩnh lặng để lắng nghe tiếng Chúa phán...</p>
-            <button class="btn btn-outline" style="font-size: 0.85rem;" onclick="showToast('Đang mở bài viết chi tiết...')">Đọc Tiếp →</button>
-          </div>
-        </div>
-
-        <div class="blog-card">
-          <div class="blog-img" style="background-image: url('https://images.unsplash.com/photo-1519817650390-64a93db51149?q=80&w=600&auto=format&fit=crop');"></div>
-          <div class="blog-content">
-            <div class="blog-meta">💡 Sự Khôn Ngoan • 6 Phút Đọc</div>
-            <h4>Xây Dựng Nền Móng Vững Chắc</h4>
-            <p>Người khôn ngoan cất nhà mình trên đá. Lời Chúa là nền tảng vững bền nhất giúp chúng ta đứng vững qua mọi giông bão.</p>
-            <button class="btn btn-outline" style="font-size: 0.85rem;" onclick="showToast('Đang mở bài viết chi tiết...')">Đọc Tiếp →</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. MEDIA / VIDEO LIBRARY -->
-    <section id="video">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Thư Viện Video Minh Họa</h2>
-          <p class="section-subtitle">Xem các video hoạt hình Kinh Thánh & bài giảng ngắn truyền cảm hứng</p>
-        </div>
-      </div>
-
-      <div class="video-grid">
-        <div class="video-card">
-          <div class="video-embed-container">
-            <iframe src="https://www.youtube.com/embed/g-LSyJp2yqU" title="Kinh Thánh Minh Họa" allowfullscreen></iframe>
-          </div>
-          <div class="video-info">
-            <h4>Tổng Quan Sách Ma-thi-ơ (Phần 1)</h4>
-            <p>Phim hoạt hình ngắn tóm tắt bối cảnh và ý nghĩa sách Ma-thi-ơ.</p>
-          </div>
-        </div>
-
-        <div class="video-card">
-          <div class="video-embed-container">
-            <iframe src="https://www.youtube.com/embed/3Dbe1LwN2S8" title="Bài Giảng Tĩnh Nguyện" allowfullscreen></iframe>
-          </div>
-          <div class="video-info">
-            <h4>Ý Nghĩa Của Sự Bình An</h4>
-            <p>Chia sẻ ngắn về cách giữ lòng bình an giữa sóng gió cuộc sống.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 5. BIBLE QUOTES GALLERY -->
-    <section id="quotes">
-      <div class="section-header">
-        <div>
-          <h2 class="section-title">Trích Dẫn Kinh Thánh Nổi Bật</h2>
-          <p class="section-subtitle">Sưu tầm những câu gốc hay chia theo chủ đề để dễ dàng suy ngẫm & chia sẻ</p>
-        </div>
-      </div>
-
-      <div class="quotes-filter">
-        <button class="filter-btn active" onclick="filterQuotes('all', this)">Tất Cả</button>
-        <button class="filter-btn" onclick="filterQuotes('faith', this)">Đức Tin</button>
-        <button class="filter-btn" onclick="filterQuotes('hope', this)">Hy Vọng</button>
-        <button class="filter-btn" onclick="filterQuotes('love', this)">Tình Yêu</button>
-        <button class="filter-btn" onclick="filterQuotes('peace', this)">Bình An</button>
-      </div>
-
-      <div class="quotes-grid">
-        <div class="quote-item" data-category="faith">
-          <div class="quote-content">"Vả, đức tin là sự quả quyết về những điều mình đang hy vọng, là bằng chứng của những điều mình không thấy."</div>
-          <div class="quote-footer">
-            <span class="quote-ref">Hê-bơ-rơ 11:1</span>
-            <button class="btn btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="copyVerse('Vả, đức tin là sự quả quyết về những điều mình đang hy vọng, là bằng chứng của những điều mình không thấy. — Hê-bơ-rơ 11:1')">Copy</button>
-          </div>
-        </div>
-
-        <div class="quote-item" data-category="love">
-          <div class="quote-content">"Tình yêu thương hay nhẫn nại; tình yêu thương hay nhân từ; tình yêu thương không ghen tị..."</div>
-          <div class="quote-footer">
-            <span class="quote-ref">1 Cô-rinh-tô 13:4</span>
-            <button class="btn btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="copyVerse('Tình yêu thương hay nhẫn nại; tình yêu thương hay nhân từ... — 1 Cô-rinh-tô 13:4')">Copy</button>
-          </div>
-        </div>
-
-        <div class="quote-item" data-category="peace">
-          <div class="quote-content">"Ta để sự bình an lại cho các ngươi; Ta cho các ngươi sự bình an của Ta."</div>
-          <div class="quote-footer">
-            <span class="quote-ref">Giăng 14:27</span>
-            <button class="btn btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="copyVerse('Ta để sự bình an lại cho các ngươi; Ta cho các ngươi sự bình an của Ta. — Giăng 14:27')">Copy</button>
-          </div>
-        </div>
-
-        <div class="quote-item" data-category="hope">
-          <div class="quote-content">"Vì Ta biết chương trình Ta hoạch định cho các con, là chương trình bình an chứ không phải tai hại, để cho các con một tương lai và một hy vọng."</div>
-          <div class="quote-footer">
-            <span class="quote-ref">Giê-rê-mi 29:11</span>
-            <button class="btn btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;" onclick="copyVerse('Vì Ta biết chương trình Ta hoạch định cho các con... — Giê-rê-mi 29:11')">Copy</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-container">
-      <div class="footer-col">
-        <a href="#" class="logo" style="margin-bottom: 1rem;">
-          <div class="logo-icon">📖</div>
-          <span>Đọc Kinh Thánh Mỗi Ngày</span>
-        </a>
-        <p>Nền tảng đồng hành cùng bạn trên hành trình khám phá và suy ngẫm Lời Chúa mỗi ngày trong sự bình an.</p>
-      </div>
-
-      <div class="footer-col">
-        <h4>Liên Kết Nhanh</h4>
-        <ul>
-          <li><a href="#plans">Lộ Trình Đọc</a></li>
-          <li><a href="#quiz">Kiểm Tra Kiến Thức</a></li>
-          <li><a href="#reflections">Suy Ngẫm & Bài Viết</a></li>
-          <li><a href="#quotes">Trích Dẫn Hay</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>Lời Chúc Bình An</h4>
-        <p>"Nguyện xin bình an và ân hiển của Thiên Chúa luôn ở cùng bạn và gia đình trong mọi nẻo đường."</p>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      &copy; 2026 Đọc Kinh Thánh Mỗi Ngày. Thiết kế trang nhã & thân thiện cho người dùng.
-    </div>
-  </footer>
-
-  <!-- TOAST NOTIFICATION -->
-  <div class="toast" id="toastNotification">Đã sao chép vào bộ nhớ tạm!</div>
-
-  <!-- JAVASCRIPT LOGIC -->
-  <script>
-    // 1. MOBILE MENU TOGGLE
-    const mobileToggle = document.getElementById('mobileToggle');
-    const navLinks = document.getElementById('navLinks');
-    mobileToggle.addEventListener('click', () => {
-      navLinks.classList.toggle('show');
-    });
-
-    // 2. DARK MODE TOGGLE
-    const btnTheme = document.getElementById('btnTheme');
-    btnTheme.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-      const isDark = document.body.classList.contains('dark-mode');
-      btnTheme.textContent = isDark ? '☀️' : '🌙';
-    });
-
-    // 3. FONT SIZE ADJUSTER
-    const btnFontSize = document.getElementById('btnFontSize');
-    let currentFontSizeIndex = 0;
-    const fontSizes = ['16px', '18px', '20px'];
-    btnFontSize.addEventListener('click', () => {
-      currentFontSizeIndex = (currentFontSizeIndex + 1) % fontSizes.length;
-      document.documentElement.style.setProperty('--base-font-size', fontSizes[currentFontSizeIndex]);
-      showToast(`Đã đổi cỡ chữ: ${fontSizes[currentFontSizeIndex]}`);
-    });
-
-    // 4. TOAST FUNCTION
-    function showToast(msg) {
-      const toast = document.getElementById('toastNotification');
-      toast.textContent = msg;
-      toast.style.display = 'block';
-      setTimeout(() => {
-        toast.style.display = 'none';
-      }, 2500);
-    }
-
-    // 5. COPY VERSE
-    function copyVerse(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        showToast('Đã sao chép câu gốc vào khay nhớ tạm!');
-      }).catch(() => {
-        showToast('Không thể sao chép văn bản.');
-      });
-    }
-
-    // 6. READING PLAN PROGRESS
-    function toggleDay(checkbox, planId) {
-      const item = checkbox.closest('.day-item');
-      if (checkbox.checked) {
-        item.classList.add('done');
-      } else {
-        item.classList.remove('done');
-      }
-      updatePlanProgress(planId);
-    }
-
-    function updatePlanProgress(planId) {
-      const card = document.getElementById(`status${planId}`).closest('.plan-card');
-      const checkboxes = card.querySelectorAll('.day-checkbox');
-      const checked = card.querySelectorAll('.day-checkbox:checked');
-      
-      const total = checkboxes.length;
-      const count = checked.length;
-      const percent = Math.round((count / total) * 100);
-
-      document.getElementById(`progress${planId}`).style.width = `${percent}%`;
-      document.getElementById(`status${planId}`).textContent = `${count} / ${total} Ngày hoàn thành (${percent}%)`;
-    }
-
-    // 7. QUIZ GRADING LOGIC
-    function gradeQuiz() {
-      // Q1 Check
-      const q1Val = document.querySelector('input[name="q1"]:checked')?.value;
-      const f1 = document.getElementById('feedbackQ1');
-      if (q1Val === 'A') {
-        f1.className = 'quiz-feedback correct';
-        f1.innerHTML = '<strong>Đúng rồi! 🎉</strong> Thi Thiên 119:105 khẳng định Lời Chúa là ngọn đèn cho chân và ánh sáng cho đường lối chúng ta.';
-      } else {
-        f1.className = 'quiz-feedback incorrect';
-        f1.innerHTML = '<strong>Chưa chính xác! 💡</strong> Đáp án đúng là A. Lời Chúa chỉ dẫn từng bước đi trong cuộc sống.';
-      }
-
-      // Q2 Check
-      const q2Val = document.querySelector('input[name="q2"]:checked')?.value;
-      const f2 = document.getElementById('feedbackQ2');
-      if (q2Val === 'True') {
-        f2.className = 'quiz-feedback correct';
-        f2.innerHTML = '<strong>Chính xác! 🎉</strong> Bài Giảng Trên Núi nổi tiếng nằm từ chương 5 đến chương 7 sách Ma-thi-ơ.';
-      } else {
-        f2.className = 'quiz-feedback incorrect';
-        f2.innerHTML = '<strong>Chưa chính xác! 💡</strong> Đáp án đúng là "Đúng".';
-      }
-
-      showToast('Đã chấm điểm xong bài trắc nghiệm!');
-    }
-
-    // 8. QUOTES FILTER
-    function filterQuotes(category, btn) {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const items = document.querySelectorAll('.quote-item');
-      items.forEach(item => {
-        if (category === 'all' || item.dataset.category === category) {
-          item.style.display = 'flex';
-        } else {
-          item.style.display = 'none';
+    <!-- JavaScript Application Logic -->
+    <script>
+        // ========================================================
+        // SUPABASE CLIENT INITIALIZATION & CONFIGURATION
+        // ========================================================
+        const SUPABASE_URL = "https://poivvectmogswfdurpmh.supabase.co"; 
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvaXZ2ZWN0bW9nc3dmZHVycG1oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYzMzY0NzgsImV4cCI6MjEwMTkxMjQ3OH0.Kp4jjOUO3joh1ZKbmU5q9-SZhIh9zqBGdh3eHAouk3E";
+        
+        let supabaseClient = null;
+        if (typeof supabase !== 'undefined' && SUPABASE_URL !== "YOUR_SUPABASE_PROJECT_URL") {
+            supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+            console.log("Supabase Client initialized successfully!");
         }
-      });
-    }
-  </script>
+
+        // Lấy hoặc tạo Mã định danh Người dùng duy nhất (Anonymous User ID)
+        function getUserIdentifier() {
+            let userId = localStorage.getItem('bible_user_id');
+            if (!userId) {
+                userId = 'user_' + Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+                localStorage.setItem('bible_user_id', userId);
+            }
+            return userId;
+        }
+
+        // Tab Navigation Router
+        function switchTab(tabId) {
+            // Update Navigation Links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + tabId) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Update Sections visibility
+            document.querySelectorAll('.section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            const activeSection = document.getElementById(tabId);
+            if (activeSection) {
+                activeSection.classList.add('active');
+            }
+
+            // Close Mobile menu if open
+            document.getElementById('navLinks').classList.remove('show');
+
+            // Scroll to top smooth
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            document.getElementById('navLinks').classList.toggle('show');
+        }
+
+        // Reading Plan Checkbox & Progress Bar Update
+        let completedDays = 2; // Initial state Day 1 & 2 completed
+        const totalDays = 6;
+
+        async function toggleDayProgress(dayNum, checkbox) {
+            const card = document.getElementById(`card-day-${dayNum}`);
+            const icon = document.getElementById(`icon-day-${dayNum}`);
+            const isChecked = checkbox.checked;
+
+            if (isChecked) {
+                card.classList.add('completed');
+                icon.className = "fa-solid fa-circle-check";
+                icon.style.color = "var(--success)";
+                completedDays++;
+            } else {
+                card.classList.remove('completed');
+                icon.className = "fa-regular fa-circle";
+                icon.style.color = "var(--text-muted)";
+                completedDays--;
+            }
+
+            // Update Progress UI
+            const percent = Math.round((completedDays / totalDays) * 100);
+            document.getElementById('completedCount').innerText = completedDays;
+            document.getElementById('progressPercent').innerText = percent + '%';
+            document.getElementById('progressBar').style.width = percent + '%';
+
+            // Đồng bộ lên Supabase Database (Nếu đã cấu hình Supabase Client)
+            if (supabaseClient) {
+                const userId = getUserIdentifier();
+                if (isChecked) {
+                    await supabaseClient
+                        .from('user_progress')
+                        .upsert({ user_identifier: userId, plan_day_id: dayNum, is_completed: true });
+                } else {
+                    await supabaseClient
+                        .from('user_progress')
+                        .delete()
+                        .eq('user_identifier', userId)
+                        .eq('plan_day_id', dayNum);
+                }
+                showToast("Đã đồng bộ tiến độ lên Supabase Cloud!");
+            }
+        }
+
+        // Quiz Submission & Auto-grading
+        function submitQuiz(event) {
+            event.preventDefault();
+
+            // Q1 Validation (Correct Answer: B)
+            const q1Val = document.querySelector('input[name="q1"]:checked')?.value;
+            const expQ1 = document.getElementById('exp-q1');
+            if (q1Val === 'B') {
+                expQ1.className = "explanation-box correct";
+                expQ1.innerHTML = " Chính xác! Bài giảng trên núi được ghi chép chi tiết từ Ma-thi-ơ chương 5 đến chương 7.";
+            } else {
+                expQ1.className = "explanation-box incorrect";
+                expQ1.innerHTML = " Chưa chính xác! Đáp án đúng là B (Ma-thi-ơ chương 5 đến 7).";
+            }
+
+            // Q2 Validation (Correct Answer: True)
+            const q2Val = document.querySelector('input[name="q2"]:checked')?.value;
+            const expQ2 = document.getElementById('exp-q2');
+            if (q2Val === 'True') {
+                expQ2.className = "explanation-box correct";
+                expQ2.innerHTML = " Chính xác! Giăng Báp-tít làm phép báp-têm cho Chúa Jêsus tại sông Giô-đanh (Ma-thi-ơ 3:13-17).";
+            } else {
+                expQ2.className = "explanation-box incorrect";
+                expQ2.innerHTML = " Chưa chính xác! Đáp án đúng là Đúng (True).";
+            }
+
+            // Q3 Essay (Always show helpful feedback/reflection guide)
+            const expQ3 = document.getElementById('exp-q3');
+            expQ3.style.display = 'block';
+
+            showToast("Đã chấm điểm thành công! Hãy xem đáp án chi tiết bên dưới.");
+        }
+
+        // Category Filter for Bible Quotes
+        function filterQuotes(category, btn) {
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const cards = document.querySelectorAll('.quote-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-cat') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Copy Text Function
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast("Đã sao chép trích dẫn Kinh Thánh vào bộ nhớ tạm!");
+            }).catch(err => {
+                showToast("Không thể sao chép: " + err);
+            });
+        }
+
+        // Share Quote Function
+        function shareQuote(title, text) {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Trích dẫn Kinh Thánh - ' + title,
+                    text: text + ' (Từ Đọc Kinh Thánh Mỗi Ngày)',
+                    url: window.location.href
+                }).catch(err => console.log('Share error:', err));
+            } else {
+                copyText(text);
+            }
+        }
+
+        // ========================================================
+        // AUTHENTICATION & ADMIN DASHBOARD LOGIC (SUPABASE AUTH)
+        // ========================================================
+        let isSignUpMode = false;
+        let currentUser = null;
+
+        function toggleAuthMode() {
+            isSignUpMode = !isSignUpMode;
+            document.getElementById('authFormTitle').innerText = isSignUpMode ? "Tạo Tài Khoản Mới" : "Đăng Nhập Tài Khoản";
+            document.getElementById('authFormSub').innerText = isSignUpMode ? "Đăng ký để lưu trữ lộ trình đọc Kinh Thánh của riêng bạn" : "Đồng bộ tiến độ đọc Kinh Thánh của bạn trên mọi thiết bị";
+            document.getElementById('authSubmitBtnText').innerText = isSignUpMode ? "Đăng Ký Ngay" : "Đăng Nhập";
+            document.getElementById('authTogglePrompt').innerText = isSignUpMode ? "Đã có tài khoản?" : "Chưa có tài khoản?";
+            document.getElementById('authToggleLink').innerText = isSignUpMode ? "Đăng nhập ngay" : "Tạo tài khoản mới";
+        }
+
+        async function handleAuthSubmit(event) {
+            event.preventDefault();
+            const email = document.getElementById('authEmail').value;
+            const password = document.getElementById('authPassword').value;
+
+            if (!supabaseClient) {
+                showToast("Vui lòng cấu hình Supabase Client trước khi đăng nhập!");
+                return;
+            }
+
+            try {
+                if (isSignUpMode) {
+                    const { data, error } = await supabaseClient.auth.signUp({ email, password });
+                    if (error) throw error;
+                    showToast("Đăng ký thành công! Hãy kiểm tra Email xác nhận hoặc đăng nhập.");
+                    toggleAuthMode();
+                } else {
+                    const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+                    if (error) throw error;
+                    currentUser = data.user;
+                    showToast("Đăng nhập thành công! Chào mừng bạn.");
+                    updateUserUI(currentUser);
+                }
+            } catch (err) {
+                showToast("Lỗi xác thực: " + err.message);
+            }
+        }
+
+        function updateUserUI(user) {
+            if (user) {
+                document.getElementById('navAuthBtn').innerHTML = `<i class="fa-solid fa-user-check"></i> ${user.email.split('@')[0]}`;
+                document.getElementById('navAdminBtn').style.display = "flex"; // Hiện nút Admin
+                localStorage.setItem('bible_user_id', user.id);
+            }
+        }
+
+        // Admin Action: Save Quote into Supabase DB
+        async function adminSaveQuote(event) {
+            event.preventDefault();
+            const text = document.getElementById('adminQuoteText').value;
+            const ref = document.getElementById('adminQuoteRef').value;
+            const cat = document.getElementById('adminQuoteCat').value;
+
+            if (!supabaseClient) {
+                showToast("Chưa kết nối CSDL Supabase!");
+                return;
+            }
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from('bible_quotes')
+                    .insert([{ scripture_text: text, reference: ref, category: cat }]);
+                
+                if (error) throw error;
+                showToast("Đã thêm thành công Câu Gốc mới vào Supabase DB!");
+                document.getElementById('adminQuoteForm').reset();
+                switchTab('quotes');
+            } catch (err) {
+                showToast("Lỗi lưu dữ liệu: " + err.message);
+            }
+        }
+
+        // Toast Notification System
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
 </body>
 </html>
