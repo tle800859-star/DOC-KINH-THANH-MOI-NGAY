@@ -1291,10 +1291,31 @@
 
                     <!-- 4. Nản Lòng, Mất Hy Vọng -->
                     <div class="quote-card" data-cat="discouraged">
-                        <p class="quote-body scripture-font">"Nhưng ai trông cậy Đức Giê-hô-va thì chắc chắn được sức mới, cất cánh bay cao như chim ưng, chạy mà không mệt nhọc..."</p>
+                        <p class="quote-body scripture-font">"Nhưng ai trông cậy Đức Giê-hô-va thì chắc chắn được sức mới, cất cánh bay cao như chim ưng, chạy mà không mệt nhọc, đi mà không giòn giã."</p>
                         <div class="quote-footer">
                             <span class="quote-ref-text">Ê-sai 40:31 (Bản 1925)</span>
                             <div><button class="icon-btn" onclick="copyText('Ê-sai 40:31')"><i class="fa-regular fa-copy"></i></button></div>
+                        </div>
+                    </div>
+                    <div class="quote-card" data-cat="discouraged">
+                        <p class="quote-body scripture-font">"Đức Giê-hô-va ở gần những người có lòng đau thương, và cứu vớt kẻ có tâm hồn tan vỡ."</p>
+                        <div class="quote-footer">
+                            <span class="quote-ref-text">Thi-thiên 34:18 (Bản 1925)</span>
+                            <div><button class="icon-btn" onclick="copyText('Thi-thiên 34:18')"><i class="fa-regular fa-copy"></i></button></div>
+                        </div>
+                    </div>
+                    <div class="quote-card" data-cat="discouraged">
+                        <p class="quote-body scripture-font">"Hỡi tâm hồn tôi, sao ngươi sờn sờn? Sao ngươi bồn chồn trong mình tôi? Hãy hy vọng nơi Đức Chúa Trời; tôi sẽ còn ngợi khen Ngài nữa, là Đấng cứu giúp tôi và là Đức Chúa Trời tôi."</p>
+                        <div class="quote-footer">
+                            <span class="quote-ref-text">Thi-thiên 42:11 (Bản 1925)</span>
+                            <div><button class="icon-btn" onclick="copyText('Thi-thiên 42:11')"><i class="fa-regular fa-copy"></i></button></div>
+                        </div>
+                    </div>
+                    <div class="quote-card" data-cat="discouraged">
+                        <p class="quote-body scripture-font">"Thịt xương tôi và lòng tôi hao mòn; nhưng Đức Chúa Trời là sức mạnh của lòng tôi, và là phần của tôi đời đời."</p>
+                        <div class="quote-footer">
+                            <span class="quote-ref-text">Thi-thiên 73:26 (Bản 1925)</span>
+                            <div><button class="icon-btn" onclick="copyText('Thi-thiên 73:26')"><i class="fa-regular fa-copy"></i></button></div>
                         </div>
                     </div>
 
@@ -2035,6 +2056,7 @@
                 const grid = document.getElementById('quotesGrid');
                 if (!grid) return;
 
+                // Tạo danh sách thẻ từ Database Supabase kết hợp sẵn 6 chuyên mục tình trạng
                 let html = '';
                 quotes.forEach(q => {
                     html += `
