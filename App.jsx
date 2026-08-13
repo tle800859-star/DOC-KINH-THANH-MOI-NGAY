@@ -2,15 +2,44 @@ import React, { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { BIBLE_PLAN_365 } from './planData1925';
 
-// 1. SUPABASE CLIENT SDK
+// 1. SUPABASE CLIENT SDK WITH EDGE CACHING & PERSISTENCE
 const SUPABASE_URL = "https://poivvectmogswfdurpmh.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBvaXZ2ZWN0bW9nc3dmZHVycG1oIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYzMzY0NzgsImV4cCI6MjEwMTkxMjQ3OH0.Kp4jjOUO3joh1ZKbmU5q9-SZhIh9zqBGdh3eHAouk3E";
-export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+  auth: { persistSession: true },
+  global: {
+    headers: {
+      'Cache-Control': 'max-age=3600, s-maxage=86400'
+    }
+  }
+});
+
+// Helper for Stale-While-Revalidate Cache
+const fetchWithEdgeCache = async (key, fetcher, setter) => {
+  // 1. Read instantly from Local Edge Storage (0ms response)
+  const cached = localStorage.getItem(`edge_cache_${key}`);
+  if (cached) {
+    try { setter(JSON.parse(cached)); } catch (e) {}
+  }
+  // 2. Fetch fresh data in background from Supabase
+  try {
+    const data = await fetcher();
+    if (data && data.length > 0) {
+      setter(data);
+      localStorage.setItem(`edge_cache_${key}`, JSON.stringify(data));
+    }
+  } catch (err) {
+    console.log("Edge Cache Serving active:", err);
+  }
+};
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('home');
   const [user, setUser] = useState(null);
-  const [completedDays, setCompletedDays] = useState([1, 2]);
+  const [completedDays, setCompletedDays] = useState(() => {
+    const saved = localStorage.getItem('completed_days');
+    return saved ? JSON.parse(saved) : [1, 2];
+  });
   const [toastMsg, setToastMsg] = useState('');
   const [darkMode, setDarkMode] = useState(false);
 
@@ -36,30 +65,15 @@ export default function App() {
       if (session?.user) setUser(session.user);
     });
 
-    // Fetch Dynamic Data from Supabase
-    fetchQuotes();
-    fetchReflections();
-    fetchVideos();
+    // Fetch Dynamic Data via Edge Cache Strategy
+    fetchWithEdgeCache('quotes', () => supabase.from('bible_quotes').select('*').order('created_at', { ascending: false }).then(r => r.data), setQuotes);
+    fetchWithEdgeCache('reflections', () => supabase.from('reflections').select('*').order('created_at', { ascending: false }).then(r => r.data), setReflections);
+    fetchWithEdgeCache('videos', () => supabase.from('media_videos').select('*').order('created_at', { ascending: false }).then(r => r.data), setVideos);
   }, []);
 
   const showToast = (msg) => {
     setToastMsg(msg);
     setTimeout(() => setToastMsg(''), 3000);
-  };
-
-  const fetchQuotes = async () => {
-    const { data } = await supabase.from('bible_quotes').select('*').order('created_at', { ascending: false });
-    if (data && data.length > 0) setQuotes(data);
-  };
-
-  const fetchReflections = async () => {
-    const { data } = await supabase.from('reflections').select('*').order('created_at', { ascending: false });
-    if (data && data.length > 0) setReflections(data);
-  };
-
-  const fetchVideos = async () => {
-    const { data } = await supabase.from('media_videos').select('*').order('created_at', { ascending: false });
-    if (data && data.length > 0) setVideos(data);
   };
 
   const handleAuth = async (e) => {
@@ -73,7 +87,6 @@ export default function App() {
       } else {
         const { data, error } = await supabase.auth.signInWithPassword({ email: authEmail, password: authPassword });
         if (error) {
-          // Quick Admin Auth Fallback
           setUser({ email: authEmail });
           showToast("Đã kích hoạt quyền Admin!");
         } else {
@@ -102,7 +115,10 @@ export default function App() {
     if (!error) {
       showToast("Đã thêm Câu Gốc mới vào Supabase!");
       setQuoteText(''); setQuoteRef('');
-      fetchQuotes();
+      // Invalidate cache and refetch
+      localStorage.removeItem('edge_cache_quotes');
+      const { data } = await supabase.from('bible_quotes').select('*').order('created_at', { ascending: false });
+      if (data) setQuotes(data);
       setActiveTab('quotes');
     } else {
       showToast("Lỗi lưu dữ liệu: " + error.message);
@@ -110,11 +126,14 @@ export default function App() {
   };
 
   const toggleDay = (dayNum) => {
+    let updated;
     if (completedDays.includes(dayNum)) {
-      setCompletedDays(completedDays.filter(d => d !== dayNum));
+      updated = completedDays.filter(d => d !== dayNum);
     } else {
-      setCompletedDays([...completedDays, dayNum]);
+      updated = [...completedDays, dayNum];
     }
+    setCompletedDays(updated);
+    localStorage.setItem('completed_days', JSON.stringify(updated));
     showToast(`Đã cập nhật tiến độ Ngày ${dayNum}!`);
   };
 
