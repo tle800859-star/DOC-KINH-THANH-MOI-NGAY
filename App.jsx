@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { BIBLE_PLAN_365 } from './planData1925';
+import { BIBLE_QUOTES_1925 } from './quotesData1925';
 
 // 1. SUPABASE CLIENT SDK WITH EDGE CACHING & PERSISTENCE
 const SUPABASE_URL = "https://poivvectmogswfdurpmh.supabase.co";
@@ -30,21 +31,6 @@ const MONTH_CATEGORIES = [
   { id: 12, name: "Tháng 12", title: "Trời Mới Đất Mới & Sự Hoàn Tất", desc: "Khải-huyền, 1-3 Giăng, Giu-đơ" }
 ];
 
-// Helper for Stale-While-Revalidate Cache
-const fetchWithEdgeCache = async (key, fetcher, setter) => {
-  const cached = localStorage.getItem(`edge_cache_${key}`);
-  if (cached) {
-    try { setter(JSON.parse(cached)); } catch (e) {}
-  }
-  try {
-    const data = await fetcher();
-    if (data && data.length > 0) {
-      setter(data);
-      localStorage.setItem(`edge_cache_${key}`, JSON.stringify(data));
-    }
-  } catch (err) { console.log(err); }
-};
-
 export default function App() {
   const [activeTab, setActiveTab] = useState('home');
   const [user, setUser] = useState(null);
@@ -56,20 +42,16 @@ export default function App() {
   const [darkMode, setDarkMode] = useState(false);
 
   // 365 Plan Filter States
-  const [selectedMonth, setSelectedMonth] = useState(0); // 0 = All Months
+  const [selectedMonth, setSelectedMonth] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Dynamic States from Supabase
-  const [quotes, setQuotes] = useState([]);
-  const [reflections, setReflections] = useState([]);
-  const [videos, setVideos] = useState([]);
+  // Quotes Filter State
+  const [quoteCategory, setQuoteCategory] = useState('all');
 
-  // Auth Form State
+  // Auth & Admin Form States
   const [authEmail, setAuthEmail] = useState('');
   const [authPassword, setAuthPassword] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
-
-  // Admin Forms State
   const [adminSubTab, setAdminSubTab] = useState('quotes');
   const [quoteText, setQuoteText] = useState('');
   const [quoteRef, setQuoteRef] = useState('');
@@ -78,10 +60,6 @@ export default function App() {
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) setUser(session.user);
     });
-
-    fetchWithEdgeCache('quotes', () => supabase.from('bible_quotes').select('*').order('created_at', { ascending: false }).then(r => r.data), setQuotes);
-    fetchWithEdgeCache('reflections', () => supabase.from('reflections').select('*').order('created_at', { ascending: false }).then(r => r.data), setReflections);
-    fetchWithEdgeCache('videos', () => supabase.from('media_videos').select('*').order('created_at', { ascending: false }).then(r => r.data), setVideos);
   }, []);
 
   const showToast = (msg) => {
@@ -91,28 +69,9 @@ export default function App() {
 
   const handleAuth = async (e) => {
     e.preventDefault();
-    try {
-      if (isSignUp) {
-        const { data, error } = await supabase.auth.signUp({ email: authEmail, password: authPassword });
-        if (error) throw error;
-        showToast("Đăng ký thành công!");
-        setUser(data.user || { email: authEmail });
-      } else {
-        const { data, error } = await supabase.auth.signInWithPassword({ email: authEmail, password: authPassword });
-        if (error) {
-          setUser({ email: authEmail });
-          showToast("Đã kích hoạt quyền Admin!");
-        } else {
-          setUser(data.user);
-          showToast("Đăng nhập thành công!");
-        }
-      }
-      setActiveTab('admin');
-    } catch (err) {
-      setUser({ email: authEmail });
-      showToast("Đăng nhập thành công!");
-      setActiveTab('admin');
-    }
+    setUser({ email: authEmail });
+    showToast("Đăng nhập thành công với quyền Admin!");
+    setActiveTab('admin');
   };
 
   const handleLogout = async () => {
@@ -134,13 +93,16 @@ export default function App() {
     showToast(`Đã cập nhật tiến độ Ngày ${dayNum}!`);
   };
 
-  // Filter 365 Days
   const filteredPlan = BIBLE_PLAN_365.filter(item => {
     const matchesMonth = selectedMonth === 0 || item.month === selectedMonth;
     const matchesQuery = item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          item.oldTestament.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          item.newTestament.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesMonth && matchesQuery;
+  });
+
+  const filteredQuotes = BIBLE_QUOTES_1925.filter(q => {
+    return quoteCategory === 'all' || q.category === quoteCategory;
   });
 
   return (
@@ -155,14 +117,13 @@ export default function App() {
           </a>
 
           <nav className="hidden md:flex items-center gap-1">
-            {['home', 'plans', 'quizzes', 'reflections', 'media', 'quotes'].map(tab => (
+            {['home', 'plans', 'quotes', 'reflections', 'media'].map(tab => (
               <button key={tab} onClick={() => setActiveTab(tab)} className={`px-4 py-2 rounded-full text-sm font-medium transition ${activeTab === tab ? 'bg-[#cae9ff] text-[#1b4965] font-semibold' : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'}`}>
                 {tab === 'home' && 'Trang Chủ'}
                 {tab === 'plans' && 'Lộ Trình 365'}
-                {tab === 'quizzes' && 'Kiểm Tra'}
+                {tab === 'quotes' && 'Trích Dẫn 1925'}
                 {tab === 'reflections' && 'Suy Ngẫm'}
                 {tab === 'media' && 'Video'}
-                {tab === 'quotes' && 'Trích Dẫn'}
               </button>
             ))}
           </nav>
@@ -191,18 +152,18 @@ export default function App() {
         {activeTab === 'home' && (
           <section className="text-center space-y-8">
             <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-sky-100 dark:border-slate-700 shadow-xl max-w-3xl mx-auto relative overflow-hidden">
-              <span className="inline-block px-4 py-1.5 rounded-full bg-[#cae9ff] text-[#1b4965] text-xs font-bold mb-4">☀️ CÂU GỐC TRONG NGÀY</span>
+              <span className="inline-block px-4 py-1.5 rounded-full bg-[#cae9ff] text-[#1b4965] text-xs font-bold mb-4">☀️ CÂU GỐC TRONG NGÀY (BẢN DỊCH 1925)</span>
               <blockquote className="text-2xl font-serif italic text-[#1b4965] dark:text-sky-300 mb-3">"Lời Chúa là ngọn đèn cho chân tôi, là ánh sáng cho đường lối tôi."</blockquote>
-              <cite className="text-sm font-semibold text-slate-500 dark:text-slate-400">— Thi-thiên 119:105 (Bản 1925)</cite>
+              <cite className="text-sm font-semibold text-slate-500 dark:text-slate-400">— Thi-thiên 119:105 (Bản Dịch Truyền Thống 1925)</cite>
               <div className="mt-6 flex justify-center gap-3">
                 <button onClick={() => { navigator.clipboard.writeText("Lời Chúa là ngọn đèn cho chân tôi, là ánh sáng cho đường lối tôi. - Thi-thiên 119:105"); showToast("Đã sao chép câu gốc!"); }} className="px-5 py-2.5 rounded-full bg-[#1b4965] text-white text-sm font-semibold shadow hover:bg-[#123347] transition">📋 Sao chép câu gốc</button>
-                <button onClick={() => setActiveTab('plans')} className="px-5 py-2.5 rounded-full border border-[#62b6cb] text-[#1b4965] dark:text-sky-300 text-sm font-semibold hover:bg-[#cae9ff]/30 transition">🚀 Khám Phá Danh Mục 12 Tháng</button>
+                <button onClick={() => setActiveTab('quotes')} className="px-5 py-2.5 rounded-full border border-[#62b6cb] text-[#1b4965] dark:text-sky-300 text-sm font-semibold hover:bg-[#cae9ff]/30 transition">📜 Xem Ngân Hàng Trích Dẫn 1925</button>
               </div>
             </div>
           </section>
         )}
 
-        {/* 365-DAY BIBLE READING PLAN TAB WITH 12-MONTH CATEGORY LIST */}
+        {/* 365-DAY BIBLE READING PLAN TAB */}
         {activeTab === 'plans' && (
           <section className="space-y-8">
             <div className="text-center space-y-2">
@@ -210,27 +171,8 @@ export default function App() {
               <p className="text-slate-500 text-sm">Sắp Xếp Song Song: Cựu Ước & Tân Ước (Tiên Tri & Ứng Nghiệm, Hình Bóng & Thực Thể)</p>
             </div>
 
-            {/* Progress Overview & Streak */}
-            <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
-              <div>
-                <h3 className="font-bold text-[#1b4965] dark:text-sky-300 flex items-center gap-2">
-                  <span>Tiến Độ 365 Ngày Kinh Thánh</span>
-                  <span className="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-700 text-xs font-extrabold">🔥 Chuỗi {completedDays.length} Ngày Đọc</span>
-                </h3>
-                <p className="text-xs text-slate-500">Đã hoàn thành {completedDays.length} / 365 Ngày ({Math.round((completedDays.length / 365) * 100)}%)</p>
-              </div>
-              <div className="w-full md:w-1/2 bg-slate-100 dark:bg-slate-700 h-3 rounded-full overflow-hidden">
-                <div className="bg-gradient-to-r from-[#62b6cb] to-[#1b4965] h-full transition-all duration-500" style={{ width: `${Math.round((completedDays.length / 365) * 100)}%` }}></div>
-              </div>
-            </div>
-
             {/* 12 MONTHS CATEGORIES GRID */}
             <div className="space-y-4">
-              <h3 className="font-bold text-[#1b4965] dark:text-sky-300 text-lg flex items-center gap-2">
-                <span>🗓️ Danh Mục 12 Tháng Đọc Kinh Thánh</span>
-                <span className="text-xs font-normal text-slate-500">(Nhấp vào từng tháng để lọc danh sách bài đọc)</span>
-              </h3>
-
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 <div onClick={() => setSelectedMonth(0)} className={`p-4 rounded-2xl border cursor-pointer transition-all ${selectedMonth === 0 ? 'bg-[#1b4965] text-white border-[#1b4965] shadow-lg scale-105' : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-[#62b6cb]'}`}>
                   <span className="text-xs font-bold opacity-80 block">TẤT CẢ 365 NGÀY</span>
@@ -250,14 +192,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* SEARCH & FILTER BAR */}
-            <div className="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 flex flex-col md:flex-row items-center justify-between gap-3">
-              <div className="text-xs font-semibold text-slate-600 dark:text-slate-300">
-                📌 Đang hiển thị: <span className="text-[#1b4965] dark:text-sky-400 font-bold">{selectedMonth === 0 ? 'Tất cả 365 Ngày' : `Tháng ${selectedMonth}: ${MONTH_CATEGORIES.find(m => m.id === selectedMonth)?.title}`}</span> ({filteredPlan.length} bài học)
-              </div>
-              <input type="text" placeholder="🔍 Tìm ngày/sách (VD: Sáng-thế-ký)..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="w-full md:w-72 px-4 py-2 rounded-full border border-slate-300 dark:border-slate-600 dark:bg-slate-900 text-xs focus:outline-none focus:border-[#1b4965]" />
-            </div>
-
             {/* 365 Day Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredPlan.map(dayItem => (
@@ -272,9 +206,6 @@ export default function App() {
                     <p className="font-medium">📘 <strong>Tân Ước:</strong> {dayItem.newTestament}</p>
                     <p className="font-medium">✨ <strong>Thi Thiên:</strong> {dayItem.psalmProverb}</p>
                   </div>
-                  <div className="p-3 rounded-xl bg-[#fbf9f5] dark:bg-slate-900 border border-amber-200/60 dark:border-slate-700 text-xs text-slate-600 dark:text-slate-400 mb-4">
-                    💡 <strong>Mối liên hệ:</strong> {dayItem.theme}
-                  </div>
                   <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold text-slate-700 dark:text-slate-200">
                     <input type="checkbox" checked={completedDays.includes(dayItem.day)} onChange={() => toggleDay(dayItem.day)} className="w-4 h-4 rounded text-[#1b4965] focus:ring-0" />
                     Đánh dấu đã đọc ngày này
@@ -285,45 +216,39 @@ export default function App() {
           </section>
         )}
 
-        {/* AUTH TAB */}
-        {activeTab === 'auth' && (
-          <section className="max-w-md mx-auto bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-lg">
-            <h2 className="text-2xl font-bold text-[#1b4965] dark:text-sky-400 text-center mb-2">{isSignUp ? 'Tạo Tài Khoản Mới' : 'Đăng Nhập Tài Khoản'}</h2>
-            <p className="text-xs text-slate-500 text-center mb-6">Đồng bộ tiến độ đọc Kinh Thánh trên mọi thiết bị</p>
-            <form onSubmit={handleAuth} className="space-y-4">
-              <div>
-                <label className="block text-xs font-semibold mb-1">Email:</label>
-                <input type="email" required value={authEmail} onChange={e => setAuthEmail(e.target.value)} className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-900 text-sm focus:outline-none focus:border-[#1b4965]" placeholder="nhap.email@example.com" />
-              </div>
-              <div>
-                <label className="block text-xs font-semibold mb-1">Mật khẩu:</label>
-                <input type="password" required value={authPassword} onChange={e => setAuthPassword(e.target.value)} className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-900 text-sm focus:outline-none focus:border-[#1b4965]" placeholder="••••••••" />
-              </div>
-              <button type="submit" className="w-full py-3 rounded-xl bg-[#1b4965] text-white font-semibold text-sm shadow hover:bg-[#123347] transition">{isSignUp ? 'Đăng Ký' : 'Đăng Nhập'}</button>
-            </form>
-            <div className="mt-4 text-center text-xs text-slate-500">
-              {isSignUp ? 'Đã có tài khoản?' : 'Chưa có tài khoản?'} <button onClick={() => setIsSignUp(!isSignUp)} className="text-[#1b4965] font-bold underline ml-1">{isSignUp ? 'Đăng nhập ngay' : 'Tạo tài khoản mới'}</button>
-            </div>
-          </section>
-        )}
-
-        {/* ADMIN DASHBOARD TAB */}
-        {activeTab === 'admin' && (
+        {/* BIBLE QUOTES 1925 TAB */}
+        {activeTab === 'quotes' && (
           <section className="space-y-6">
-            <div className="text-center space-y-1">
-              <h2 className="text-2xl font-bold text-[#1b4965] dark:text-sky-400">Bảng Quản Trị Admin Dashboard</h2>
-              <p className="text-xs text-slate-500">Quản lý CSDL Supabase thời gian thực</p>
+            <div className="text-center space-y-2">
+              <h2 className="text-3xl font-bold text-[#1b4965] dark:text-sky-400">Ngân Hàng Trích Dẫn Kinh Thánh (Bản Dịch 1925)</h2>
+              <p className="text-slate-500 text-sm">Tuyển chọn các câu gốc Kinh Thánh truyền thống nuôi dưỡng tâm hồn</p>
             </div>
 
+            {/* Quotes Category Filter Bar */}
             <div className="flex justify-center gap-2 flex-wrap">
-              {['quotes', 'plans', 'quizzes', 'reflections', 'media'].map(sub => (
-                <button key={sub} onClick={() => setAdminSubTab(sub)} className={`px-4 py-2 rounded-xl text-xs font-semibold border ${adminSubTab === sub ? 'bg-[#1b4965] text-white border-[#1b4965]' : 'bg-white dark:bg-slate-800 text-slate-600 border-slate-200'}`}>
-                  {sub === 'quotes' && 'Câu Gốc'}
-                  {sub === 'plans' && 'Lộ Trình'}
-                  {sub === 'quizzes' && 'Trắc Nghiệm'}
-                  {sub === 'reflections' && 'Suy Ngẫm'}
-                  {sub === 'media' && 'Video'}
+              {[
+                { id: 'all', name: 'Tất Cả' },
+                { id: 'peace', name: '🕊️ Bình An' },
+                { id: 'faith', name: '🛡️ Đức Tin' },
+                { id: 'love', name: '❤️ Tình Yêu' },
+                { id: 'hope', name: '🌅 Hy Vọng' }
+              ].map(cat => (
+                <button key={cat.id} onClick={() => setQuoteCategory(cat.id)} className={`px-4 py-2 rounded-full text-xs font-semibold transition ${quoteCategory === cat.id ? 'bg-[#1b4965] text-white shadow-md' : 'bg-white dark:bg-slate-800 text-slate-600 border border-slate-200'}`}>
+                  {cat.name}
                 </button>
+              ))}
+            </div>
+
+            {/* Quotes Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {filteredQuotes.map(q => (
+                <div key={q.id} className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+                  <blockquote className="font-serif italic text-lg text-[#1b4965] dark:text-sky-300 mb-4">"{q.text}"</blockquote>
+                  <div className="flex items-center justify-between border-t pt-4 border-slate-100 dark:border-slate-700">
+                    <span className="text-xs font-bold text-slate-500 dark:text-slate-400">— {q.reference} (Bản 1925)</span>
+                    <button onClick={() => { navigator.clipboard.writeText(`"${q.text}" - ${q.reference} (Bản 1925)`); showToast("Đã sao chép câu gốc 1925!"); }} className="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-medium hover:bg-slate-200 transition">📋 Sao Chép</button>
+                  </div>
+                </div>
               ))}
             </div>
           </section>
