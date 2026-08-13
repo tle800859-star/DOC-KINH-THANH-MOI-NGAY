@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { BIBLE_PLAN_365 } from './planData1925';
-import { BIBLE_QUOTES_1925 } from './quotesData1925';
+import { BIBLE_QUOTES_1925, BIBLE_QUOTES_CATEGORIES } from './quotesData1925';
 
 // 1. SUPABASE CLIENT SDK WITH EDGE CACHING & PERSISTENCE
 const SUPABASE_URL = "https://poivvectmogswfdurpmh.supabase.co";
@@ -52,9 +52,6 @@ export default function App() {
   const [authEmail, setAuthEmail] = useState('');
   const [authPassword, setAuthPassword] = useState('');
   const [isSignUp, setIsSignUp] = useState(false);
-  const [adminSubTab, setAdminSubTab] = useState('quotes');
-  const [quoteText, setQuoteText] = useState('');
-  const [quoteRef, setQuoteRef] = useState('');
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -121,7 +118,7 @@ export default function App() {
               <button key={tab} onClick={() => setActiveTab(tab)} className={`px-4 py-2 rounded-full text-sm font-medium transition ${activeTab === tab ? 'bg-[#cae9ff] text-[#1b4965] font-semibold' : 'text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'}`}>
                 {tab === 'home' && 'Trang Chủ'}
                 {tab === 'plans' && 'Lộ Trình 365'}
-                {tab === 'quotes' && 'Trích Dẫn 1925'}
+                {tab === 'quotes' && 'Lời Chúa Khích Lệ'}
                 {tab === 'reflections' && 'Suy Ngẫm'}
                 {tab === 'media' && 'Video'}
               </button>
@@ -152,12 +149,12 @@ export default function App() {
         {activeTab === 'home' && (
           <section className="text-center space-y-8">
             <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-sky-100 dark:border-slate-700 shadow-xl max-w-3xl mx-auto relative overflow-hidden">
-              <span className="inline-block px-4 py-1.5 rounded-full bg-[#cae9ff] text-[#1b4965] text-xs font-bold mb-4">☀️ CÂU GỐC TRONG NGÀY (BẢN DỊCH 1925)</span>
-              <blockquote className="text-2xl font-serif italic text-[#1b4965] dark:text-sky-300 mb-3">"Lời Chúa là ngọn đèn cho chân tôi, là ánh sáng cho đường lối tôi."</blockquote>
-              <cite className="text-sm font-semibold text-slate-500 dark:text-slate-400">— Thi-thiên 119:105 (Bản Dịch Truyền Thống 1925)</cite>
+              <span className="inline-block px-4 py-1.5 rounded-full bg-[#cae9ff] text-[#1b4965] text-xs font-bold mb-4">☀️ CÂU GỐC KHÍCH LỆ TRONG NGÀY</span>
+              <blockquote className="text-2xl font-serif italic text-[#1b4965] dark:text-sky-300 mb-3">"Đừng sợ, vì Ta ở với ngươi; chớ kinh hãi, vì Ta là Đức Chúa Trời ngươi."</blockquote>
+              <cite className="text-sm font-semibold text-slate-500 dark:text-slate-400">— Ê-sai 41:10 (Bản Dịch Truyền Thống 1925)</cite>
               <div className="mt-6 flex justify-center gap-3">
-                <button onClick={() => { navigator.clipboard.writeText("Lời Chúa là ngọn đèn cho chân tôi, là ánh sáng cho đường lối tôi. - Thi-thiên 119:105"); showToast("Đã sao chép câu gốc!"); }} className="px-5 py-2.5 rounded-full bg-[#1b4965] text-white text-sm font-semibold shadow hover:bg-[#123347] transition">📋 Sao chép câu gốc</button>
-                <button onClick={() => setActiveTab('quotes')} className="px-5 py-2.5 rounded-full border border-[#62b6cb] text-[#1b4965] dark:text-sky-300 text-sm font-semibold hover:bg-[#cae9ff]/30 transition">📜 Xem Ngân Hàng Trích Dẫn 1925</button>
+                <button onClick={() => { navigator.clipboard.writeText("Đừng sợ, vì Ta ở với ngươi; chớ kinh hãi, vì Ta là Đức Chúa Trời ngươi. - Ê-sai 41:10"); showToast("Đã sao chép câu gốc!"); }} className="px-5 py-2.5 rounded-full bg-[#1b4965] text-white text-sm font-semibold shadow hover:bg-[#123347] transition">📋 Sao chép câu gốc</button>
+                <button onClick={() => setActiveTab('quotes')} className="px-5 py-2.5 rounded-full border border-[#62b6cb] text-[#1b4965] dark:text-sky-300 text-sm font-semibold hover:bg-[#cae9ff]/30 transition">💡 Lời Chúa Theo Tình Trạng Nhau</button>
               </div>
             </div>
           </section>
@@ -216,24 +213,18 @@ export default function App() {
           </section>
         )}
 
-        {/* BIBLE QUOTES 1925 TAB */}
+        {/* BIBLE QUOTES BY HUMAN NEED CATEGORIES TAB */}
         {activeTab === 'quotes' && (
           <section className="space-y-6">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-[#1b4965] dark:text-sky-400">Ngân Hàng Trích Dẫn Kinh Thánh (Bản Dịch 1925)</h2>
-              <p className="text-slate-500 text-sm">Tuyển chọn các câu gốc Kinh Thánh truyền thống nuôi dưỡng tâm hồn</p>
+              <h2 className="text-3xl font-bold text-[#1b4965] dark:text-sky-400">Lời Chúa Khích Lệ Theo Tình Trạng Cần Giúp</h2>
+              <p className="text-slate-500 text-sm">Tuyển chọn các câu Kinh Thánh khích lệ giúp nâng đỡ tâm hồn (Bản Dịch 1925)</p>
             </div>
 
-            {/* Quotes Category Filter Bar */}
+            {/* Quotes Categories Filter Bar */}
             <div className="flex justify-center gap-2 flex-wrap">
-              {[
-                { id: 'all', name: 'Tất Cả' },
-                { id: 'peace', name: '🕊️ Bình An' },
-                { id: 'faith', name: '🛡️ Đức Tin' },
-                { id: 'love', name: '❤️ Tình Yêu' },
-                { id: 'hope', name: '🌅 Hy Vọng' }
-              ].map(cat => (
-                <button key={cat.id} onClick={() => setQuoteCategory(cat.id)} className={`px-4 py-2 rounded-full text-xs font-semibold transition ${quoteCategory === cat.id ? 'bg-[#1b4965] text-white shadow-md' : 'bg-white dark:bg-slate-800 text-slate-600 border border-slate-200'}`}>
+              {BIBLE_QUOTES_CATEGORIES.map(cat => (
+                <button key={cat.id} onClick={() => setQuoteCategory(cat.id)} className={`px-4 py-2 rounded-full text-xs font-semibold transition ${quoteCategory === cat.id ? 'bg-[#1b4965] text-white shadow-md scale-105' : 'bg-white dark:bg-slate-800 text-slate-600 border border-slate-200 hover:border-[#62b6cb]'}`}>
                   {cat.name}
                 </button>
               ))}
@@ -243,10 +234,10 @@ export default function App() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {filteredQuotes.map(q => (
                 <div key={q.id} className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col justify-between hover:shadow-md transition">
-                  <blockquote className="font-serif italic text-lg text-[#1b4965] dark:text-sky-300 mb-4">"{q.text}"</blockquote>
+                  <blockquote className="font-serif italic text-base text-[#1b4965] dark:text-sky-300 mb-4 leading-relaxed">"{q.text}"</blockquote>
                   <div className="flex items-center justify-between border-t pt-4 border-slate-100 dark:border-slate-700">
-                    <span className="text-xs font-bold text-slate-500 dark:text-slate-400">— {q.reference} (Bản 1925)</span>
-                    <button onClick={() => { navigator.clipboard.writeText(`"${q.text}" - ${q.reference} (Bản 1925)`); showToast("Đã sao chép câu gốc 1925!"); }} className="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-medium hover:bg-slate-200 transition">📋 Sao Chép</button>
+                    <span className="text-xs font-bold text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-slate-900 px-3 py-1 rounded-full">📍 {q.reference} (Bản 1925)</span>
+                    <button onClick={() => { navigator.clipboard.writeText(`"${q.text}" - ${q.reference} (Bản Dịch Truyền Thống 1925)`); showToast("Đã sao chép câu gốc khích lệ 1925!"); }} className="px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-medium hover:bg-slate-200 transition">📋 Sao Chép</button>
                   </div>
                 </div>
               ))}
