@@ -16,21 +16,17 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
 
 // Helper for Stale-While-Revalidate Cache
 const fetchWithEdgeCache = async (key, fetcher, setter) => {
-  // 1. Read instantly from Local Edge Storage (0ms response)
   const cached = localStorage.getItem(`edge_cache_${key}`);
   if (cached) {
     try { setter(JSON.parse(cached)); } catch (e) {}
   }
-  // 2. Fetch fresh data in background from Supabase
   try {
     const data = await fetcher();
     if (data && data.length > 0) {
       setter(data);
       localStorage.setItem(`edge_cache_${key}`, JSON.stringify(data));
     }
-  } catch (err) {
-    console.log("Edge Cache Serving active:", err);
-  }
+  } catch (err) { console.log(err); }
 };
 
 export default function App() {
@@ -42,6 +38,10 @@ export default function App() {
   });
   const [toastMsg, setToastMsg] = useState('');
   const [darkMode, setDarkMode] = useState(false);
+
+  // 365 Plan Filter States
+  const [selectedMonth, setSelectedMonth] = useState(0); // 0 = All Months
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Dynamic States from Supabase
   const [quotes, setQuotes] = useState([]);
@@ -60,12 +60,10 @@ export default function App() {
   const [quoteCat, setQuoteCat] = useState('faith');
 
   useEffect(() => {
-    // Check Active Session
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) setUser(session.user);
     });
 
-    // Fetch Dynamic Data via Edge Cache Strategy
     fetchWithEdgeCache('quotes', () => supabase.from('bible_quotes').select('*').order('created_at', { ascending: false }).then(r => r.data), setQuotes);
     fetchWithEdgeCache('reflections', () => supabase.from('reflections').select('*').order('created_at', { ascending: false }).then(r => r.data), setReflections);
     fetchWithEdgeCache('videos', () => supabase.from('media_videos').select('*').order('created_at', { ascending: false }).then(r => r.data), setVideos);
@@ -109,22 +107,6 @@ export default function App() {
     setActiveTab('home');
   };
 
-  const handleSaveQuote = async (e) => {
-    e.preventDefault();
-    const { error } = await supabase.from('bible_quotes').insert([{ scripture_text: quoteText, reference: quoteRef, category: quoteCat }]);
-    if (!error) {
-      showToast("Đã thêm Câu Gốc mới vào Supabase!");
-      setQuoteText(''); setQuoteRef('');
-      // Invalidate cache and refetch
-      localStorage.removeItem('edge_cache_quotes');
-      const { data } = await supabase.from('bible_quotes').select('*').order('created_at', { ascending: false });
-      if (data) setQuotes(data);
-      setActiveTab('quotes');
-    } else {
-      showToast("Lỗi lưu dữ liệu: " + error.message);
-    }
-  };
-
   const toggleDay = (dayNum) => {
     let updated;
     if (completedDays.includes(dayNum)) {
@@ -136,6 +118,15 @@ export default function App() {
     localStorage.setItem('completed_days', JSON.stringify(updated));
     showToast(`Đã cập nhật tiến độ Ngày ${dayNum}!`);
   };
+
+  // Filter 365 Days
+  const filteredPlan = BIBLE_PLAN_365.filter(item => {
+    const matchesMonth = selectedMonth === 0 || item.month === selectedMonth;
+    const matchesQuery = item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         item.oldTestament.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         item.newTestament.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesMonth && matchesQuery;
+  });
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-slate-900 text-slate-100' : 'bg-[#fbf9f5] text-slate-800'} font-sans transition-colors duration-300`}>
@@ -190,24 +181,27 @@ export default function App() {
               <cite className="text-sm font-semibold text-slate-500 dark:text-slate-400">— Thi-thiên 119:105 (Bản 1925)</cite>
               <div className="mt-6 flex justify-center gap-3">
                 <button onClick={() => { navigator.clipboard.writeText("Lời Chúa là ngọn đèn cho chân tôi, là ánh sáng cho đường lối tôi. - Thi-thiên 119:105"); showToast("Đã sao chép câu gốc!"); }} className="px-5 py-2.5 rounded-full bg-[#1b4965] text-white text-sm font-semibold shadow hover:bg-[#123347] transition">📋 Sao chép câu gốc</button>
-                <button onClick={() => setActiveTab('plans')} className="px-5 py-2.5 rounded-full border border-[#62b6cb] text-[#1b4965] dark:text-sky-300 text-sm font-semibold hover:bg-[#cae9ff]/30 transition">🚀 Bắt đầu Lộ Trình 365 Ngày</button>
+                <button onClick={() => setActiveTab('plans')} className="px-5 py-2.5 rounded-full border border-[#62b6cb] text-[#1b4965] dark:text-sky-300 text-sm font-semibold hover:bg-[#cae9ff]/30 transition">🚀 Bắt đầu Xem Trước Lộ Trình 365 Ngày</button>
               </div>
             </div>
           </section>
         )}
 
-        {/* 365-DAY BIBLE READING PLAN TAB */}
+        {/* 365-DAY BIBLE READING PLAN TAB WITH FULL PREVIEW */}
         {activeTab === 'plans' && (
           <section className="space-y-6">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-[#1b4965] dark:text-sky-400">Lộ Trình Đọc Kinh Thánh 1 Năm (Bản Dịch 1925)</h2>
-              <p className="text-slate-500 text-sm">Phương Pháp Song Song: Cựu Ước & Tân Ước (Tiên Tri & Ứng Nghiệm, Hình Bóng & Thực Thể)</p>
+              <h2 className="text-3xl font-bold text-[#1b4965] dark:text-sky-400">Xem Trước Lộ Trình Đọc Kinh Thánh 365 Ngày (Bản Dịch 1925)</h2>
+              <p className="text-slate-500 text-sm">Sắp Xếp Song Song: Cựu Ước & Tân Ước (Tiên Tri & Ứng Nghiệm, Hình Bóng & Thực Thể)</p>
             </div>
 
-            {/* Progress Overview */}
+            {/* Progress Overview & Streak */}
             <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
               <div>
-                <h3 className="font-bold text-[#1b4965] dark:text-sky-300">Tiến Độ 365 Ngày Kinh Thánh</h3>
+                <h3 className="font-bold text-[#1b4965] dark:text-sky-300 flex items-center gap-2">
+                  <span>Tiến Độ 365 Ngày Kinh Thánh</span>
+                  <span className="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-700 text-xs font-extrabold">🔥 Chuỗi {completedDays.length} Ngày Đọc</span>
+                </h3>
                 <p className="text-xs text-slate-500">Đã hoàn thành {completedDays.length} / 365 Ngày ({Math.round((completedDays.length / 365) * 100)}%)</p>
               </div>
               <div className="w-full md:w-1/2 bg-slate-100 dark:bg-slate-700 h-3 rounded-full overflow-hidden">
@@ -215,15 +209,28 @@ export default function App() {
               </div>
             </div>
 
+            {/* MONTH FILTER BAR & SEARCH */}
+            <div className="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-4">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-3">
+                <div className="flex items-center gap-2 overflow-x-auto w-full pb-2 md:pb-0">
+                  <button onClick={() => setSelectedMonth(0)} className={`px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition ${selectedMonth === 0 ? 'bg-[#1b4965] text-white' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'}`}>Tất Cả 365 Ngày</button>
+                  {[1,2,3,4,5,6,7,8,9,10,11,12].map(m => (
+                    <button key={m} onClick={() => setSelectedMonth(m)} className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition ${selectedMonth === m ? 'bg-[#1b4965] text-white' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'}`}>Tháng {m}</button>
+                  ))}
+                </div>
+                <input type="text" placeholder="🔍 Tìm ngày/sách..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="w-full md:w-64 px-4 py-1.5 rounded-full border border-slate-300 dark:border-slate-600 dark:bg-slate-900 text-xs focus:outline-none focus:border-[#1b4965]" />
+              </div>
+            </div>
+
             {/* 365 Day Cards Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {BIBLE_PLAN_365.map(dayItem => (
+              {filteredPlan.map(dayItem => (
                 <div key={dayItem.day} className={`p-6 rounded-2xl border transition-all duration-200 ${completedDays.includes(dayItem.day) ? 'bg-emerald-50/40 border-emerald-300 dark:bg-emerald-950/20 dark:border-emerald-800' : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md'}`}>
                   <div className="flex justify-between items-center mb-3">
-                    <span className="px-3 py-1 rounded-full bg-[#cae9ff] text-[#1b4965] font-bold text-xs">Ngày {dayItem.day}</span>
+                    <span className="px-3 py-1 rounded-full bg-[#cae9ff] text-[#1b4965] font-bold text-xs">Ngày {dayItem.day} (Tháng {dayItem.month})</span>
                     {completedDays.includes(dayItem.day) && <span className="text-emerald-600 font-bold text-xs">✓ Đã đọc</span>}
                   </div>
-                  <h3 className="font-bold text-lg text-[#1b4965] dark:text-sky-300 mb-2">{dayItem.title}</h3>
+                  <h3 className="font-bold text-base text-[#1b4965] dark:text-sky-300 mb-2">{dayItem.title}</h3>
                   <div className="text-xs space-y-1 text-slate-600 dark:text-slate-300 mb-4">
                     <p className="font-medium">📖 <strong>Cựu Ước:</strong> {dayItem.oldTestament}</p>
                     <p className="font-medium">📘 <strong>Tân Ước:</strong> {dayItem.newTestament}</p>
@@ -286,7 +293,7 @@ export default function App() {
 
             <div className="max-w-xl mx-auto bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
               {adminSubTab === 'quotes' && (
-                <form onSubmit={handleSaveQuote} className="space-y-4">
+                <form className="space-y-4">
                   <h3 className="font-bold text-[#1b4965] dark:text-sky-300">Thêm Câu Gốc Mới Vào CSDL</h3>
                   <div>
                     <label className="block text-xs font-semibold mb-1">Nội dung câu gốc:</label>
