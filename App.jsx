@@ -14,6 +14,22 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   }
 });
 
+// DANH MỤC 12 THÁNG ĐỌC KINH THÁNH THEO CHỦ ĐỀ
+const MONTH_CATEGORIES = [
+  { id: 1, name: "Tháng 1", title: "Khởi Nguyên & Sáng Tạo", desc: "Sáng-thế-ký, Giăng, Ma-thi-ơ" },
+  { id: 2, name: "Tháng 2", title: "Xuất Hành & Cứu Rỗi", desc: "Xuất Ê-díp-tô Ký, Giăng, Ma-thi-ơ" },
+  { id: 3, name: "Tháng 3", title: "Luật Pháp & Sự Thánh Sạch", desc: "Lê-vi Ký, Mác, Hê-bơ-rơ" },
+  { id: 4, name: "Tháng 4", title: "Hành Trình Đồng Vắng", desc: "Dân-số-ký, Lu-ca, Công-vụ" },
+  { id: 5, name: "Tháng 5", title: "Nhắc Lại Luật Pháp & Chiếm Đất Hứa", desc: "Phục-truyền, Giô-suê, Rô-ma" },
+  { id: 6, name: "Tháng 6", title: "Thời Kỳ Các Vua & Đa-vít", desc: "Các Quan-xét, 1-2 Sa-mu-ên, 1-2 Cô-rinh-tô" },
+  { id: 7, name: "Tháng 7", title: "Thi Ca & Trí Tuệ", desc: "Thi-thiên, Châm-ngôn, Gióp, Ê-phê-sô" },
+  { id: 8, name: "Tháng 8", title: "Lời Tiên Tri Ê-sai & Đấng Mê-si", desc: "Ê-sai, Ga-la-ti, Phi-líp" },
+  { id: 9, name: "Tháng 9", title: "Giao Ước Mới & Sự Phục Hưng", desc: "Giê-rê-mi, Ca-thương, 1-2 Ti-mô-thê" },
+  { id: 10, name: "Tháng 10", title: "Thung Lũng Hài Cốt Khô & Sự Sống Lại", desc: "Ê-zê-chi-ên, Đa-ni-ên, Hê-bơ-rơ" },
+  { id: 11, name: "Tháng 11", title: "Các Tiên Tri Nhỏ & Sự Ăn Năn", desc: "Ô-sê đến Ma-la-chi, 1-2 Phi-e-rơ" },
+  { id: 12, name: "Tháng 12", title: "Trời Mới Đất Mới & Sự Hoàn Tất", desc: "Khải-huyền, 1-3 Giăng, Giu-đơ" }
+];
+
 // Helper for Stale-While-Revalidate Cache
 const fetchWithEdgeCache = async (key, fetcher, setter) => {
   const cached = localStorage.getItem(`edge_cache_${key}`);
@@ -57,7 +73,6 @@ export default function App() {
   const [adminSubTab, setAdminSubTab] = useState('quotes');
   const [quoteText, setQuoteText] = useState('');
   const [quoteRef, setQuoteRef] = useState('');
-  const [quoteCat, setQuoteCat] = useState('faith');
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -80,7 +95,7 @@ export default function App() {
       if (isSignUp) {
         const { data, error } = await supabase.auth.signUp({ email: authEmail, password: authPassword });
         if (error) throw error;
-        showToast("Đăng ký thành công! Kích hoạt quyền truy cập...");
+        showToast("Đăng ký thành công!");
         setUser(data.user || { email: authEmail });
       } else {
         const { data, error } = await supabase.auth.signInWithPassword({ email: authEmail, password: authPassword });
@@ -95,7 +110,7 @@ export default function App() {
       setActiveTab('admin');
     } catch (err) {
       setUser({ email: authEmail });
-      showToast("Đăng nhập thành công với quyền Admin!");
+      showToast("Đăng nhập thành công!");
       setActiveTab('admin');
     }
   };
@@ -181,17 +196,17 @@ export default function App() {
               <cite className="text-sm font-semibold text-slate-500 dark:text-slate-400">— Thi-thiên 119:105 (Bản 1925)</cite>
               <div className="mt-6 flex justify-center gap-3">
                 <button onClick={() => { navigator.clipboard.writeText("Lời Chúa là ngọn đèn cho chân tôi, là ánh sáng cho đường lối tôi. - Thi-thiên 119:105"); showToast("Đã sao chép câu gốc!"); }} className="px-5 py-2.5 rounded-full bg-[#1b4965] text-white text-sm font-semibold shadow hover:bg-[#123347] transition">📋 Sao chép câu gốc</button>
-                <button onClick={() => setActiveTab('plans')} className="px-5 py-2.5 rounded-full border border-[#62b6cb] text-[#1b4965] dark:text-sky-300 text-sm font-semibold hover:bg-[#cae9ff]/30 transition">🚀 Bắt đầu Xem Trước Lộ Trình 365 Ngày</button>
+                <button onClick={() => setActiveTab('plans')} className="px-5 py-2.5 rounded-full border border-[#62b6cb] text-[#1b4965] dark:text-sky-300 text-sm font-semibold hover:bg-[#cae9ff]/30 transition">🚀 Khám Phá Danh Mục 12 Tháng</button>
               </div>
             </div>
           </section>
         )}
 
-        {/* 365-DAY BIBLE READING PLAN TAB WITH FULL PREVIEW */}
+        {/* 365-DAY BIBLE READING PLAN TAB WITH 12-MONTH CATEGORY LIST */}
         {activeTab === 'plans' && (
-          <section className="space-y-6">
+          <section className="space-y-8">
             <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-[#1b4965] dark:text-sky-400">Xem Trước Lộ Trình Đọc Kinh Thánh 365 Ngày (Bản Dịch 1925)</h2>
+              <h2 className="text-3xl font-bold text-[#1b4965] dark:text-sky-400">Danh Mục Lộ Trình 12 Tháng Đọc Trọn Vẹn Kinh Thánh (1925)</h2>
               <p className="text-slate-500 text-sm">Sắp Xếp Song Song: Cựu Ước & Tân Ước (Tiên Tri & Ứng Nghiệm, Hình Bóng & Thực Thể)</p>
             </div>
 
@@ -209,17 +224,38 @@ export default function App() {
               </div>
             </div>
 
-            {/* MONTH FILTER BAR & SEARCH */}
-            <div className="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-4">
-              <div className="flex flex-col md:flex-row items-center justify-between gap-3">
-                <div className="flex items-center gap-2 overflow-x-auto w-full pb-2 md:pb-0">
-                  <button onClick={() => setSelectedMonth(0)} className={`px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition ${selectedMonth === 0 ? 'bg-[#1b4965] text-white' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'}`}>Tất Cả 365 Ngày</button>
-                  {[1,2,3,4,5,6,7,8,9,10,11,12].map(m => (
-                    <button key={m} onClick={() => setSelectedMonth(m)} className={`px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition ${selectedMonth === m ? 'bg-[#1b4965] text-white' : 'bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300'}`}>Tháng {m}</button>
-                  ))}
+            {/* 12 MONTHS CATEGORIES GRID */}
+            <div className="space-y-4">
+              <h3 className="font-bold text-[#1b4965] dark:text-sky-300 text-lg flex items-center gap-2">
+                <span>🗓️ Danh Mục 12 Tháng Đọc Kinh Thánh</span>
+                <span className="text-xs font-normal text-slate-500">(Nhấp vào từng tháng để lọc danh sách bài đọc)</span>
+              </h3>
+
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div onClick={() => setSelectedMonth(0)} className={`p-4 rounded-2xl border cursor-pointer transition-all ${selectedMonth === 0 ? 'bg-[#1b4965] text-white border-[#1b4965] shadow-lg scale-105' : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-[#62b6cb]'}`}>
+                  <span className="text-xs font-bold opacity-80 block">TẤT CẢ 365 NGÀY</span>
+                  <h4 className="font-bold text-sm mb-1">Toàn Bộ Lộ Trình</h4>
+                  <p className="text-[11px] opacity-70">365 Bài Học Trọn Vẹn 66 Sách</p>
                 </div>
-                <input type="text" placeholder="🔍 Tìm ngày/sách..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="w-full md:w-64 px-4 py-1.5 rounded-full border border-slate-300 dark:border-slate-600 dark:bg-slate-900 text-xs focus:outline-none focus:border-[#1b4965]" />
+
+                {MONTH_CATEGORIES.map(m => (
+                  <div key={m.id} onClick={() => setSelectedMonth(m.id)} className={`p-4 rounded-2xl border cursor-pointer transition-all ${selectedMonth === m.id ? 'bg-[#1b4965] text-white border-[#1b4965] shadow-lg scale-105' : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-[#62b6cb]'}`}>
+                    <div className="flex justify-between items-center mb-1">
+                      <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${selectedMonth === m.id ? 'bg-sky-400 text-slate-900' : 'bg-[#cae9ff] text-[#1b4965]'}`}>{m.name}</span>
+                    </div>
+                    <h4 className="font-bold text-xs mb-1 line-clamp-1">{m.title}</h4>
+                    <p className="text-[10px] opacity-75 line-clamp-1">{m.desc}</p>
+                  </div>
+                ))}
               </div>
+            </div>
+
+            {/* SEARCH & FILTER BAR */}
+            <div className="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-200 dark:border-slate-700 flex flex-col md:flex-row items-center justify-between gap-3">
+              <div className="text-xs font-semibold text-slate-600 dark:text-slate-300">
+                📌 Đang hiển thị: <span className="text-[#1b4965] dark:text-sky-400 font-bold">{selectedMonth === 0 ? 'Tất cả 365 Ngày' : `Tháng ${selectedMonth}: ${MONTH_CATEGORIES.find(m => m.id === selectedMonth)?.title}`}</span> ({filteredPlan.length} bài học)
+              </div>
+              <input type="text" placeholder="🔍 Tìm ngày/sách (VD: Sáng-thế-ký)..." value={searchQuery} onChange={e => setSearchQuery(e.target.value)} className="w-full md:w-72 px-4 py-2 rounded-full border border-slate-300 dark:border-slate-600 dark:bg-slate-900 text-xs focus:outline-none focus:border-[#1b4965]" />
             </div>
 
             {/* 365 Day Cards Grid */}
@@ -289,23 +325,6 @@ export default function App() {
                   {sub === 'media' && 'Video'}
                 </button>
               ))}
-            </div>
-
-            <div className="max-w-xl mx-auto bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
-              {adminSubTab === 'quotes' && (
-                <form className="space-y-4">
-                  <h3 className="font-bold text-[#1b4965] dark:text-sky-300">Thêm Câu Gốc Mới Vào CSDL</h3>
-                  <div>
-                    <label className="block text-xs font-semibold mb-1">Nội dung câu gốc:</label>
-                    <textarea required value={quoteText} onChange={e => setQuoteText(e.target.value)} className="w-full p-3 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-900 text-sm h-24" placeholder="Ví dụ: Lời Chúa là ngọn đèn cho chân tôi..."></textarea>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold mb-1">Địa danh (Thi-thiên 119:105):</label>
-                    <input type="text" required value={quoteRef} onChange={e => setQuoteRef(e.target.value)} className="w-full px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-600 dark:bg-slate-900 text-sm" placeholder="Thi-thiên 119:105" />
-                  </div>
-                  <button type="submit" className="w-full py-2.5 rounded-xl bg-[#1b4965] text-white font-semibold text-sm">Lưu Vào Supabase DB</button>
-                </form>
-              )}
             </div>
           </section>
         )}
