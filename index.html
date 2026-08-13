@@ -922,67 +922,67 @@
                 <div style="background: white; padding: 20px; border-radius: 16px; margin: 20px 0; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
                     <h3 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 12px;">🗓️ Danh Mục 12 Tháng Đọc Kinh Thánh Theo Chủ Đề</h3>
                     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px;">
-                        <div style="background: #1b4965; color: white; padding: 12px; border-radius: 12px; cursor: pointer;">
-                            <span style="font-size: 0.75rem; font-weight: bold; opacity: 0.9;">TẤT CẢ 365 NGÀY</span>
+                        <div class="month-card active" onclick="filterMonthPlan(0, this)" data-month="0" style="background: #1b4965; color: white; border: 1px solid #1b4965; padding: 12px; border-radius: 12px; cursor: pointer; transition: all 0.2s;">
+                            <span style="font-size: 0.75rem; font-weight: bold; color: #1b4965; background: #cae9ff; padding: 2px 8px; border-radius: 10px;">TẤT CẢ 365 NGÀY</span>
                             <h4 style="font-size: 0.9rem; margin: 4px 0;">Toàn Bộ Lộ Trình</h4>
                             <p style="font-size: 0.75rem; opacity: 0.8;">365 Bài Học Trọn Vẹn 66 Sách</p>
                         </div>
-                        <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer;">
+                        <div class="month-card" onclick="filterMonthPlan(1, this)" data-month="1" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer; transition: all 0.2s;">
                             <span style="font-size: 0.75rem; font-weight: bold; color: #1b4965; background: #cae9ff; padding: 2px 8px; border-radius: 10px;">Tháng 1</span>
                             <h4 style="font-size: 0.85rem; margin: 4px 0; color: #1b4965;">Khởi Nguyên & Sáng Tạo</h4>
                             <p style="font-size: 0.7rem; color: #64748b;">Sáng-thế-ký, Giăng, Ma-thi-ơ</p>
                         </div>
-                        <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer;">
+                        <div class="month-card" onclick="filterMonthPlan(2, this)" data-month="2" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer; transition: all 0.2s;">
                             <span style="font-size: 0.75rem; font-weight: bold; color: #1b4965; background: #cae9ff; padding: 2px 8px; border-radius: 10px;">Tháng 2</span>
                             <h4 style="font-size: 0.85rem; margin: 4px 0; color: #1b4965;">Xuất Hành & Cứu Rỗi</h4>
                             <p style="font-size: 0.7rem; color: #64748b;">Xuất Ê-díp-tô Ký, Giăng</p>
                         </div>
-                        <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer;">
+                        <div class="month-card" onclick="filterMonthPlan(3, this)" data-month="3" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer; transition: all 0.2s;">
                             <span style="font-size: 0.75rem; font-weight: bold; color: #1b4965; background: #cae9ff; padding: 2px 8px; border-radius: 10px;">Tháng 3</span>
                             <h4 style="font-size: 0.85rem; margin: 4px 0; color: #1b4965;">Luật Pháp & Thánh Sạch</h4>
                             <p style="font-size: 0.7rem; color: #64748b;">Lê-vi Ký, Mác, Hê-bơ-rơ</p>
                         </div>
-                        <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer;">
+                        <div class="month-card" onclick="filterMonthPlan(4, this)" data-month="4" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer; transition: all 0.2s;">
                             <span style="font-size: 0.75rem; font-weight: bold; color: #1b4965; background: #cae9ff; padding: 2px 8px; border-radius: 10px;">Tháng 4</span>
                             <h4 style="font-size: 0.85rem; margin: 4px 0; color: #1b4965;">Hành Trình Đồng Vắng</h4>
                             <p style="font-size: 0.7rem; color: #64748b;">Dân-số-ký, Lu-ca, Công-vụ</p>
                         </div>
-                        <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer;">
+                        <div class="month-card" onclick="filterMonthPlan(5, this)" data-month="5" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer; transition: all 0.2s;">
                             <span style="font-size: 0.75rem; font-weight: bold; color: #1b4965; background: #cae9ff; padding: 2px 8px; border-radius: 10px;">Tháng 5</span>
                             <h4 style="font-size: 0.85rem; margin: 4px 0; color: #1b4965;">Nhắc Lại Luật Pháp</h4>
                             <p style="font-size: 0.7rem; color: #64748b;">Phục-truyền, Giô-suê, Rô-ma</p>
                         </div>
-                        <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer;">
+                        <div class="month-card" onclick="filterMonthPlan(6, this)" data-month="6" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer; transition: all 0.2s;">
                             <span style="font-size: 0.75rem; font-weight: bold; color: #1b4965; background: #cae9ff; padding: 2px 8px; border-radius: 10px;">Tháng 6</span>
                             <h4 style="font-size: 0.85rem; margin: 4px 0; color: #1b4965;">Các Vua & Đa-vít</h4>
                             <p style="font-size: 0.7rem; color: #64748b;">Các Quan-xét, 1-2 Sa-mu-ên</p>
                         </div>
-                        <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer;">
+                        <div class="month-card" onclick="filterMonthPlan(7, this)" data-month="7" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer; transition: all 0.2s;">
                             <span style="font-size: 0.75rem; font-weight: bold; color: #1b4965; background: #cae9ff; padding: 2px 8px; border-radius: 10px;">Tháng 7</span>
                             <h4 style="font-size: 0.85rem; margin: 4px 0; color: #1b4965;">Thi Ca & Trí Tuệ</h4>
                             <p style="font-size: 0.7rem; color: #64748b;">Thi-thiên, Châm-ngôn, Gióp</p>
                         </div>
-                        <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer;">
+                        <div class="month-card" onclick="filterMonthPlan(8, this)" data-month="8" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer; transition: all 0.2s;">
                             <span style="font-size: 0.75rem; font-weight: bold; color: #1b4965; background: #cae9ff; padding: 2px 8px; border-radius: 10px;">Tháng 8</span>
                             <h4 style="font-size: 0.85rem; margin: 4px 0; color: #1b4965;">Tiên Tri Ê-sai & Đấng Mê-si</h4>
                             <p style="font-size: 0.7rem; color: #64748b;">Ê-sai, Ga-la-ti, Phi-líp</p>
                         </div>
-                        <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer;">
+                        <div class="month-card" onclick="filterMonthPlan(9, this)" data-month="9" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer; transition: all 0.2s;">
                             <span style="font-size: 0.75rem; font-weight: bold; color: #1b4965; background: #cae9ff; padding: 2px 8px; border-radius: 10px;">Tháng 9</span>
                             <h4 style="font-size: 0.85rem; margin: 4px 0; color: #1b4965;">Giao Ước Mới Phục Hưng</h4>
                             <p style="font-size: 0.7rem; color: #64748b;">Giê-rê-mi, 1-2 Ti-mô-thê</p>
                         </div>
-                        <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer;">
+                        <div class="month-card" onclick="filterMonthPlan(10, this)" data-month="10" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer; transition: all 0.2s;">
                             <span style="font-size: 0.75rem; font-weight: bold; color: #1b4965; background: #cae9ff; padding: 2px 8px; border-radius: 10px;">Tháng 10</span>
                             <h4 style="font-size: 0.85rem; margin: 4px 0; color: #1b4965;">Hài Cốt Khô Sống Lại</h4>
                             <p style="font-size: 0.7rem; color: #64748b;">Ê-zê-chi-ên, Đa-ni-ên</p>
                         </div>
-                        <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer;">
+                        <div class="month-card" onclick="filterMonthPlan(11, this)" data-month="11" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer; transition: all 0.2s;">
                             <span style="font-size: 0.75rem; font-weight: bold; color: #1b4965; background: #cae9ff; padding: 2px 8px; border-radius: 10px;">Tháng 11</span>
                             <h4 style="font-size: 0.85rem; margin: 4px 0; color: #1b4965;">Các Tiên Tri Nhỏ</h4>
                             <p style="font-size: 0.7rem; color: #64748b;">Ô-sê đến Ma-la-chi</p>
                         </div>
-                        <div style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer;">
+                        <div class="month-card" onclick="filterMonthPlan(12, this)" data-month="12" style="background: #f8fafc; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer; transition: all 0.2s;">
                             <span style="font-size: 0.75rem; font-weight: bold; color: #1b4965; background: #cae9ff; padding: 2px 8px; border-radius: 10px;">Tháng 12</span>
                             <h4 style="font-size: 0.85rem; margin: 4px 0; color: #1b4965;">Trời Mới Đất Mới</h4>
                             <p style="font-size: 0.7rem; color: #64748b;">Khải-huyền, 1-3 Giăng</p>
@@ -1843,6 +1843,49 @@
             expQ3.style.display = 'block';
 
             showToast("Đã chấm điểm thành công! Hãy xem đáp án chi tiết bên dưới.");
+        }
+
+        // Filter 365 Days Reading Plan By Month Category
+        function filterMonthPlan(monthNum, btn) {
+            // Hiệu ứng Active cho thẻ tháng
+            document.querySelectorAll('.month-card').forEach(b => {
+                b.classList.remove('active');
+                b.style.background = '#f8fafc';
+                b.style.color = '#1e293b';
+                b.style.borderColor = '#cbd5e1';
+                const h4 = b.querySelector('h4');
+                if (h4) h4.style.color = '#1b4965';
+            });
+
+            btn.classList.add('active');
+            btn.style.background = '#1b4965';
+            btn.style.color = 'white';
+            btn.style.borderColor = '#1b4965';
+            const activeH4 = btn.querySelector('h4');
+            if (activeH4) activeH4.style.color = 'white';
+
+            // Lọc danh sách bài học theo tháng (30 ngày mỗi tháng)
+            const cards = document.querySelectorAll('.reading-days-grid .day-card');
+            cards.forEach(card => {
+                const dayIdStr = card.id.replace('card-day-', '');
+                const dayNum = parseInt(dayIdStr, 10);
+                
+                if (monthNum === 0) {
+                    // Hiển thị tất cả
+                    card.style.display = 'block';
+                } else {
+                    // Mỗi tháng gồm 30 ngày (Tháng 1: 1-30, Tháng 2: 31-60...)
+                    const startDay = (monthNum - 1) * 30 + 1;
+                    const endDay = monthNum * 30;
+                    if (dayNum >= startDay && dayNum <= endDay) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+
+            showToast(monthNum === 0 ? "Đang hiển thị tất cả 365 ngày lộ trình!" : `Đã lọc bài học cho Tháng ${monthNum}!`);
         }
 
         // Category Filter for Bible Quotes
