@@ -1911,9 +1911,40 @@
         async function loadAllDynamicDataFromSupabase() {
             if (!supabaseClient) return;
             loadQuotesFromSupabase();
+            loadPlansFromSupabase();
             loadReflectionsFromSupabase();
             loadVideosFromSupabase();
-            loadAdminDataLists();
+        }
+
+        async function loadPlansFromSupabase() {
+            try {
+                const { data: plans, error } = await supabaseClient
+                    .from('reading_plans')
+                    .select('*')
+                    .order('day_number', { ascending: true });
+
+                if (error || !plans || plans.length === 0) return;
+
+                const container = document.querySelector('.reading-days-grid');
+                if (!container) return;
+
+                let html = '';
+                plans.forEach(p => {
+                    html += `
+                    <div class="day-card" id="card-day-${p.day_number}">
+                        <div class="day-header">
+                            <span class="day-badge">Ngày ${p.day_number}</span>
+                            <i class="fa-regular fa-circle" style="color: var(--text-muted);" id="icon-day-${p.day_number}"></i>
+                        </div>
+                        <h3 class="day-title">${p.title}</h3>
+                        <p class="day-passage"><i class="fa-solid fa-book-open"></i> ${p.description || p.passage}</p>
+                        <label class="checkbox-label">
+                            <input type="checkbox" onchange="toggleDayProgress(${p.day_number}, this)"> Đã đọc xong
+                        </label>
+                    </div>`;
+                });
+                container.innerHTML = html;
+            } catch (err) { console.log(err); }
         }
 
         async function loadQuotesFromSupabase() {
