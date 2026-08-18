@@ -15,20 +15,20 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   }
 });
 
-// DANH MỤC 12 THÁNG ĐỌC KINH THÁNH THEO CHỦ ĐỀ
+// DANH MỤC 12 THÁNG ĐỌC KINH THÁNH THEO CHỦ ĐỀ (WATV.ORG - PHAN KHÔI 1925)
 const MONTH_CATEGORIES = [
-  { id: 1, name: "Tháng 1", title: "Khởi Nguyên & Sáng Tạo", desc: "Sáng-thế-ký, Giăng, Ma-thi-ơ" },
-  { id: 2, name: "Tháng 2", title: "Xuất Hành & Cứu Rỗi", desc: "Xuất Ê-díp-tô Ký, Giăng, Ma-thi-ơ" },
-  { id: 3, name: "Tháng 3", title: "Luật Pháp & Sự Thánh Sạch", desc: "Lê-vi Ký, Mác, Hê-bơ-rơ" },
-  { id: 4, name: "Tháng 4", title: "Hành Trình Đồng Vắng", desc: "Dân-số-ký, Lu-ca, Công-vụ" },
-  { id: 5, name: "Tháng 5", title: "Nhắc Lại Luật Pháp & Chiếm Đất Hứa", desc: "Phục-truyền, Giô-suê, Rô-ma" },
-  { id: 6, name: "Tháng 6", title: "Thời Kỳ Các Vua & Đa-vít", desc: "Các Quan-xét, 1-2 Sa-mu-ên, 1-2 Cô-rinh-tô" },
-  { id: 7, name: "Tháng 7", title: "Thi Ca & Trí Tuệ", desc: "Thi-thiên, Châm-ngôn, Gióp, Ê-phê-sô" },
-  { id: 8, name: "Tháng 8", title: "Lời Tiên Tri Ê-sai & Đấng Mê-si", desc: "Ê-sai, Ga-la-ti, Phi-líp" },
-  { id: 9, name: "Tháng 9", title: "Giao Ước Mới & Sự Phục Hưng", desc: "Giê-rê-mi, Ca-thương, 1-2 Ti-mô-thê" },
-  { id: 10, name: "Tháng 10", title: "Thung Lũng Hài Cốt Khô & Sự Sống Lại", desc: "Ê-zê-chi-ên, Đa-ni-ên, Hê-bơ-rơ" },
-  { id: 11, name: "Tháng 11", title: "Các Tiên Tri Nhỏ & Sự Ăn Năn", desc: "Ô-sê đến Ma-la-chi, 1-2 Phi-e-rơ" },
-  { id: 12, name: "Tháng 12", title: "Trời Mới Đất Mới & Sự Hoàn Tất", desc: "Khải-huyền, 1-3 Giăng, Giu-đơ" }
+  { id: 1, name: "Tháng 1 (106ch)", title: "Đức Chúa Trời Elohim, Ngày Sa-bát & Lễ Vượt Qua", desc: "Sáng-thế-ký, Ma-thi-ơ, Giăng, 1-2-3 Giăng" },
+  { id: 2, name: "Tháng 2 (96ch)", title: "Lễ Vượt Qua, 3 Kỳ 7 Lễ & Mên-chi-xê-đéc", desc: "Xuất Ê-đíp-tô Ký, Lê-vi Ký, Mác, Hê-bơ-rơ" },
+  { id: 3, name: "Tháng 3 (94ch)", title: "Thói Quen Giữ Ngày Sa-bát", desc: "Dân-số-ký, Phục-truyền, Lu-ca" },
+  { id: 4, name: "Tháng 4 (93ch)", title: "Lễ Ngũ Tuần & Sự Sống Lại", desc: "Giô-suê, Các Quan-xét, Ru-tơ, Công-vụ, Rô-ma" },
+  { id: 5, name: "Tháng 5 (112ch)", title: "Đức Chúa Trời Mẹ & Luật Khăn Trùm Đầu", desc: "1-2 Sa-mu-ên, 1 Các Vua, 1-2 Cô-rinh-tô, Ga-la-ti" },
+  { id: 6, name: "Tháng 6 (104ch)", title: "Lễ Vượt Qua Phá Thần Tượng & Tha Tội", desc: "2 Các Vua, 1-2 Sử-ký, Ê-phê-sô, Phi-líp, Cô-lô-se" },
+  { id: 7, name: "Tháng 7 (97ch)", title: "Tái Thiết Si-ôn & Lễ Lều Tạm", desc: "Ê-xơ-ra, Nê-hê-mi, Ê-xơ-thê, Gióp, Tê-sa-lô-ni-ca, Ti-mô-thê..." },
+  { id: 8, name: "Tháng 8 (113ch)", title: "Si-ôn Ban Sự Sống Đời Đời & Huyết Báu", desc: "Thi-thiên (1-100), Gia-cơ, 1-2 Phi-e-rơ" },
+  { id: 9, name: "Tháng 9 (102ch)", title: "Sự Khôn Ngoan & Tiệc Rượu Nho", desc: "Thi-thiên (101-150), Châm-ngôn, Truyền-đạo, Nhã-ca, Giu-đơ" },
+  { id: 10, name: "Tháng 10 (101ch)", title: "Tiệc Rượu Nho Lâu Năm & Si-ôn Lễ Trọng", desc: "Ê-sai, Giê-rê-mi (1–35)" },
+  { id: 11, name: "Tháng 11 (82ch)", title: "Dấu Ấn Đức Chúa Trời & Nước Sự Sống", desc: "Giê-rê-mi (36–52), Ca-thương, Ê-zê-chi-ên, Đa-ni-ên" },
+  { id: 12, name: "Tháng 12 (89ch)", title: "Thánh Linh & Vợ Mới Ban Nước Sự Sống", desc: "12 Tiên Tri Nhỏ, Khải-huyền" }
 ];
 
 export default function App() {
