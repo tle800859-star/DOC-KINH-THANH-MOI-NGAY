@@ -1939,14 +1939,19 @@
         let currentCardRef = "";
 
         function openImageCardModal(text, ref) {
-            currentCardText = text || document.querySelector('.hero blockquote').innerText.replace(/"/g, '');
-            currentCardRef = ref || document.querySelector('.hero cite').innerText.replace('— ', '');
+            const defaultTextElem = document.querySelector('.verse-text');
+            const defaultRefElem = document.querySelector('.verse-ref');
+            
+            currentCardText = text || (defaultTextElem ? defaultTextElem.innerText.replace(/"/g, '') : 'Lời Chúa là ngọn đèn cho chân tôi, là ánh sáng cho đường lối tôi.');
+            currentCardRef = ref || (defaultRefElem ? defaultRefElem.innerText.trim() : 'Thi-thiên 119:105');
 
             document.getElementById('cardPreviewText').innerText = `"${currentCardText}"`;
             document.getElementById('cardPreviewRef').innerText = `${currentCardRef} (Bản 1925)`;
             
             const modal = document.getElementById('imageCardModal');
-            modal.style.display = 'flex';
+            if (modal) {
+                modal.style.display = 'flex';
+            }
         }
 
         function closeImageCardModal() {
