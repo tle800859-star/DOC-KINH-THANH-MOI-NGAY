@@ -2301,12 +2301,13 @@
                     const dataSource = (typeof WATV_12_MONTHS_PLAN !== 'undefined' ? WATV_12_MONTHS_PLAN : WATV_DATA_PLAN);
                     const mData = dataSource.find(m => m.month === monthNum);
                     if (mData) {
-                        mData.schedule.forEach(s => {
-                            const globalDay = (monthNum - 1) * 30 + s.day;
+                        mData.schedule.forEach((s, idx) => {
+                            const dayDisplayNum = idx + 1;
+                            const globalDay = s.day || (monthNum - 1) * 30 + dayDisplayNum;
                             html += `
                             <div class="day-card" id="card-day-${globalDay}">
                                 <div class="day-header">
-                                    <span class="day-badge">Ngày ${s.day}</span>
+                                    <span class="day-badge">Ngày ${dayDisplayNum}</span>
                                     <i class="fa-regular fa-circle" style="color: var(--text-muted);" id="icon-day-${globalDay}"></i>
                                 </div>
                                 <h3 class="day-title">${s.passage}</h3>
