@@ -995,29 +995,6 @@
                     </div>
                 </div>
 
-                <!-- WATV.ORG Month Detail Overview Card -->
-                <div id="monthDetailBox" style="background: white; border-radius: 20px; padding: 24px; margin-bottom: 24px; border: 1px solid #cbd5e1; box-shadow: 0 4px 15px rgba(27,73,101,0.06); display: none;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; border-b: 1px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 16px;">
-                        <h3 id="watvMonthTitle" style="color: #1b4965; font-size: 1.15rem; font-weight: 700;"></h3>
-                        <span id="watvMonthMeta" style="background: #cae9ff; color: #1b4965; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;"></span>
-                    </div>
-
-                    <div style="margin-bottom: 16px;">
-                        <h4 style="font-size: 0.85rem; color: #5c677d; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">📌 Phần Tổng Quan:</h4>
-                        <p id="watvMonthOverview" style="font-size: 0.95rem; color: #2b2d42; line-height: 1.6;"></p>
-                    </div>
-
-                    <div style="background: #f8fafc; border-left: 4px solid #1b4965; padding: 14px 18px; border-radius: 0 12px 12px 0; margin-bottom: 16px;">
-                        <h4 style="font-size: 0.85rem; color: #1b4965; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">✨ Bản Chất Cốt Lõi (WATV.ORG):</h4>
-                        <ul id="watvCoreDocList" style="font-size: 0.88rem; color: #334155; line-height: 1.6; padding-left: 18px; space-y: 6px;"></ul>
-                    </div>
-
-                    <div>
-                        <h4 style="font-size: 0.85rem; color: #b8860b; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">📖 Câu Gốc Nền Tảng (Bản 1925):</h4>
-                        <div id="watvVersesList" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px;"></div>
-                    </div>
-                </div>
-
                 <!-- Day Grid (Hiển thị chuẩn 30 ngày Tháng 1 WATV.ORG Phan Khôi 1925) -->
                 <div class="reading-days-grid">
                     <div class="day-card completed" id="card-day-1">
@@ -2295,33 +2272,6 @@
             btn.style.borderColor = '#1b4965';
             const activeH4 = btn.querySelector('h4');
             if (activeH4) activeH4.style.color = 'white';
-
-            // Cập nhật thông tin chi tiết Tháng theo WATV.ORG
-            const detailBox = document.getElementById('monthDetailBox');
-            if (monthNum === 0) {
-                if (detailBox) detailBox.style.display = 'none';
-            } else {
-                const monthData = WATV_DATA_PLAN.find(m => m.month === monthNum);
-                if (monthData && detailBox) {
-                    detailBox.style.display = 'block';
-                    document.getElementById('watvMonthTitle').innerText = monthData.title;
-                    document.getElementById('watvMonthMeta').innerText = `${monthData.books} • ${monthData.totalChapters} chương`;
-                    document.getElementById('watvMonthOverview').innerText = monthData.overview;
-
-                    // Render Bản chất cốt lõi
-                    const docUl = document.getElementById('watvCoreDocList');
-                    docUl.innerHTML = monthData.coreDoc.map(doc => `<li style="margin-bottom: 6px;">${doc}</li>`).join('');
-
-                    // Render Câu gốc nền tảng
-                    const versesDiv = document.getElementById('watvVersesList');
-                    versesDiv.innerHTML = monthData.foundationVerses.map(v => `
-                        <div style="background: #fffbeb; border: 1px solid #fef3c7; padding: 12px; border-radius: 12px;">
-                            <p style="font-weight: 700; color: #b8860b; font-size: 0.85rem; margin-bottom: 4px;">📍 ${v.ref}</p>
-                            <p style="font-style: italic; font-size: 0.83rem; color: #451a03; line-height: 1.5;">"${v.text}"</p>
-                        </div>
-                    `).join('');
-                }
-            }
 
             // Lọc danh sách bài học theo tháng (30 ngày mỗi tháng)
             const cards = document.querySelectorAll('.reading-days-grid .day-card');
