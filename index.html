@@ -1689,7 +1689,7 @@
     </footer>
 
     <!-- JavaScript Application Logic -->
-    <script src="./watvPlanData1925.js?v=20260819_v9"></script>
+    <script src="./watvPlanData1925.js?v=20260819_v10"></script>
     <script>
         // Data Bank WATV 12 Tháng
         const WATV_DATA_PLAN = (typeof WATV_12_MONTHS_PLAN !== 'undefined' ? WATV_12_MONTHS_PLAN : []);
@@ -2329,10 +2329,7 @@
         // ========================================================
         window.addEventListener('DOMContentLoaded', async () => {
             // Tự động tải danh sách bài đọc cho Tháng 1 làm mặc định
-            const month1Btn = document.querySelector('.month-card[data-month="1"]');
-            if (month1Btn) {
-                filterMonthPlan(1, month1Btn);
-            }
+            filterMonthPlan(1);
 
             if (supabaseClient) {
                 const { data: { session } } = await supabaseClient.auth.getSession();
