@@ -3,7 +3,7 @@
 // CHUẨN NỘI DUNG VÀ QUAN ĐIỂM HỘI HÁNH ĐỨC CHÚA TRỜI (WATV.ORG)
 // ========================================================
 
-export const WATV_12_MONTHS_PLAN = [
+const WATV_12_MONTHS_PLAN = [
   {
     month: 1,
     title: "Tháng 1: Đức Chúa Trời Elohim, Ngày Sa-bát & Lễ Vượt Qua Giao Ước Mới",
@@ -518,7 +518,13 @@ export const WATV_12_MONTHS_PLAN = [
       { day: 261, passage: "Khải-huyền 4–7" },
       { day: 262, passage: "Khải-huyền 8–12" },
       { day: 263, passage: "Khải-huyền 13–17" },
-      { day: 264, passage: "Khải-huyền 18–22" }
     ]
   }
 ];
+
+if (typeof window !== 'undefined') {
+    window.WATV_12_MONTHS_PLAN = WATV_12_MONTHS_PLAN;
+}
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { WATV_12_MONTHS_PLAN };
+}

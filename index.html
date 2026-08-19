@@ -1889,6 +1889,7 @@
     </footer>
 
     <!-- JavaScript Application Logic -->
+    <script src="./watvPlanData1925.js"></script>
     <script>
         // Data Bank WATV 12 Tháng
         const WATV_DATA_PLAN = [
@@ -2273,26 +2274,54 @@
             const activeH4 = btn.querySelector('h4');
             if (activeH4) activeH4.style.color = 'white';
 
-            // Lọc danh sách bài học theo tháng (30 ngày mỗi tháng)
-            const cards = document.querySelectorAll('.reading-days-grid .day-card');
-            cards.forEach(card => {
-                const dayIdStr = card.id.replace('card-day-', '');
-                const dayNum = parseInt(dayIdStr, 10);
-                
+            // Hiển thị và vẽ danh sách các ngày đọc chuẩn cho Tháng được chọn (WATV.ORG Phan Khôi 1925)
+            const container = document.querySelector('.reading-days-grid');
+            if (container) {
+                let html = '';
                 if (monthNum === 0) {
-                    card.style.display = 'block';
+                    // Hiển thị toàn bộ 12 tháng (365 ngày)
+                    WATV_12_MONTHS_PLAN.forEach(m => {
+                        m.schedule.forEach(s => {
+                            const globalDay = (m.month - 1) * 30 + s.day;
+                            html += `
+                            <div class="day-card" id="card-day-${globalDay}">
+                                <div class="day-header">
+                                    <span class="day-badge">Tháng ${m.month} • Ngày ${s.day}</span>
+                                    <i class="fa-regular fa-circle" style="color: var(--text-muted);" id="icon-day-${globalDay}"></i>
+                                </div>
+                                <h3 class="day-title">${s.passage}</h3>
+                                <p class="day-passage"><i class="fa-solid fa-book-open"></i> Lộ trình đọc Kinh Thánh 1925 (WATV.ORG)</p>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" onchange="toggleDayProgress(${globalDay}, this)"> Đã đọc xong
+                                </label>
+                            </div>`;
+                        });
+                    });
                 } else {
-                    const startDay = (monthNum - 1) * 30 + 1;
-                    const endDay = monthNum * 30;
-                    if (dayNum >= startDay && dayNum <= endDay) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
+                    const dataSource = (typeof WATV_12_MONTHS_PLAN !== 'undefined' ? WATV_12_MONTHS_PLAN : WATV_DATA_PLAN);
+                    const mData = dataSource.find(m => m.month === monthNum);
+                    if (mData) {
+                        mData.schedule.forEach(s => {
+                            const globalDay = (monthNum - 1) * 30 + s.day;
+                            html += `
+                            <div class="day-card" id="card-day-${globalDay}">
+                                <div class="day-header">
+                                    <span class="day-badge">Ngày ${s.day}</span>
+                                    <i class="fa-regular fa-circle" style="color: var(--text-muted);" id="icon-day-${globalDay}"></i>
+                                </div>
+                                <h3 class="day-title">${s.passage}</h3>
+                                <p class="day-passage"><i class="fa-solid fa-book-open"></i> ${mData.books}</p>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" onchange="toggleDayProgress(${globalDay}, this)"> Đã đọc xong
+                                </label>
+                            </div>`;
+                        });
                     }
                 }
-            });
+                container.innerHTML = html;
+            }
 
-            showToast(monthNum === 0 ? "Đang hiển thị tất cả 365 ngày lộ trình!" : `Đã lọc bài học cho Tháng ${monthNum}!`);
+            showToast(monthNum === 0 ? "Đang hiển thị tất cả 365 ngày lộ trình!" : `Đã tải lịch đọc chuẩn WATV.ORG cho Tháng ${monthNum}!`);
         }
 
         // ========================================================
