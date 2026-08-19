@@ -1685,7 +1685,7 @@
     </footer>
 
     <!-- JavaScript Application Logic -->
-    <script src="./watvPlanData1925.js?v=20260819_v5"></script>
+    <script src="./watvPlanData1925.js?v=20260819_v6"></script>
     <script>
         // Data Bank WATV 12 Tháng
         const WATV_DATA_PLAN = (typeof WATV_12_MONTHS_PLAN !== 'undefined' ? WATV_12_MONTHS_PLAN : []);
@@ -1736,6 +1736,14 @@
 
             // Scroll to top smooth
             window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Tự động kích hoạt hiển thị Tháng 1 khi người dùng mở trang Lộ Trình #plans
+            if (tabId === 'plans') {
+                setTimeout(() => {
+                    const month1Btn = document.querySelector('.month-card[data-month="1"]');
+                    filterMonthPlan(1, month1Btn);
+                }, 50);
+            }
         }
 
         // Toggle Mobile Menu
