@@ -2706,13 +2706,17 @@
         // TỰ ĐỘNG LẤY DỮ LIỆU ĐỘNG TỪ SUPABASE KHI MỞ TRANG & QUẢN LÝ ADMIN
         // ========================================================
         window.addEventListener('DOMContentLoaded', async () => {
+            // Tự động tải danh sách bài đọc cho Tháng 1 làm mặc định
+            const month1Btn = document.querySelector('.month-card[data-month="1"]');
+            if (month1Btn) {
+                filterMonthPlan(1, month1Btn);
+            }
+
             if (supabaseClient) {
-                // Check active session
                 const { data: { session } } = await supabaseClient.auth.getSession();
                 if (session && session.user) {
                     updateUserUI(session.user);
                 }
-                // Load Dynamic Data to User UI
                 loadAllDynamicDataFromSupabase();
             }
         });
