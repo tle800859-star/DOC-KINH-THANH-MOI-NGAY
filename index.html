@@ -1685,7 +1685,7 @@
     </footer>
 
     <!-- JavaScript Application Logic -->
-    <script src="./watvPlanData1925.js?v=20260819_v6"></script>
+    <script src="./watvPlanData1925.js?v=20260819_v7"></script>
     <script>
         // Data Bank WATV 12 Tháng
         const WATV_DATA_PLAN = (typeof WATV_12_MONTHS_PLAN !== 'undefined' ? WATV_12_MONTHS_PLAN : []);
@@ -1834,20 +1834,22 @@
             document.querySelectorAll('.month-card').forEach(b => {
                 b.classList.remove('active');
                 b.style.background = '#f8fafc';
-                b.style.color = '#1e293b';
                 b.style.borderColor = '#cbd5e1';
                 const h4 = b.querySelector('h4');
                 if (h4) h4.style.color = '#1b4965';
+                const p = b.querySelector('p');
+                if (p) p.style.color = '#64748b';
             });
 
             const activeBtn = btn || document.querySelector(`.month-card[data-month="${monthNum}"]`);
             if (activeBtn) {
                 activeBtn.classList.add('active');
                 activeBtn.style.background = '#1b4965';
-                activeBtn.style.color = 'white';
                 activeBtn.style.borderColor = '#1b4965';
                 const activeH4 = activeBtn.querySelector('h4');
-                if (activeH4) activeH4.style.color = 'white';
+                if (activeH4) activeH4.style.color = '#ffffff';
+                const activeP = activeBtn.querySelector('p');
+                if (activeP) activeP.style.color = '#e2e8f0';
             }
 
             // Hiển thị và vẽ danh sách các ngày đọc chuẩn cho Tháng được chọn (WATV.ORG Phan Khôi 1925)
