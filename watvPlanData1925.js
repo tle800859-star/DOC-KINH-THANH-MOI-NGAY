@@ -518,6 +518,7 @@ const WATV_12_MONTHS_PLAN = [
       { day: 261, passage: "Khải-huyền 4–7" },
       { day: 262, passage: "Khải-huyền 8–12" },
       { day: 263, passage: "Khải-huyền 13–17" },
+      { day: 264, passage: "Khải-huyền 18–22" }
     ]
   }
 ];
