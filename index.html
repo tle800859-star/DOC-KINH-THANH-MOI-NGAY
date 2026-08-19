@@ -1876,6 +1876,9 @@
                         </div>` : ''}
                     </div>
                 `;
+                setTimeout(() => {
+                    detailContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
             } else if (detailContainer) {
                 detailContainer.style.display = 'none';
             }
