@@ -2304,12 +2304,13 @@
                 if (isChecked) {
                     await supabaseClient
                         .from('user_progress')
-                        .upsert({ user_identifier: userId, plan_day_id: dayNum, is_completed: true });
+                        .upsert({ user_identifier: userId, plan_type: currentPlanMode, plan_day_id: dayNum, is_completed: true });
                 } else {
                     await supabaseClient
                         .from('user_progress')
                         .delete()
                         .eq('user_identifier', userId)
+                        .eq('plan_type', currentPlanMode)
                         .eq('plan_day_id', dayNum);
                 }
                 showToast("Đã đồng bộ tiến độ lên Supabase Cloud!");

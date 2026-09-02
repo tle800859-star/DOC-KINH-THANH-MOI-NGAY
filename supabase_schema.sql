@@ -16,7 +16,9 @@ CREATE TABLE IF NOT EXISTS public.bible_quotes (
 -- 2. BẢNG LỘ TRÌNH ĐỌC (Reading Plans)
 CREATE TABLE IF NOT EXISTS public.reading_plans (
     id SERIAL PRIMARY KEY,
-    day_number INT NOT NULL UNIQUE,
+    plan_type VARCHAR(50) DEFAULT 'doctrinal', -- 'chronological', 'doctrinal', 'fast6', 'cap2', 'cap3'
+    month_number INT DEFAULT 1,
+    day_number INT NOT NULL,
     title VARCHAR(255) NOT NULL,
     passage VARCHAR(255) NOT NULL,
     description TEXT,
@@ -27,10 +29,11 @@ CREATE TABLE IF NOT EXISTS public.reading_plans (
 CREATE TABLE IF NOT EXISTS public.user_progress (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     user_identifier VARCHAR(255) NOT NULL, -- UUID user hoặc Cookie ID
-    plan_day_id INT REFERENCES public.reading_plans(day_number) ON DELETE CASCADE,
+    plan_type VARCHAR(50) DEFAULT 'doctrinal', -- Lưu loại Lộ trình (chronological, doctrinal, fast6, cap2, cap3)
+    plan_day_id INT NOT NULL,
     is_completed BOOLEAN DEFAULT FALSE,
     completed_at TIMESTAMPTZ DEFAULT NOW(),
-    UNIQUE(user_identifier, plan_day_id)
+    UNIQUE(user_identifier, plan_type, plan_day_id)
 );
 
 -- 4. BẢNG BÀI KIỂM TRA (Quizzes)
