@@ -1087,62 +1087,48 @@
             </div>
         </section>
 
-        <!-- 2. QUIZZES SECTION -->
+        <!-- 2. QUIZZES SECTION (Đồng nhất 100% với Lộ Trình Đọc) -->
         <section id="quizzes" class="section">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">Kiểm Tra Kiến Thức</h2>
-                    <p class="section-subtitle">Ôn tập và củng cố bài học Kinh Thánh sau các phân đoạn đã đọc</p>
+                    <h2 class="section-title">✍️ Kiểm Tra Kiến Thức Theo Lộ Trình Đọc (WATV.ORG Phan Khôi 1925)</h2>
+                    <p class="section-subtitle">Ôn tập và củng cố các Lẽ Thật Giao Ước Mới & Phân Đoạn Kinh Thánh đã đọc theo từng Tháng</p>
+                </div>
+
+                <!-- Bộ Chọn Tháng Kiểm Tra -->
+                <div style="background: white; padding: 18px 24px; border-radius: 16px; margin-bottom: 24px; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span style="background: var(--primary); color: white; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.95rem;">📖</span>
+                        <div>
+                            <h3 style="font-size: 1rem; color: var(--primary); margin: 0; font-weight: 700;">Chọn Tháng Độc Giả Vừa Đọc Xong:</h3>
+                            <p style="font-size: 0.8rem; color: #64748b; margin: 0;">Bộ câu hỏi tự động đồng bộ theo 12 Tháng Lộ Trình Lịch Sử & Tiên Tri</p>
+                        </div>
+                    </div>
+                    <select id="quizMonthSelect" onchange="renderQuizForMonth(this.value)" style="padding: 10px 16px; border-radius: 10px; border: 2px solid var(--primary); font-weight: 700; color: var(--primary); background: #f0f7ff; cursor: pointer; font-size: 0.9rem; outline: none;">
+                        <option value="1">🌱 Tháng 1: Đức Chúa Trời Elohim & Lễ Vượt Qua</option>
+                        <option value="2">🛡️ Tháng 2: 3 Kỳ 7 Lễ & Mên-chi-xê-đéc</option>
+                        <option value="3">📜 Tháng 3: Hành Trình Luyện Rèn & Sa-bát</option>
+                        <option value="4">👑 Tháng 4: Chiếm Đất Hứa & Lễ Ngũ Tuần</option>
+                        <option value="5">🕊️ Tháng 5: Đức Chúa Trời Mẹ & Khăn Trùm Đầu</option>
+                        <option value="6">✝️ Tháng 6: Phá Thần Tượng & Tha Tội</option>
+                        <option value="7">🏰 Tháng 7: Tái Thiết Si-ôn & Lễ Lều Tạm</option>
+                        <option value="8">🌊 Tháng 8: Si-ôn Ban Sự Sống Đời Đời</option>
+                        <option value="9">💎 Tháng 9: Sự Khôn Ngoan & Tiệc Rượu Nho</option>
+                        <option value="10">🍷 Tháng 10: Tiệc Rượu Nho Lâu Năm & Giao Ước Mới</option>
+                        <option value="11">🔥 Tháng 11: Dấu Ấn & Sông Nước Sự Sống</option>
+                        <option value="12">👑 Tháng 12: 144,000 & Vợ Mới Ban Nước Sự Sống</option>
+                    </select>
                 </div>
 
                 <div class="quiz-container">
                     <form id="quizForm" onsubmit="submitQuiz(event)">
-                        <!-- Q1: Multiple Choice -->
-                        <div class="quiz-question-box">
-                            <span class="quiz-type-tag">Câu 1: Trắc Nghiệm (Multiple Choice)</span>
-                            <h3 class="quiz-question">Bài giảng trên núi của Chúa Jêsus được ghi chép trong phân đoạn nào của sách Ma-thi-ơ?</h3>
-                            <div class="options-group">
-                                <label class="option-item">
-                                    <input type="radio" name="q1" value="A"> A. Ma-thi-ơ chương 1 đến 3
-                                </label>
-                                <label class="option-item">
-                                    <input type="radio" name="q1" value="B"> B. Ma-thi-ơ chương 5 đến 7
-                                </label>
-                                <label class="option-item">
-                                    <input type="radio" name="q1" value="C"> C. Ma-thi-ơ chương 10 đến 12
-                                </label>
-                            </div>
-                            <div class="explanation-box" id="exp-q1"></div>
-                        </div>
-
-                        <!-- Q2: True / False -->
-                        <div class="quiz-question-box">
-                            <span class="quiz-type-tag">Câu 2: Đúng / Sai (True / False)</span>
-                            <h3 class="quiz-question">Đúng hay Sai: Giăng Báp-tít là người đã làm phép báp-têm cho Chúa Jêsus tại sông Giô-đanh?</h3>
-                            <div class="options-group">
-                                <label class="option-item">
-                                    <input type="radio" name="q2" value="True"> Đúng (True)
-                                </label>
-                                <label class="option-item">
-                                    <input type="radio" name="q2" value="False"> Sai (False)
-                                </label>
-                            </div>
-                            <div class="explanation-box" id="exp-q2"></div>
-                        </div>
-
-                        <!-- Q3: Essay -->
-                        <div class="quiz-question-box">
-                            <span class="quiz-type-tag">Câu 3: Suy Ngẫm & Tự Luận (Essay)</span>
-                            <h3 class="quiz-question">Qua câu Kinh Thánh "Lời Chúa là ngọn đèn cho chân tôi" (Thi-thiên 119:105), bạn ứng dụng lời Chúa vào quyết định hàng ngày như thế nào?</h3>
-                            <textarea class="essay-input" placeholder="Viết cảm nhận hoặc suy ngẫm của bạn tại đây..."></textarea>
-                            <div class="explanation-box correct" id="exp-q3" style="display:none;">
-                                💡 <strong>Gợi ý suy ngẫm:</strong> Lời Chúa định hướng cho từng bước đi nhỏ (ngọn đèn cho chân) và soi sáng bức tranh tương lai dài hạn (ánh sáng cho đường lối). Cầu nguyện và đọc Kinh Thánh trước khi đưa ra quyết định quan trọng.
-                            </div>
+                        <div id="dynamicQuizContent">
+                            <!-- Được render động 100% đồng nhất theo Tháng được chọn bởi renderQuizForMonth() -->
                         </div>
 
                         <div style="text-align: center; margin-top: 30px;">
                             <button type="submit" class="btn btn-primary" style="padding: 12px 36px; font-size: 1rem;">
-                                <i class="fa-solid fa-check-double"></i> Chấm Điểm & Xem Đáp Án
+                                <i class="fa-solid fa-check-double"></i> Nộp Bài & Xem Đáp Án Chi Tiết
                             </button>
                         </div>
                     </form>
@@ -2398,38 +2384,185 @@
             }
         }
 
-        // Quiz Submission & Auto-grading
+        // ========================================================
+        // NGÂN HÀNG CÂU HỎI TRẮC NGHIỆM ĐỒNG NHẤT 100% VỚI 12 THÁNG LỘ TRÌNH ĐỌC
+        // (BẢN DỊCH PHAN KHÔI 1925 - CHUẨN WATV.ORG)
+        // ========================================================
+        const WATV_QUIZ_BANK = {
+            1: {
+                title: "Tháng 1: Đức Chúa Trời Elohim, Ngày Sa-bát & Lễ Vượt Qua Giao Ước Mới",
+                q1: { question: "Trong Sáng-thế-ký 1:26-27, danh xưng Đức Chúa Trời dạng số nhiều trong nguyên bản Hê-bơ-rơ mang ý nghĩa gì?", options: [{ label: "A. Chỉ có một Ngôi duy nhất tạo dựng loài người", value: "A" }, { label: "B. Khẳng định sự hiện hữu của Đức Chúa Trời Cha và Đức Chúa Trời Mẹ (Elohim)", value: "B" }, { label: "C. Chỉ sự hiệp một của các thiên sứ", value: "C" }], correct: "B", exp: "Chính xác! Từ 'Chúng ta' và danh xưng 'Elohim' khẳng định sự hiện hữu của Đức Chúa Trời Cha và Đức Chúa Trời Mẹ." },
+                q2: { question: "Đúng hay Sai: Ngày thứ bảy (Ngày Sa-bát) được Đức Chúa Trời ban phước và đặt làm ngày thánh từ lúc sáng thế (Sáng-thế-ký 2:1-3)?", options: [{ label: "Đúng (True)", value: "True" }, { label: "Sai (False)", value: "False" }], correct: "True", exp: "Chính xác! Ngày thứ bảy là Ngày Sa-bát thánh để kỷ niệm quyền năng Đấng Sáng Tạo." },
+                q3: { guide: "💡 Gợi ý suy ngẫm: Đức Chúa Giê-xu đã ban Bánh và Rượu Nho Lễ Vượt Qua Giao Ước Mới (Giăng 6:53-54, Ma-thi-ơ 26:26-28) làm thực thể Cây Sự Sống để ban sự sống đời đời cho nhân loại.", prompt: "Qua phân đoạn Giăng 6:53-54 & Ma-thi-ơ 26:17-28, bạn nhận thức thế nào về tầm quan trọng của Lễ Vượt Qua Giao Ước Mới?" }
+            },
+            2: {
+                title: "Tháng 2: Lễ Vượt Qua Giải Thoát, 3 Kỳ 7 Lễ & Mên-chi-xê-đéc",
+                q1: { question: "Theo Xuất Ê-đíp-tô Ký 12:13-14, dấu hiệu duy nhất để tai vạ diệt trừ vượt qua khỏi dân sự là gì?", options: [{ label: "A. Huyết Chiên Con Lễ Vượt Qua", value: "A" }, { label: "B. Việc giữ ngày trăng tròn", value: "B" }, { label: "C. Dấu thập tự giá trên cửa", value: "C" }], correct: "A", exp: "Chính xác! Huyết Chiên Con Lễ Vượt Qua là dấu hiệu duy nhất được Đức Chúa Trời hứa bảo vệ." },
+                q2: { question: "Đúng hay Sai: Việc quỳ lạy hoặc thờ thập tự giá là vi phạm Điều răn thứ hai cấm thờ hình tượng (Xuất 20:4-5)?", options: [{ label: "Đúng (True)", value: "True" }, { label: "Sai (False)", value: "False" }], correct: "True", exp: "Chính xác! Thập tự giá chỉ là dụng cụ xử tử La Mã, dựng và thờ thập tự giá là thờ ngẫu tượng." },
+                q3: { guide: "💡 Gợi ý suy ngẫm: Đức Chúa Giê-xu chính là Thầy Tế Lễ Thượng Phẩm theo ban Mên-chi-xê-đéc (Hê-bơ-rơ 5, 7) dùng Bánh và Rượu Nho ban sự tha tội đời đời.", prompt: "Theo Hê-bơ-rơ 7:17, việc Đức Chúa Giê-xu đến theo ban Mên-chi-xê-đéc thay thế ban A-ron có ý nghĩa gì đối với Giao Ước Mới?" }
+            },
+            3: {
+                title: "Tháng 3: Hành Trình Luyện Rèn Đức Tin & Thói Quen Giữ Ngày Sa-bát",
+                q1: { question: "Đức Chúa Giê-xu vào nhà hội giữ ngày Sa-bát vào ngày nào trong tuần theo thói quen Ngài (Lu-ca 4:16)?", options: [{ label: "A. Ngày thứ nhất (Chủ Nhật)", value: "A" }, { label: "B. Ngày thứ bảy (Thứ Bảy)", value: "B" }, { label: "C. Ngày giữa tuần (Thứ Tư)", value: "C" }], correct: "B", exp: "Chính xác! Đức Chúa Giê-xu giữ ngày Sa-bát vào ngày thứ Bảy theo thói quen Ngài thường làm." },
+                q2: { question: "Đúng hay Sai: Việc nhìn con rắn đồng được sống (Dân-số-ký 21, 2 Các Vua 18:4) là nhờ quyền phép của con rắn đồng chứ không phải do Lời phán của Đức Chúa Trời?", options: [{ label: "Đúng (True)", value: "True" }, { label: "Sai (False)", value: "False" }], correct: "False", exp: "Chính xác! Được cứu là nhờ Lời phán của Đức Chúa Trời; về sau ai thờ con rắn đồng bị vua Ê-xê-chia đập nát." },
+                q3: { guide: "💡 Gợi ý suy ngẫm: Lu-ca 22:15 ghi nhận tấm lòng Chúa Giê-xu 'Ta rất muốn ăn Lễ Vượt Qua này' trước khi chịu đau đớn.", prompt: "Cảm nhận của bạn về tình yêu thương bao la của Đức Chúa Giê-xu khi Ngài thiết lập Lễ Vượt Qua Giao Ước Mới trước khi chịu hình treo trên thập tự giá?" }
+            },
+            4: {
+                title: "Tháng 4: Lễ Vượt Qua Chiếm Đất Hứa, Lễ Ngũ Tuần & Sự Sống Lại",
+                q1: { question: "Sứ đồ Phao-lô lập luận A-đam là hình bóng của Đấng phải đến (Đức Chúa Trời Cha) trong sách nào?", options: [{ label: "A. Rô-ma 5:14", value: "A" }, { label: "B. Công-vụ 2:1", value: "B" }, { label: "C. Giô-suê 5:10", value: "C" }], correct: "A", exp: "Chính xác! Rô-ma 5:14 khẳng định A-đam là hình bóng của Đấng phải đến, ngụ ý Ê-va là hình bóng Đức Chúa Trời Mẹ." },
+                q2: { question: "Đúng hay Sai: Đức Thánh Linh mưa đầu mùa được giáng lâm cho các môn đồ vào Ngày Lễ Ngũ Tuần (Công-vụ 2:1-4)?", options: [{ label: "Đúng (True)", value: "True" }, { label: "Sai (False)", value: "False" }], correct: "True", exp: "Chính xác! Lễ Ngũ Tuần là kỳ lễ nhận lãnh quyền năng Đức Thánh Linh dạt dào." },
+                q3: { guide: "💡 Gợi ý suy ngẫm: Dân Y-sơ-ra-ên giữ Lễ Vượt Qua tại Ghinh-ganh trước khi công phá thành Giê-ri-cô sụp đổ (Giô-suê 5:10).", prompt: "Sự kiện giữ Lễ Vượt Qua giúp hạ gục thành Giê-ri-cô mang lại bài học đức tin nào cho bạn khi đối mặt với khó khăn?" }
+            },
+            5: {
+                title: "Tháng 5: Đức Chúa Trời Mẹ Giê-ru-sa-lem, Luật Khăn Trùm Đầu & Lễ Vượt Qua",
+                q1: { question: "Câu Kinh Thánh nào tuyên bố rõ ràng: 'Thành Giê-ru-sa-lem ở trên cao là tự do, và ấy là Mẹ chúng ta'?", options: [{ label: "A. Ga-la-ti 4:26", value: "A" }, { label: "B. 1 Cô-rinh-tô 11:5", value: "B" }, { label: "C. 2 Sa-mu-ên 6:1", value: "C" }], correct: "A", exp: "Chính xác! Ga-la-ti 4:26 và 4:28 khẳng định chúng ta là con cái của Lời Hứa được sinh ra bởi Đức Chúa Trời Mẹ." },
+                q2: { question: "Đúng hay Sai: Theo 1 Cô-rinh-tô 11:1-16, nữ tín đồ cần đội khăn trùm đầu khi cầu nguyện và thờ phượng Đức Chúa Trời?", options: [{ label: "Đúng (True)", value: "True" }, { label: "Sai (False)", value: "False" }], correct: "True", exp: "Chính xác! Luật Khăn Trùm Đầu tôn vinh trật tự sáng tạo thánh sạch của Đức Chúa Trời." },
+                q3: { guide: "💡 Gợi ý suy ngẫm: 1 Cô-rinh-tô 5:7-8 răn dạy 'Vì Đấng Christ là con sinh lễ Vượt Qua của chúng ta đã bị hi sinh rồi. Vậy thì chúng ta hãy giữ lễ'.", prompt: "Hãy chia sẻ thái độ tâm linh của bạn khi vâng giữ Lễ Vượt Qua Giao Ước Mới theo lời dạy của Sứ đồ Phao-lô." }
+            },
+            6: {
+                title: "Tháng 6: Lễ Vượt Qua Phá Thần Tượng (Ê-xê-chia & Giô-si-a) & Tha Tội",
+                q1: { question: "Vua Ê-xê-chia đã làm hành động gì đối với con rắn đồng Nê-hu-sơ-tan (2 Các Vua 18:4)?", options: [{ label: "A. Xây đền thờ riêng cho nó", value: "A" }, { label: "B. Đập nát vì dân chúng xông hương thờ lạy nó", value: "B" }, { label: "C. Dát vàng lên con rắn đồng", value: "C" }], correct: "B", exp: "Chính xác! Vua Ê-xê-chia đập nát con rắn đồng vì đó là sự thờ hình tượng phạm tội." },
+                q2: { question: "Đúng hay Sai: Theo Ê-phê-sô 1:7, chúng ta được sự cứu chuộc và tha tội là nhờ Huyết của Đấng Christ?", options: [{ label: "Đúng (True)", value: "True" }, { label: "Sai (False)", value: "False" }], correct: "True", exp: "Chính xác! Huyết Lễ Vượt Qua của Đấng Christ ban cho chúng ta sự cứu chuộc dạt dào ân điển." },
+                q3: { guide: "💡 Gợi ý suy ngẫm: 2 Sử-ký 30 ghi lại việc vua Ê-xê-chia kêu gọi toàn dân trở lại giữ Lễ Vượt Qua để nhận sự che chở của Đức Chúa Trời.", prompt: "Việc phục hưng Lễ Vượt Qua giúp triệt hạ mọi thần tượng cho thấy giá trị tâm linh to lớn nào?" }
+            },
+            7: {
+                title: "Tháng 7: Tái Thiết Si-ôn, Lễ Lều Tạm & Cảnh Báo Kẻ Gian Ác Đổi Luật Pháp",
+                q1: { question: "Lời tiên tri trong 2 Tê-sa-lô-ni-ca 2:3-4 cảnh báo về đối tượng gian ác nào hiện ra?", options: [{ label: "A. Kẻ bội đạo tôn mình lên trên Đức Chúa Trời và toan đổi luật pháp", value: "A" }, { label: "B. Các vua chúa thời Cựu Ước", value: "B" }, { label: "C. Những người chăn chiên thật", value: "C" }], correct: "A", exp: "Chính xác! Tiên tri vạch trần kẻ gian ác ngồi trong đền thờ tự tôn xưng và bãi bỏ luật pháp Giao Ước Mới." },
+                q2: { question: "Đúng hay Sai: Dân sự Ba-by-lôn trở về tái thiết Đền Thờ liền vui vẻ vâng giữ Lễ Vượt Qua và Lễ Bánh Không Men (Ê-xơ-ra 6:19-22)?", options: [{ label: "Đúng (True)", value: "True" }, { label: "Sai (False)", value: "False" }], correct: "True", exp: "Chính xác! Giữ Lễ Vượt Qua là công việc đầu tiên khi tái thiết Si-ôn." },
+                q3: { guide: "💡 Gợi ý suy ngẫm: 2 Ti-mô-thê 3:16-17 khẳng định Cả Kinh Thánh đều bởi Đức Chúa Trời soi dẫn, có ích cho sự dạy dỗ bẻ trách sửa trị.", prompt: "Bạn áp dụng Lời Kinh Thánh 1925 làm tiêu chuẩn duy nhất phân biệt lẽ thật và sự dối trá như thế nào?" }
+            },
+            8: {
+                title: "Tháng 8: Si-ôn Nơi Ban Sự Sống Đời Đời & Huyết Báu Chiên Con",
+                q1: { question: "Địa danh nào được Thi-thiên 133:3 khẳng định là nơi Đức Chúa Trời ban phước sự sống cho đến đời đời?", options: [{ label: "A. Si-ôn (Zion)", value: "A" }, { label: "B. Ba-by-lôn", value: "B" }, { label: "C. Ai Cập", value: "C" }], correct: "A", exp: "Chính xác! Si-ôn - thành của các kỳ lễ trọng thể - là nơi duy nhất ban phước sự sống đời đời." },
+                q2: { question: "Đúng hay Sai: Gia-cơ 2:26 dạy rằng 'Xác chẳng có hồn thì chết, đức tin không có việc làm cũng chết như vậy'?", options: [{ label: "Đúng (True)", value: "True" }, { label: "Sai (False)", value: "False" }], correct: "True", exp: "Chính xác! Đức tin thật phải đi kèm hành động vâng giữ các điều răn Lễ Vượt Qua, Sa-bát." },
+                q3: { guide: "💡 Gợi ý suy ngẫm: 1 Phi-e-rơ 1:18-19 nhắc nhở chúng ta được chuộc bởi Huyết báu Chiên Con không lỗi không vít.", prompt: "Tấm lòng biết ơn của bạn đối với giá chuộc bằng Huyết báu Lễ Vượt Qua của Đức Chúa Giê-xu?" }
+            },
+            9: {
+                title: "Tháng 9: Sự Khôn Ngoan Thiên Thượng, Tiệc Rượu Nho & Tình Yêu Nhã-ca",
+                q1: { question: "Trong Châm-ngôn 9:1-5, Sự Khôn Ngoan lên tiệc mời gọi người ta đến dự bởi thực thể nào?", options: [{ label: "A. Bánh và Rượu Nho Lễ Vượt Qua", value: "A" }, { label: "B. Trái cây bình thường", value: "B" }, { label: "C. Chiên bò quay", value: "C" }], correct: "A", exp: "Chính xác! Sự Khôn Ngoan (Đức Chúa Trời Mẹ) dọn tiệc Bánh và Rượu Nho Lễ Vượt Qua ban sự sống." },
+                q2: { question: "Đúng hay Sai: Truyền-đạo 12:13 đúc kết bổn phận trọn vẹn của con người là khá kính sợ Đức Chúa Trời và vâng giữ các điều răn Ngài?", options: [{ label: "Đúng (True)", value: "True" }, { label: "Sai (False)", value: "False" }], correct: "True", exp: "Chính xác! Kính sợ Đức Chúa Trời và giữ điều răn là trọn phận sự con người." },
+                q3: { guide: "💡 Gợi ý suy ngẫm: Thi-thiên 119:105 xưng tụng 'Lời Chúa là ngọn đèn cho chân tôi, là ánh sáng cho đường lối tôi'.", prompt: "Lời Kinh Thánh đã dẫn dắt và ban sự khôn ngoan cho bạn trong cuộc sống hàng ngày ra sao?" }
+            },
+            10: {
+                title: "Tháng 10: Tiên Tri Tiệc Rượu Nho Lâu Năm, Si-ôn Lễ Trọng & Giao Ước Mới",
+                q1: { question: "Lời tiên tri Ê-sai 25:6-9 phán truyền Đấng Cứu Chúa sẽ đãi muôn dân tiệc gì để nuốt sự chết đến đời đời?", options: [{ label: "A. Tiệc Rượu Nho Lâu Năm (Lễ Vượt Qua phục hồi)", value: "A" }, { label: "B. Tiệc bánh mì không men", value: "B" }, { label: "C. Tiệc nước suối trong", value: "C" }], correct: "A", exp: "Chính xác! Tiệc Rượu Nho Lâu Năm Lễ Vượt Qua bị bãi bỏ 1600 năm được Đấng Cứu Chúa phục hồi." },
+                q2: { question: "Đúng hay Sai: Ê-sai 33:20 định nghĩa Si-ôn chính là thành của các kỳ lễ trọng thể của Đức Chúa Trời?", options: [{ label: "Đúng (True)", value: "True" }, { label: "Sai (False)", value: "False" }], correct: "True", exp: "Chính xác! Si-ôn là nơi cử hành 3 kỳ 7 Lễ Trọng Thể Giao Ước Mới." },
+                q3: { guide: "💡 Gợi ý suy ngẫm: Giê-rê-mi 31:31-34 hứa hẹn Đức Chúa Trời sẽ lập Giao Ước Mới khắc ghi luật pháp vào lòng.", prompt: "Lòng biết ơn của bạn khi được là người dân thuộc về Giao Ước Mới được tha thứ tội lỗi?" }
+            },
+            11: {
+                title: "Tháng 11: Dấu Ấn Bảo Vệ & Dòng Sông Nước Sự Sống",
+                q1: { question: "Ê-zê-chi-ên 47:1-9 mô tả Dòng Sông Nước Sự Sống tuôn chảy ra từ vị trí nào làm muôn vật sinh sống?", options: [{ label: "A. Phát xuất từ Đền Thờ Giê-ru-sa-lem (Đức Chúa Trời Mẹ)", value: "A" }, { label: "B. Từ biển Địa Trung Hải", value: "B" }, { label: "C. Từ núi Si-na-i", value: "C" }], correct: "A", exp: "Chính xác! Nước Sự Sống phát tuôn từ Giê-ru-sa-lem Mẹ nuôi sống linh hồn nhân loại." },
+                q2: { question: "Đúng hay Sai: Đa-ni-ên 7:25 tiên tri kẻ thù của Đức Chúa Trời sẽ toan định đổi những thời kỳ và luật pháp?", options: [{ label: "Đúng (True)", value: "True" }, { label: "Sai (False)", value: "False" }], correct: "True", exp: "Chính xác! Tiên tri vạch trần việc bãi bỏ Lễ Vượt Qua và đổi ngày Sa-bát sang Chủ Nhật." },
+                q3: { guide: "💡 Gợi ý suy ngẫm: Ê-zê-chi-ên 9:4 nhắc về Dấu Ấn bảo vệ tôi tớ Đức Chúa Trời thoát khỏi tai nạn diệt vong.", prompt: "Sự bình an tuyệt đối của bạn khi được nhận Ấn Lễ Vượt Qua che chở trong thời đại ngày sau rốt?" }
+            },
+            12: {
+                title: "Tháng 12: 144,000 & Vợ Mới Ban Nước Sự Sống",
+                q1: { question: "Trong Khải-huyền 22:17, những Đấng nào cùng kêu gọi 'Hãy đến... nhận lấy nước sự sống cách nhưng không'?", options: [{ label: "A. Thánh Linh và Vợ Mới (Đức Chúa Trời Cha & Đức Chúa Trời Mẹ)", value: "A" }, { label: "B. Các thiên sứ trưởng", value: "B" }, { label: "C. Các sứ đồ thời xưa", value: "C" }], correct: "A", exp: "Chính xác! Khải-huyền 22:17 khẳng định Thánh Linh và Vợ Mới (Mẹ Giê-ru-sa-lem - Ga-la-ti 4:26) ban Nước Sự Sống." },
+                q2: { question: "Đúng hay Sai: Sa-cha-ri 14:16-17 lặp lại lệnh truyền muôn dân phải lên Si-ôn giữ Lễ Lều Tạm để nhận mưa Thánh Linh?", options: [{ label: "Đúng (True)", value: "True" }, { label: "Sai (False)", value: "False" }], correct: "True", exp: "Chính xác! Giữ Lễ Lều Tạm là điều kiện nhận mưa Thánh Linh hằng năm." },
+                q3: { guide: "💡 Gợi ý suy ngẫm: Khải-huyền 14:1-4 miêu tả 144,000 người đứng trên núi Si-ôn có danh Cha và danh Mẹ ghi trên trán.", prompt: "Mục tiêu đức tin và quyết tâm vâng giữ trọn vẹn Lộ Trình Lẽ Thật của bạn để hướng về Nước Thiên Đàng?" }
+            }
+        };
+
+        // Hàm Render Bộ Trắc Nghiệm Động Đồng Nhất 100% Theo Tháng Được Chọn
+        function renderQuizForMonth(mNum) {
+            const monthVal = parseInt(mNum) || 1;
+            const qData = WATV_QUIZ_BANK[monthVal] || WATV_QUIZ_BANK[1];
+            const container = document.getElementById('dynamicQuizContent');
+            if (!container) return;
+
+            let html = `
+                <div style="background: #f0f9ff; border-left: 4px solid var(--primary); padding: 14px 18px; border-radius: 8px; margin-bottom: 24px;">
+                    <h3 style="color: var(--primary); font-size: 1.05rem; margin: 0; font-weight: 700;">✍️ Bài Kiểm Tra Kiến Thức: ${qData.title}</h3>
+                </div>
+
+                <!-- Q1: Trắc nghiệm theo Tháng -->
+                <div class="quiz-question-box">
+                    <span class="quiz-type-tag">Câu 1: Trắc Nghiệm Lẽ Thật (Multiple Choice)</span>
+                    <h3 class="quiz-question">${qData.q1.question}</h3>
+                    <div class="options-group">
+                        ${qData.q1.options.map(opt => `
+                            <label class="option-item">
+                                <input type="radio" name="q1" value="${opt.value}"> ${opt.label}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div class="explanation-box" id="exp-q1"></div>
+                </div>
+
+                <!-- Q2: Đúng / Sai theo Tháng -->
+                <div class="quiz-question-box">
+                    <span class="quiz-type-tag">Câu 2: Kiểm Tra Đúng / Sai (True / False)</span>
+                    <h3 class="quiz-question">${qData.q2.question}</h3>
+                    <div class="options-group">
+                        ${qData.q2.options.map(opt => `
+                            <label class="option-item">
+                                <input type="radio" name="q2" value="${opt.value}"> ${opt.label}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div class="explanation-box" id="exp-q2"></div>
+                </div>
+
+                <!-- Q3: Suy Ngẫm & Tự Luận theo Tháng -->
+                <div class="quiz-question-box">
+                    <span class="quiz-type-tag">Câu 3: Bài Học Suy Ngẫm Tự Luận (Essay)</span>
+                    <h3 class="quiz-question">${qData.q3.prompt}</h3>
+                    <textarea class="essay-input" placeholder="Viết cảm nhận hoặc bài học suy ngẫm của bạn tại đây..."></textarea>
+                    <div class="explanation-box correct" id="exp-q3" style="display:none;">
+                        ${qData.q3.guide}
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        // Quiz Submission & Auto-grading đồng nhất động
         function submitQuiz(event) {
             event.preventDefault();
 
-            // Q1 Validation (Correct Answer: B)
+            const monthVal = parseInt(document.getElementById('quizMonthSelect')?.value) || 1;
+            const qData = WATV_QUIZ_BANK[monthVal] || WATV_QUIZ_BANK[1];
+
+            // Q1 Validation
             const q1Val = document.querySelector('input[name="q1"]:checked')?.value;
             const expQ1 = document.getElementById('exp-q1');
-            if (q1Val === 'B') {
-                expQ1.className = "explanation-box correct";
-                expQ1.innerHTML = " Chính xác! Bài giảng trên núi được ghi chép chi tiết từ Ma-thi-ơ chương 5 đến chương 7.";
-            } else {
-                expQ1.className = "explanation-box incorrect";
-                expQ1.innerHTML = " Chưa chính xác! Đáp án đúng là B (Ma-thi-ơ chương 5 đến 7).";
+            if (expQ1) {
+                if (q1Val === qData.q1.correct) {
+                    expQ1.className = "explanation-box correct";
+                    expQ1.innerHTML = ` ${qData.q1.exp}`;
+                } else {
+                    expQ1.className = "explanation-box incorrect";
+                    expQ1.innerHTML = ` Chưa chính xác! Đáp án đúng là <strong>${qData.q1.correct}</strong>. (${qData.q1.exp})`;
+                }
             }
 
-            // Q2 Validation (Correct Answer: True)
+            // Q2 Validation
             const q2Val = document.querySelector('input[name="q2"]:checked')?.value;
             const expQ2 = document.getElementById('exp-q2');
-            if (q2Val === 'True') {
-                expQ2.className = "explanation-box correct";
-                expQ2.innerHTML = " Chính xác! Giăng Báp-tít làm phép báp-têm cho Chúa Jêsus tại sông Giô-đanh (Ma-thi-ơ 3:13-17).";
-            } else {
-                expQ2.className = "explanation-box incorrect";
-                expQ2.innerHTML = " Chưa chính xác! Đáp án đúng là Đúng (True).";
+            if (expQ2) {
+                if (q2Val === qData.q2.correct) {
+                    expQ2.className = "explanation-box correct";
+                    expQ2.innerHTML = ` ${qData.q2.exp}`;
+                } else {
+                    expQ2.className = "explanation-box incorrect";
+                    expQ2.innerHTML = ` Chưa chính xác! Đáp án đúng là <strong>${qData.q2.correct === 'True' ? 'Đúng (True)' : 'Sai (False)'}</strong>. (${qData.q2.exp})`;
+                }
             }
 
-            // Q3 Essay (Always show helpful feedback/reflection guide)
+            // Q3 Essay
             const expQ3 = document.getElementById('exp-q3');
-            expQ3.style.display = 'block';
+            if (expQ3) {
+                expQ3.style.display = 'block';
+            }
 
-            showToast("Đã chấm điểm thành công! Hãy xem đáp án chi tiết bên dưới.");
+            showToast(`Đã chấm điểm thành công cho Tháng ${monthVal}! Hãy xem đáp án chi tiết bên dưới.`);
         }
+
+        // Tự động khởi tạo Quiz Tháng 1 ngay khi trang nạp xong
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuizForMonth(1);
+        });
 
         function filterMonthPlan(monthNum, btn) {
             // Hiệu ứng Active cho thẻ tháng
@@ -2454,7 +2587,14 @@
                 if (activeP) activeP.style.color = '#e2e8f0';
             }
 
-            // Hiển thị và vẽ danh sách các ngày đọc chuẩn cho Tháng được chọn (WATV.ORG Phan Khôi 1925)
+            // Đồng bộ 100% Bộ Chọn Kiểm Tra Kiến Thức sang Tháng tương ứng (nếu bấm chọn tháng > 0)
+            if (monthNum > 0) {
+                const qSelect = document.getElementById('quizMonthSelect');
+                if (qSelect) {
+                    qSelect.value = monthNum;
+                    renderQuizForMonth(monthNum);
+                }
+            }
             const detailContainer = document.getElementById('monthDetailBox');
             const dataSource = (typeof WATV_12_MONTHS_PLAN !== 'undefined' ? WATV_12_MONTHS_PLAN : WATV_DATA_PLAN);
             const mData = dataSource.find(m => m.month === monthNum);
