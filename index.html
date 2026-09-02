@@ -919,6 +919,7 @@
                         <select id="mainPlanSelector" onchange="switchReadingPlan(this.value)" style="padding: 12px 20px; border-radius: 12px; border: 2px solid var(--primary); font-weight: 700; color: var(--primary); background: #f0f7ff; cursor: pointer; font-size: 0.95rem; outline: none; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
                             <option value="chronological">📜 LỘ TRÌNH 1: Theo Tiến Trình Lịch Sử & Lời Tiên Tri (Cựu Ước ➔ Tân Ước)</option>
                             <option value="doctrinal" selected>🕊️ LỘ TRÌNH 2: Theo Chuyên Đề Lẽ Thật Giao Ước Mới (Song Song 2 Ước - WATV.ORG)</option>
+                            <option value="fast6">⚡ LỘ TRÌNH 3: Lộ Trình 6 Tháng Nhanh (Tân Ước & Tiên Tri Trọng Tâm - 2 Chương/Ngày)</option>
                         </select>
                     </div>
                 </div>
@@ -2557,6 +2558,9 @@
             if (planType === 'chronological') {
                 window.ACTIVE_12_MONTHS_PLAN = (typeof CHRONOLOGICAL_12_MONTHS_PLAN !== 'undefined' ? CHRONOLOGICAL_12_MONTHS_PLAN : []);
                 showToast("Đã chuyển sang LỘ TRÌNH 1: Theo Tiến Trình Lịch Sử Thuần Tuý!");
+            } else if (planType === 'fast6') {
+                window.ACTIVE_12_MONTHS_PLAN = (typeof FAST_6_MONTHS_PLAN !== 'undefined' ? FAST_6_MONTHS_PLAN : []);
+                showToast("Đã chuyển sang LỘ TRÌNH 3: Lộ Trình 6 Tháng Nhanh (2 Chương/Ngày)!");
             } else {
                 window.ACTIVE_12_MONTHS_PLAN = (typeof WATV_12_MONTHS_PLAN !== 'undefined' ? WATV_12_MONTHS_PLAN : []);
                 showToast("Đã chuyển sang LỘ TRÌNH 2: Theo Chuyên Đề Lẽ Thật Giao Ước Mới!");

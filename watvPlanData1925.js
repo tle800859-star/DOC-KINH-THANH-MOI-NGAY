@@ -885,18 +885,267 @@ const CHRONOLOGICAL_12_MONTHS_PLAN = [
   }
 ];
 
-if (typeof window !== 'undefined') {
-    window.WATV_12_MONTHS_PLAN = WATV_12_MONTHS_PLAN;
-    window.CHRONOLOGICAL_12_MONTHS_PLAN = CHRONOLOGICAL_12_MONTHS_PLAN;
-}
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { WATV_12_MONTHS_PLAN, CHRONOLOGICAL_12_MONTHS_PLAN };
-}
+// ========================================================
+// LỘ TRÌNH 3: LỘ TRÌNH 6 THÁNG NHANH (TÂN ƯỚC & TIÊN TRI TRỌNG TÂM)
+// (2 chương/ngày - 10-15 phút/ngày - Tân Ước + Ê-sai, Đa-ni-ên, Sa-cha-ri)
+// ========================================================
+const FAST_6_MONTHS_PLAN = [
+  {
+    month: 1,
+    title: "Tháng 1: Bốn Phúc Âm (Phần 1) – Đức Chúa Giê-xu & Lễ Vượt Qua Giao Ước Mới",
+    books: "Ma-thi-ơ, Mác",
+    totalChapters: 44,
+    totalDays: 22,
+    overview: "Đức Chúa Giê-xu giáng sinh, chịu báp-têm tại sông Giô-đanh, giảng trên núi, chọn 12 sứ đồ và lập Lễ Vượt Qua Giao Ước Mới làm Cây Sự Sống tái sinh linh hồn.",
+    coreDoc: [
+      "Ma-thi-ơ 26:17-28: Đức Chúa Giê-xu phán Bánh và Rượu Nho Lễ Vượt Qua là Thân Thể và Huyết Ngài ban sự tha tội.",
+      "Ma-thi-ơ 5–7: Bài giảng trên núi về luật pháp Giao Ước Mới."
+    ],
+    foundationVerses: [
+      { ref: "Ma-thi-ơ 26:26-28", text: "Đức Chúa Giê-xu lấy bánh, chúc phước, bẻ ra đưa cho môn đồ mà phán rằng: Hãy lấy ăn đi, nầy là thân thể ta..." }
+    ],
+    schedule: [
+      { day: 1, passage: "Ma-thi-ơ 1–2" },
+      { day: 2, passage: "Ma-thi-ơ 3–4" },
+      { day: 3, passage: "Ma-thi-ơ 5–6" },
+      { day: 4, passage: "Ma-thi-ơ 7–8" },
+      { day: 5, passage: "Ma-thi-ơ 9–10" },
+      { day: 6, passage: "Ma-thi-ơ 11–12" },
+      { day: 7, passage: "Ma-thi-ơ 13–14" },
+      { day: 8, passage: "Ma-thi-ơ 15–16" },
+      { day: 9, passage: "Ma-thi-ơ 17–18" },
+      { day: 10, passage: "Ma-thi-ơ 19–20" },
+      { day: 11, passage: "Ma-thi-ơ 21–22" },
+      { day: 12, passage: "Ma-thi-ơ 23–24" },
+      { day: 13, passage: "Ma-thi-ơ 25–26" },
+      { day: 14, passage: "Ma-thi-ơ 27–28" },
+      { day: 15, passage: "Mác 1–2" },
+      { day: 16, passage: "Mác 3–4" },
+      { day: 17, passage: "Mác 5–6" },
+      { day: 18, passage: "Mác 7–8" },
+      { day: 19, passage: "Mác 9–10" },
+      { day: 20, passage: "Mác 11–12" },
+      { day: 21, passage: "Mác 13–14" },
+      { day: 22, passage: "Mác 15–16" }
+    ]
+  },
+  {
+    month: 2,
+    title: "Tháng 2: Bốn Phúc Âm (Phần 2) – Thói Quen Sa-bát & Nước Sự Sống",
+    books: "Lu-ca, Giăng",
+    totalChapters: 45,
+    totalDays: 23,
+    overview: "Đức Chúa Giê-xu giữ ngày Sa-bát thứ Bảy theo thói quen Ngài, phán truyền Thịt và Huyết Ngài ban sự sống đời đời (Giăng 6) và Lễ Rửa Chân thánh khiết.",
+    coreDoc: [
+      "Lu-ca 4:16: Đức Chúa Giê-xu vào nhà hội giữ ngày Sa-bát theo thói quen Ngài.",
+      "Giăng 6:53-54: Ai ăn thịt và uống huyết Ngài thì được sự sống đời đời."
+    ],
+    foundationVerses: [
+      { ref: "Lu-ca 4:16", text: "Theo thói quen thường làm, Ngài vào nhà hội trong ngày Sa-bát, đứng dậy để đọc." },
+      { ref: "Giăng 6:54", text: "Ai ăn thịt và uống huyết ta thì được sự sống đời đời, ta sẽ làm cho người sống lại trong ngày sau rốt." }
+    ],
+    schedule: [
+      { day: 1, passage: "Lu-ca 1–2" },
+      { day: 2, passage: "Lu-ca 3–4" },
+      { day: 3, passage: "Lu-ca 5–6" },
+      { day: 4, passage: "Lu-ca 7–8" },
+      { day: 5, passage: "Lu-ca 9–10" },
+      { day: 6, passage: "Lu-ca 11–12" },
+      { day: 7, passage: "Lu-ca 13–14" },
+      { day: 8, passage: "Lu-ca 15–16" },
+      { day: 9, passage: "Lu-ca 17–18" },
+      { day: 10, passage: "Lu-ca 19–20" },
+      { day: 11, passage: "Lu-ca 21–22" },
+      { day: 12, passage: "Lu-ca 23–24" },
+      { day: 13, passage: "Giăng 1–2" },
+      { day: 14, passage: "Giăng 3–4" },
+      { day: 15, passage: "Giăng 5–6" },
+      { day: 16, passage: "Giăng 7–8" },
+      { day: 17, passage: "Giăng 9–10" },
+      { day: 18, passage: "Giăng 11–12" },
+      { day: 19, passage: "Giăng 13–14" },
+      { day: 20, passage: "Giăng 15–16" },
+      { day: 21, passage: "Giăng 17–18" },
+      { day: 22, passage: "Giăng 19–20" },
+      { day: 23, passage: "Giăng 21" }
+    ]
+  },
+  {
+    month: 3,
+    title: "Tháng 3: Hội Thánh Sơ Khai & Các Thư Tín Truyền Giáo Sa-bát",
+    books: "Công-vụ các Sứ-đồ, Rô-ma, 1-2 Cô-rinh-tô",
+    totalChapters: 57,
+    totalDays: 28,
+    overview: "Đức Thánh Linh giáng lâm Lễ Ngũ Tuần, Sứ đồ Phao-lô luôn giữ ngày Sa-bát theo thói quen trong suốt hành trình truyền giáo và dặn dò vâng giữ Lễ Vượt Qua.",
+    coreDoc: [
+      "Công-vụ 17:2 & 18:4: Sứ đồ Phao-lô giữ ngày Sa-bát theo thói quen.",
+      "1 Cô-rinh-tô 5:7-8: Đấng Christ là con sinh Lễ Vượt Qua đã bị hi sinh, vậy chúng ta hãy giữ lễ."
+    ],
+    foundationVerses: [
+      { ref: "Công-vụ 17:2", text: "Phao-lô tới nơi họ, theo thói quen mình, và trong ba ngày Sa-bát biện luận với họ bằng Kinh Thánh." }
+    ],
+    schedule: [
+      { day: 1, passage: "Công-vụ 1–2" },
+      { day: 2, passage: "Công-vụ 3–4" },
+      { day: 3, passage: "Công-vụ 5–6" },
+      { day: 4, passage: "Công-vụ 7–8" },
+      { day: 5, passage: "Công-vụ 9–10" },
+      { day: 6, passage: "Công-vụ 11–12" },
+      { day: 7, passage: "Công-vụ 13–14" },
+      { day: 8, passage: "Công-vụ 15–16" },
+      { day: 9, passage: "Công-vụ 17–18" },
+      { day: 10, passage: "Công-vụ 19–20" },
+      { day: 11, passage: "Công-vụ 21–22" },
+      { day: 12, passage: "Công-vụ 23–24" },
+      { day: 13, passage: "Công-vụ 25–26" },
+      { day: 14, passage: "Công-vụ 27–28" },
+      { day: 15, passage: "Rô-ma 1–2" },
+      { day: 16, passage: "Rô-ma 3–4" },
+      { day: 17, passage: "Rô-ma 5–6" },
+      { day: 18, passage: "Rô-ma 7–8" },
+      { day: 19, passage: "Rô-ma 9–10" },
+      { day: 20, passage: "Rô-ma 11–12" },
+      { day: 21, passage: "Rô-ma 13–14" },
+      { day: 22, passage: "Rô-ma 15–16" },
+      { day: 23, passage: "1 Cô-rinh-tô 1–3" },
+      { day: 24, passage: "1 Cô-rinh-tô 4–6" },
+      { day: 25, passage: "1 Cô-rinh-tô 7–9" },
+      { day: 26, passage: "1 Cô-rinh-tô 10–12" },
+      { day: 27, passage: "1 Cô-rinh-tô 13–16" },
+      { day: 28, passage: "2 Cô-rinh-tô 1–13" }
+    ]
+  },
+  {
+    month: 4,
+    title: "Tháng 4: Thư Tín Sứ Đồ & Lẽ Thật Đức Chúa Trời Mẹ Giê-ru-sa-lem",
+    books: "Ga-la-ti đến Giu-đơ (Các Thư Tín)",
+    totalChapters: 61,
+    totalDays: 30,
+    overview: "Khai sáng lẽ thật tối thượng về Đức Chúa Trời Mẹ Giê-ru-sa-lem trên trời (Ga-la-ti 4:26), Luật Khăn Trùm Đầu và chức việc Thầy Tế Lễ theo ban Mên-chi-xê-đéc.",
+    coreDoc: [
+      "Ga-la-ti 4:26: Thành Giê-ru-sa-lem ở trên cao là tự do, và ấy là Mẹ chúng ta.",
+      "Hê-bơ-rơ 7: Đấng Christ là Thầy Tế Lễ Thượng Phẩm theo ban Mên-chi-xê-đéc."
+    ],
+    foundationVerses: [
+      { ref: "Ga-la-ti 4:26", text: "Nhưng thành Giê-ru-sa-lem ở trên cao là tự do, và ấy là Mẹ chúng ta." }
+    ],
+    schedule: [
+      { day: 1, passage: "Ga-la-ti 1–2" },
+      { day: 2, passage: "Ga-la-ti 3–4" },
+      { day: 3, passage: "Ga-la-ti 5–6" },
+      { day: 4, passage: "Ê-phê-sô 1–2" },
+      { day: 5, passage: "Ê-phê-sô 3–4" },
+      { day: 6, passage: "Ê-phê-sô 5–6" },
+      { day: 7, passage: "Phi-líp 1–4" },
+      { day: 8, passage: "Cô-lô-se 1–4" },
+      { day: 9, passage: "1 Tê-sa-lô-ni-ca 1–5" },
+      { day: 10, passage: "2 Tê-sa-lô-ni-ca 1–3" },
+      { day: 11, passage: "1 Ti-mô-thê 1–3" },
+      { day: 12, passage: "1 Ti-mô-thê 4–6" },
+      { day: 13, passage: "2 Ti-mô-thê 1–4" },
+      { day: 14, passage: "Tít 1–3 & Phi-lê-môn 1" },
+      { day: 15, passage: "Hê-bơ-rơ 1–2" },
+      { day: 16, passage: "Hê-bơ-rơ 3–4" },
+      { day: 17, passage: "Hê-bơ-rơ 5–6" },
+      { day: 18, passage: "Hê-bơ-rơ 7–8" },
+      { day: 19, passage: "Hê-bơ-rơ 9–10" },
+      { day: 20, passage: "Hê-bơ-rơ 11–13" },
+      { day: 21, passage: "Gia-cơ 1–3" },
+      { day: 22, passage: "Gia-cơ 4–5" },
+      { day: 23, passage: "1 Phi-e-rơ 1–3" },
+      { day: 24, passage: "1 Phi-e-rơ 4–5" },
+      { day: 25, passage: "2 Phi-e-rơ 1–3" },
+      { day: 26, passage: "1 Giăng 1–3" },
+      { day: 27, passage: "1 Giăng 4–5" },
+      { day: 28, passage: "2 Giăng 1 & 3 Giăng 1" },
+      { day: 29, passage: "Giu-đơ 1" },
+      { day: 30, passage: "Ôn tập Thư Tín" }
+    ]
+  },
+  {
+    month: 5,
+    title: "Tháng 5: Các Tiên Tri Cựu Ước Trọng Tâm (Ê-sai, Đa-ni-ên, Sa-cha-ri)",
+    books: "Ê-sai, Đa-ni-ên, Sa-cha-ri",
+    totalChapters: 92,
+    totalDays: 30,
+    overview: "Các lời tiên tri cốt lõi Cựu Ước về Tiệc Rượu Nho Lâu Năm nuốt sự chết (Ê-sai 25), kẻ gian ác toan định đổi luật pháp (Đa-ni-ên 7) và Lễ Lều Tạm nhận nước sự sống (Sa-cha-ri 14).",
+    coreDoc: [
+      "Ê-sai 25:6-9: Tiệc rượu nho lâu năm nuốt sự chết đến đời đời.",
+      "Đa-ni-ên 7:25: Tiên tri vạch trần kẻ gian ác đổi thời kỳ và luật pháp.",
+      "Sa-cha-ri 14:16-17: Giữ Lễ Lều Tạm hằng năm nhận mưa Thánh Linh."
+    ],
+    foundationVerses: [
+      { ref: "Ê-sai 25:6", text: "Đức Giê-hô-va vạn quân sẽ đãi muôn dân một tiệc rượu nho lâu năm." },
+      { ref: "Sa-cha-ri 14:16", text: "Hết thảy... sẽ lên đó hằng năm đặng thờ lạy Vua... và giữ lễ Lều-tạm." }
+    ],
+    schedule: [
+      { day: 1, passage: "Ê-sai 1–3" },
+      { day: 2, passage: "Ê-sai 4–6" },
+      { day: 3, passage: "Ê-sai 7–9" },
+      { day: 4, passage: "Ê-sai 10–12" },
+      { day: 5, passage: "Ê-sai 13–15" },
+      { day: 6, passage: "Ê-sai 16–18" },
+      { day: 7, passage: "Ê-sai 19–21" },
+      { day: 8, passage: "Ê-sai 22–24" },
+      { day: 9, passage: "Ê-sai 25–27" },
+      { day: 10, passage: "Ê-sai 28–30" },
+      { day: 11, passage: "Ê-sai 31–33" },
+      { day: 12, passage: "Ê-sai 34–36" },
+      { day: 13, passage: "Ê-sai 37–39" },
+      { day: 14, passage: "Ê-sai 40–42" },
+      { day: 15, passage: "Ê-sai 43–45" },
+      { day: 16, passage: "Ê-sai 46–48" },
+      { day: 17, passage: "Ê-sai 49–51" },
+      { day: 18, passage: "Ê-sai 52–54" },
+      { day: 19, passage: "Ê-sai 55–57" },
+      { day: 20, passage: "Ê-sai 58–60" },
+      { day: 21, passage: "Ê-sai 61–63" },
+      { day: 22, passage: "Ê-sai 64–66" },
+      { day: 23, passage: "Đa-ni-ên 1–3" },
+      { day: 24, passage: "Đa-ni-ên 4–6" },
+      { day: 25, passage: "Đa-ni-ên 7–9" },
+      { day: 26, passage: "Đa-ni-ên 10–12" },
+      { day: 27, passage: "Sa-cha-ri 1–4" },
+      { day: 28, passage: "Sa-cha-ri 5–8" },
+      { day: 29, passage: "Sa-cha-ri 9–11" },
+      { day: 30, passage: "Sa-cha-ri 12–14" }
+    ]
+  },
+  {
+    month: 6,
+    title: "Tháng 6: Khải-huyền & Thánh Linh Cùng Vợ Mới Ban Nước Sự Sống",
+    books: "Khải-huyền",
+    totalChapters: 22,
+    totalDays: 15,
+    overview: "Ấn Đức Chúa Trời Hằng Sống bảo vệ tai nạn diệt vong, 144,000 người trên núi Si-ôn và Thánh Linh cùng Vợ Mới (Đức Chúa Trời Mẹ) ban Nước Sự Sống cách nhưng không.",
+    coreDoc: [
+      "Khải-huyền 7:2-3: Ấn của Đức Chúa Trời Hằng Sống bảo vệ các tôi tớ khỏi tai nạn.",
+      "Khải-huyền 22:17: Thánh Linh và Vợ Mới cùng phán hãy đến nhận nước sự sống."
+    ],
+    foundationVerses: [
+      { ref: "Khải-huyền 22:17", text: "Thánh Linh và Vợ Mới cùng nói: Hãy đến! Kẻ nào khát, khá đến. Kẻ nào muốn, khá nhận lấy nước sự sống cách nhưng không." }
+    ],
+    schedule: [
+      { day: 1, passage: "Khải-huyền 1–2" },
+      { day: 2, passage: "Khải-huyền 3–4" },
+      { day: 3, passage: "Khải-huyền 5–6" },
+      { day: 4, passage: "Khải-huyền 7–8" },
+      { day: 5, passage: "Khải-huyền 9–10" },
+      { day: 6, passage: "Khải-huyền 11–12" },
+      { day: 7, passage: "Khải-huyền 13–14" },
+      { day: 8, passage: "Khải-huyền 15–16" },
+      { day: 9, passage: "Khải-huyền 17–18" },
+      { day: 10, passage: "Khải-huyền 19–20" },
+      { day: 11, passage: "Khải-huyền 21–22" }
+    ]
+  }
+];
 
 if (typeof window !== 'undefined') {
     window.WATV_12_MONTHS_PLAN = WATV_12_MONTHS_PLAN;
     window.CHRONOLOGICAL_12_MONTHS_PLAN = CHRONOLOGICAL_12_MONTHS_PLAN;
+    window.FAST_6_MONTHS_PLAN = FAST_6_MONTHS_PLAN;
 }
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { WATV_12_MONTHS_PLAN, CHRONOLOGICAL_12_MONTHS_PLAN };
+    module.exports = { WATV_12_MONTHS_PLAN, CHRONOLOGICAL_12_MONTHS_PLAN, FAST_6_MONTHS_PLAN };
 }
