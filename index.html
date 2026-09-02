@@ -904,9 +904,23 @@
         <!-- 1. READING PLANS SECTION -->
         <section id="plans" class="section">
             <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">🗓️ Lộ Trình Đọc Kinh Thánh Theo Tiến Trình Lịch Sử & Lời Tiên Tri (Chronological Plan)</h2>
-                    <p class="section-subtitle">Sắp xếp chính xác theo thời gian lịch sử xuất hiện và lời tiên tri ứng nghiệm • Bản Dịch Phan Khôi 1925 (WATV.ORG)</p>
+                <!-- BỘ CHỌN LỘ TRÌNH ĐỌC (PLAN SELECTOR DROPDOWN TOGGLE) -->
+                <div style="background: white; border: 2px solid var(--primary); border-radius: 16px; padding: 20px; margin-bottom: 24px; box-shadow: 0 6px 16px rgba(27,73,101,0.08); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="background: var(--primary); color: white; width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: bold;">
+                            <i class="fa-solid fa-route"></i>
+                        </div>
+                        <div>
+                            <h3 style="color: var(--primary); font-size: 1.05rem; margin: 0; font-weight: 700;">Chọn Lộ Trình Đọc Phù Hợp Cho Bạn:</h3>
+                            <p style="color: #64748b; font-size: 0.82rem; margin: 2px 0 0 0;">Thay đổi 100% danh sách bài đọc & lộ trình 12 tháng theo thói quen đọc</p>
+                        </div>
+                    </div>
+                    <div>
+                        <select id="mainPlanSelector" onchange="switchReadingPlan(this.value)" style="padding: 12px 20px; border-radius: 12px; border: 2px solid var(--primary); font-weight: 700; color: var(--primary); background: #f0f7ff; cursor: pointer; font-size: 0.95rem; outline: none; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+                            <option value="chronological">📜 LỘ TRÌNH 1: Theo Tiến Trình Lịch Sử & Lời Tiên Tri (Cựu Ước ➔ Tân Ước)</option>
+                            <option value="doctrinal" selected>🕊️ LỘ TRÌNH 2: Theo Chuyên Đề Lẽ Thật Giao Ước Mới (Song Song 2 Ước - WATV.ORG)</option>
+                        </select>
+                    </div>
                 </div>
 
                 <!-- Progress Overview -->
@@ -2564,6 +2578,27 @@
             renderQuizForMonth(1);
         });
 
+        // Lộ Trình Đọc Hiện Tại (Mặc định: 'doctrinal' - Lộ Trình 2)
+        let currentPlanMode = 'doctrinal';
+
+        // Hàm Đổi Lộ Trình Đọc (Dropdown Toggle)
+        function switchReadingPlan(planType) {
+            currentPlanMode = planType;
+
+            // Cập nhật mảng dữ liệu active
+            if (planType === 'chronological') {
+                window.ACTIVE_12_MONTHS_PLAN = (typeof CHRONOLOGICAL_12_MONTHS_PLAN !== 'undefined' ? CHRONOLOGICAL_12_MONTHS_PLAN : []);
+                showToast("Đã chuyển sang LỘ TRÌNH 1: Theo Tiến Trình Lịch Sử Thuần Tuý!");
+            } else {
+                window.ACTIVE_12_MONTHS_PLAN = (typeof WATV_12_MONTHS_PLAN !== 'undefined' ? WATV_12_MONTHS_PLAN : []);
+                showToast("Đã chuyển sang LỘ TRÌNH 2: Theo Chuyên Đề Lẽ Thật Giao Ước Mới!");
+            }
+
+            // Tải lại Tháng 1 theo Lộ Trình Mới
+            const month1Btn = document.querySelector('.month-card[data-month="1"]');
+            filterMonthPlan(1, month1Btn);
+        }
+
         function filterMonthPlan(monthNum, btn) {
             // Hiệu ứng Active cho thẻ tháng
             document.querySelectorAll('.month-card').forEach(b => {
@@ -2596,7 +2631,7 @@
                 }
             }
             const detailContainer = document.getElementById('monthDetailBox');
-            const dataSource = (typeof WATV_12_MONTHS_PLAN !== 'undefined' ? WATV_12_MONTHS_PLAN : WATV_DATA_PLAN);
+            const dataSource = window.ACTIVE_12_MONTHS_PLAN || (typeof WATV_12_MONTHS_PLAN !== 'undefined' ? WATV_12_MONTHS_PLAN : WATV_DATA_PLAN);
             const mData = dataSource.find(m => m.month === monthNum);
 
             if (detailContainer && monthNum > 0 && mData) {
