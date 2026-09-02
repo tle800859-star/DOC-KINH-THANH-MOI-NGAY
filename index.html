@@ -926,6 +926,8 @@
                             <option value="chronological">📜 LỘ TRÌNH 1: Theo Tiến Trình Lịch Sử & Lời Tiên Tri (Cựu Ước ➔ Tân Ước)</option>
                             <option value="doctrinal" selected>🕊️ LỘ TRÌNH 2: Theo Chuyên Đề Lẽ Thật Giao Ước Mới (Song Song 2 Ước - WATV.ORG)</option>
                             <option value="fast6">⚡ LỘ TRÌNH 3: Lộ Trình 6 Tháng Nhanh (Tân Ước & Tiên Tri Trọng Tâm - 2 Chương/Ngày)</option>
+                            <option value="cap2">🎒 LỘ TRÌNH 4: Lộ Trình Học Sinh Cấp 2 (THCS: 11-14 Tuổi - Thiếu Niên Đức Tin)</option>
+                            <option value="cap3">🎓 LỘ TRÌNH 5: Lộ Trình Học Sinh Cấp 3 (THPT: 15-18 Tuổi - Định Hướng & Lẽ Thật)</option>
                         </select>
                     </div>
                 </div>
@@ -2540,6 +2542,12 @@
             } else if (planType === 'fast6') {
                 window.ACTIVE_12_MONTHS_PLAN = (typeof FAST_6_MONTHS_PLAN !== 'undefined' ? FAST_6_MONTHS_PLAN : []);
                 showToast("Đã chuyển sang LỘ TRÌNH 3: Lộ Trình 6 Tháng Nhanh (2 Chương/Ngày)!");
+            } else if (planType === 'cap2') {
+                window.ACTIVE_12_MONTHS_PLAN = (typeof STUDENT_CAP2_PLAN !== 'undefined' ? STUDENT_CAP2_PLAN : []);
+                showToast("Đã chuyển sang LỘ TRÌNH 4: Học Sinh Cấp 2 (Thiếu Niên Đức Tin)!");
+            } else if (planType === 'cap3') {
+                window.ACTIVE_12_MONTHS_PLAN = (typeof STUDENT_CAP3_PLAN !== 'undefined' ? STUDENT_CAP3_PLAN : []);
+                showToast("Đã chuyển sang LỘ TRÌNH 5: Học Sinh Cấp 3 (Định Hướng & Lẽ Thật)!");
             } else {
                 window.ACTIVE_12_MONTHS_PLAN = (typeof WATV_12_MONTHS_PLAN !== 'undefined' ? WATV_12_MONTHS_PLAN : []);
                 showToast("Đã chuyển sang LỘ TRÌNH 2: Theo Chuyên Đề Lẽ Thật Giao Ước Mới!");

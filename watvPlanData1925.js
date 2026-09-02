@@ -1141,11 +1141,370 @@ const FAST_6_MONTHS_PLAN = [
   }
 ];
 
+// ========================================================
+// LỘ TRÌNH 4: LỘ TRÌNH DÀNH CHO HỌC SINH CẤP 2 (THCS: 11 – 14 TUỔI)
+// (1-1.5 chương/ngày - 5-7 phút/ngày - Thiếu niên đức tin & Lẽ Thật)
+// ========================================================
+const STUDENT_CAP2_PLAN = [
+  {
+    month: 1,
+    title: "Tháng 1: Những Thiếu Niên Anh Hùng Đức Tin & Lắng Nghe Tiếng Đức Chúa Trời",
+    books: "1 Sa-mu-ên (1–17), Đa-ni-ên (1–6)",
+    totalChapters: 23,
+    totalDays: 16,
+    overview: "Cậu bé Sa-mu-ên lắng nghe tiếng Chúa, Đa-vít đánh bại tên khổng lồ Gô-li-át bằng Danh Đức Giê-hô-va, Đa-ni-ên kiên trì cầu nguyện trong hang sư tử.",
+    coreDoc: [
+      "1 Sa-mu-ên 15:22: Sự vâng lời tốt hơn của tế lễ.",
+      "Đa-ni-ên 6: Giữ thói quen cầu nguyện 3 lần mỗi ngày."
+    ],
+    foundationVerses: [
+      { ref: "1 Sa-mu-ên 17:45", text: "Đa-vít đáp cùng người Phi-li-tin rằng: Ngươi đến cùng ta với gươm, giáo, thương; còn ta đến cùng ngươi nhân danh Đức Giê-hô-va vạn quân..." }
+    ],
+    schedule: [
+      { day: 1, passage: "1 Sa-mu-ên 1" },
+      { day: 2, passage: "1 Sa-mu-ên 2" },
+      { day: 3, passage: "1 Sa-mu-ên 3" },
+      { day: 4, passage: "1 Sa-mu-ên 4" },
+      { day: 5, passage: "1 Sa-mu-ên 8" },
+      { day: 6, passage: "1 Sa-mu-ên 15" },
+      { day: 7, passage: "1 Sa-mu-ên 16" },
+      { day: 8, passage: "1 Sa-mu-ên 17:1-30" },
+      { day: 9, passage: "1 Sa-mu-ên 17:31-58" },
+      { day: 10, passage: "Đa-ni-ên 1" },
+      { day: 11, passage: "Đa-ni-ên 2:1-23" },
+      { day: 12, passage: "Đa-ni-ên 2:24-49" },
+      { day: 13, passage: "Đa-ni-ên 3:1-18" },
+      { day: 14, passage: "Đa-ni-ên 3:19-30" },
+      { day: 15, passage: "Đa-ni-ên 6:1-14" },
+      { day: 16, passage: "Đa-ni-ên 6:15-28" }
+    ]
+  },
+  {
+    month: 2,
+    title: "Tháng 2: Tình Yêu Thương Của Đức Chúa Giê-xu & Lòng Khiêm Nhường",
+    books: "Ma-thi-ơ (5–10, 26), Mác (1–5)",
+    totalChapters: 20,
+    totalDays: 14,
+    overview: "Bài giảng phước lành trên núi, tình yêu thương chữa lành kẻ bệnh tật, phép lạ dập tắt sóng gió và tình yêu thương ban Lễ Vượt Qua Giao Ước Mới.",
+    coreDoc: [
+      "Ma-thi-ơ 5:14: Các ngươi là ánh sáng của thế gian.",
+      "Ma-thi-ơ 26:26-28: Lễ Vượt Qua Giao Ước Mới ban sự tha tội."
+    ],
+    foundationVerses: [
+      { ref: "Ma-thi-ơ 5:16", text: "Ánh sáng các ngươi hãy soi trước mặt người ta như vậy, đặng họ thấy những việc lành của các ngươi, và tôn vinh Cha các ngươi ở trên trời." }
+    ],
+    schedule: [
+      { day: 1, passage: "Ma-thi-ơ 5" },
+      { day: 2, passage: "Ma-thi-ơ 6" },
+      { day: 3, passage: "Ma-thi-ơ 7" },
+      { day: 4, passage: "Ma-thi-ơ 8" },
+      { day: 5, passage: "Ma-thi-ơ 9" },
+      { day: 6, passage: "Ma-thi-ơ 10" },
+      { day: 7, passage: "Ma-thi-ơ 18" },
+      { day: 8, passage: "Ma-thi-ơ 26:1-16" },
+      { day: 9, passage: "Ma-thi-ơ 26:17-30" },
+      { day: 10, passage: "Mác 1" },
+      { day: 11, passage: "Mác 2" },
+      { day: 12, passage: "Mác 3" },
+      { day: 13, passage: "Mác 4" },
+      { day: 14, passage: "Mác 5" }
+    ]
+  },
+  {
+    month: 3,
+    title: "Tháng 3: Lòng Hiếu Kính Cha Mẹ & Sự Khôn Ngoan Tuổi Trẻ",
+    books: "Châm-ngôn (1–15), Ru-tơ (1–4)",
+    totalChapters: 19,
+    totalDays: 12,
+    overview: "Kính sợ Đức Chúa Trời là khởi đầu sự khôn ngoan, lòng hiếu kính cha mẹ, bài học siêng năng từ loài kiến và gương hiếu thảo của Ru-tơ.",
+    coreDoc: [
+      "Châm-ngôn 1:7: Kính sợ Đức Giê-hô-va là khởi đầu sự khôn ngoan.",
+      "Ru-tơ 1: Tấm lòng hiếu thảo tuyệt vời với mẹ."
+    ],
+    foundationVerses: [
+      { ref: "Châm-ngôn 3:5-6", text: "Hãy hết lòng tin cậy Đức Giê-hô-va, chớ nương dựa trên sự khôn ngoan của con; phàm trong các việc làm của con, khá nhận biết Ngài..." }
+    ],
+    schedule: [
+      { day: 1, passage: "Châm-ngôn 1" },
+      { day: 2, passage: "Châm-ngôn 2" },
+      { day: 3, passage: "Châm-ngôn 3" },
+      { day: 4, passage: "Châm-ngôn 4" },
+      { day: 5, passage: "Châm-ngôn 6:1-19" },
+      { day: 6, passage: "Châm-ngôn 10" },
+      { day: 7, passage: "Châm-ngôn 12" },
+      { day: 8, passage: "Châm-ngôn 13" },
+      { day: 9, passage: "Châm-ngôn 15" },
+      { day: 10, passage: "Ru-tơ 1" },
+      { day: 11, passage: "Ru-tơ 2" },
+      { day: 12, passage: "Ru-tơ 3–4" }
+    ]
+  },
+  {
+    month: 4,
+    title: "Tháng 4: Lễ Vượt Qua Cây Sự Sống & Thói Quen Ngày Sa-bát Thánh",
+    books: "Sáng-thế-ký, Xuất Ê-đíp-tô Ký, Lu-ca, Giăng",
+    totalChapters: 12,
+    totalDays: 10,
+    overview: "Đức Chúa Trời Elohim, ngày thứ bảy Sa-bát kỷ niệm Đấng Sáng Tạo, Huyết Chiên Con Lễ Vượt Qua bảo vệ khỏi tai vạ và ban sự sống đời đời.",
+    coreDoc: [
+      "Sáng-thế-ký 1:26: Đức Chúa Trời Elohim 'Chúng ta'.",
+      "Lu-ca 4:16: Thói quen giữ ngày Sa-bát của Đức Chúa Giê-xu."
+    ],
+    foundationVerses: [
+      { ref: "Lu-ca 22:15", text: "Ngài phán rằng: Ta rất muốn ăn lễ Vượt qua nầy với các ngươi trước khi ta chịu đau đớn." }
+    ],
+    schedule: [
+      { day: 1, passage: "Sáng-thế-ký 1:26-27" },
+      { day: 2, passage: "Sáng-thế-ký 2:1-3" },
+      { day: 3, passage: "Sáng-thế-ký 3" },
+      { day: 4, passage: "Xuất Ê-đíp-tô Ký 12:1-14" },
+      { day: 5, passage: "Xuất Ê-đíp-tô Ký 20:1-17" },
+      { day: 6, passage: "Lu-ca 4:16-30" },
+      { day: 7, passage: "Giăng 6:47-58" },
+      { day: 8, passage: "Lu-ca 22:7-20" },
+      { day: 9, passage: "1 Cô-rinh-tô 5:7-8" },
+      { day: 10, passage: "Công-vụ 17:1-4" }
+    ]
+  },
+  {
+    month: 5,
+    title: "Tháng 5: Tình Bạn Thánh Sạch & Thái Độ Sống Vui Mừng",
+    books: "1 Sa-mu-ên (18–20), Phi-líp (1–4), 1 Tê-sa-lô-ni-ca (5)",
+    totalChapters: 10,
+    totalDays: 7,
+    overview: "Tình bạn thánh sạch giữa Đa-vít và Giô-na-than, thói quen luôn sống vui mừng, cầu nguyện không nghỉ và tạ ơn trong phàm mọi việc.",
+    coreDoc: [
+      "1 Tê-sa-lô-ni-ca 5:16-18: Hãy vui mừng mãi mãi, cầu nguyện không nghỉ, phàm việc gì cũng phải tạ ơn.",
+      "Phi-líp 4:4: Hãy vui mừng trong Chúa luôn luôn."
+    ],
+    foundationVerses: [
+      { ref: "1 Tê-sa-lô-ni-ca 5:16-18", text: "Hãy vui mừng mãi mãi, cầu nguyện không nghỉ, phàm việc gì cũng phải tạ ơn; vì ý muốn của Đức Chúa Trời đối với anh em trong Đức Chúa Giê-xu Christ là như vậy." }
+    ],
+    schedule: [
+      { day: 1, passage: "1 Sa-mu-ên 18" },
+      { day: 2, passage: "1 Sa-mu-ên 19–20" },
+      { day: 3, passage: "Phi-líp 1" },
+      { day: 4, passage: "Phi-líp 2" },
+      { day: 5, passage: "Phi-líp 3" },
+      { day: 6, passage: "Phi-líp 4" },
+      { day: 7, passage: "1 Tê-sa-lô-ni-ca 5" }
+    ]
+  },
+  {
+    month: 6,
+    title: "Tháng 6: Đức Chúa Trời Mẹ Giê-ru-sa-lem & Hy Vọng Nước Thiên Đàng",
+    books: "Ga-la-ti (4), Ê-sai (66), Khải-huyền (21–22)",
+    totalChapters: 8,
+    totalDays: 8,
+    overview: "Lẽ thật Đức Chúa Trời Mẹ Giê-ru-sa-lem trên trời, Ấn Lễ Vượt Qua bảo vệ và vinh hiển nước Thiên Đàng không còn nước mắt đau khổ.",
+    coreDoc: [
+      "Ga-la-ti 4:26: Thành Giê-ru-sa-lem ở trên cao là tự do, và ấy là Mẹ chúng ta.",
+      "Khải-huyền 22:17: Thánh Linh và Vợ Mới ban Nước Sự Sống."
+    ],
+    foundationVerses: [
+      { ref: "Ga-la-ti 4:26", text: "Nhưng thành Giê-ru-sa-lem ở trên cao là tự do, và ấy là Mẹ chúng ta." }
+    ],
+    schedule: [
+      { day: 1, passage: "Ga-la-ti 4:21-31" },
+      { day: 2, passage: "Ê-sai 66:10-14" },
+      { day: 3, passage: "Ê-zê-chi-ên 47:1-12" },
+      { day: 4, passage: "Khải-huyền 7:1-4" },
+      { day: 5, passage: "Khải-huyền 21:1-8" },
+      { day: 6, passage: "Khải-huyền 21:9-27" },
+      { day: 7, passage: "Khải-huyền 22:1-5" },
+      { day: 8, passage: "Khải-huyền 22:17" }
+    ]
+  }
+];
+
+// ========================================================
+// LỘ TRÌNH 5: LỘ TRÌNH DÀNH CHO HỌC SINH CẤP 3 (THPT: 15 – 18 TUỔI)
+// (2 chương/ngày - 10-12 phút/ngày - Định hướng tương lai & Lẽ Thật)
+// ========================================================
+const STUDENT_CAP3_PLAN = [
+  {
+    month: 1,
+    title: "Tháng 1: Bản Sắc Con Cái Đức Chúa Trời & Lẽ Thật Elohim",
+    books: "Sáng-thế-ký (1–11), Rô-ma (1–8)",
+    totalChapters: 19,
+    totalDays: 14,
+    overview: "Sáng tạo con người theo hình ảnh Đức Chúa Trời Elohim 'Chúng ta', A-đam là hình bóng của Đấng phán về Đức Chúa Trời Cha và Đức Chúa Trời Mẹ.",
+    coreDoc: [
+      "Sáng-thế-ký 1:26-27: Đức Chúa Trời Elohim.",
+      "Rô-ma 8:16: Chính Đức Thánh Linh chứng nhận chúng ta là con cái Đức Chúa Trời."
+    ],
+    foundationVerses: [
+      { ref: "Rô-ma 8:16-17", text: "Chính Đức Thánh Linh chứng nhận rằng chúng ta là con cái Đức Chúa Trời. Nào là con cái, thì cũng là kẻ thừa tự..." }
+    ],
+    schedule: [
+      { day: 1, passage: "Sáng-thế-ký 1" },
+      { day: 2, passage: "Sáng-thế-ký 2" },
+      { day: 3, passage: "Sáng-thế-ký 3" },
+      { day: 4, passage: "Sáng-thế-ký 4–5" },
+      { day: 5, passage: "Sáng-thế-ký 6–7" },
+      { day: 6, passage: "Sáng-thế-ký 8–9" },
+      { day: 7, passage: "Sáng-thế-ký 10–11" },
+      { day: 8, passage: "Rô-ma 1–2" },
+      { day: 9, passage: "Rô-ma 3–4" },
+      { day: 10, passage: "Rô-ma 5" },
+      { day: 11, passage: "Rô-ma 6" },
+      { day: 12, passage: "Rô-ma 7" },
+      { day: 13, passage: "Rô-ma 8:1-17" },
+      { day: 14, passage: "Rô-ma 8:18-39" }
+    ]
+  },
+  {
+    month: 2,
+    title: "Tháng 2: Giao Ước Mới & Thực Thể Tha Tội Lễ Vượt Qua",
+    books: "Xuất Ê-đíp-tô Ký, Ma-thi-ơ, Giăng, 1 Cô-rinh-tô",
+    totalChapters: 14,
+    totalDays: 10,
+    overview: "Huyết Chiên Con Lễ Vượt Qua thoát tai vạ, Thực thể Bánh & Rượu Nho Lễ Vượt Qua Giao Ước Mới ban sự tha tội và sự sống đời đời.",
+    coreDoc: [
+      "Ma-thi-ơ 26:26-28: Huyết Giao Ước Mới đổ ra cho nhiều người được tha tội.",
+      "1 Cô-rinh-tô 5:7-8: Đấng Christ là con sinh Lễ Vượt Qua."
+    ],
+    foundationVerses: [
+      { ref: "1 Cô-rinh-tô 5:7-8", text: "Vì Đấng Christ là con sinh lễ Vượt qua chúng ta, đã bị hy sinh rồi. Vậy thì, chúng ta hãy giữ lễ..." }
+    ],
+    schedule: [
+      { day: 1, passage: "Xuất Ê-đíp-tô Ký 12:1-28" },
+      { day: 2, passage: "Xuất Ê-đíp-tô Ký 12:29-51" },
+      { day: 3, passage: "Xuất Ê-đíp-tô Ký 13–14" },
+      { day: 4, passage: "Giăng 6:26-58" },
+      { day: 5, passage: "Giăng 6:59-71" },
+      { day: 6, passage: "Ma-thi-ơ 26:1-16" },
+      { day: 7, passage: "Ma-thi-ơ 26:17-30" },
+      { day: 8, passage: "Giăng 13:1-20" },
+      { day: 9, passage: "1 Cô-rinh-tô 5:1-13" },
+      { day: 10, passage: "1 Cô-rinh-tô 11:17-34" }
+    ]
+  },
+  {
+    month: 3,
+    title: "Tháng 3: Thói Quen Sa-bát & Sự Khôn Ngoan Thi Cử",
+    books: "Lu-ca (4), Công-vụ (17–18), Thi-thiên (1, 19, 91, 119)",
+    totalChapters: 12,
+    totalDays: 10,
+    overview: "Thói quen vâng giữ ngày Sa-bát thứ Bảy của Đức Chúa Giê-xu & Phao-lô; xin sự khôn ngoan và sự an ninh từ Lời Đức Chúa Trời trước kỳ thi cử.",
+    coreDoc: [
+      "Lu-ca 4:16: Thói quen giữ ngày Sa-bát.",
+      "Thi-thiên 119:105: Lời Chúa là ngọn đèn cho chân tôi."
+    ],
+    foundationVerses: [
+      { ref: "Thi-thiên 119:105", text: "Lời Chúa là ngọn đèn cho chân tôi, Ánh sáng cho đường lối tôi." }
+    ],
+    schedule: [
+      { day: 1, passage: "Lu-ca 4:16-32" },
+      { day: 2, passage: "Công-vụ 17:1-15" },
+      { day: 3, passage: "Công-vụ 18:1-11" },
+      { day: 4, passage: "Thi-thiên 1" },
+      { day: 5, passage: "Thi-thiên 19" },
+      { day: 6, passage: "Thi-thiên 23" },
+      { day: 7, passage: "Thi-thiên 91" },
+      { day: 8, passage: "Thi-thiên 119:1-24" },
+      { day: 9, passage: "Thi-thiên 119:25-48" },
+      { day: 10, passage: "Thi-thiên 119:49-80" }
+    ]
+  },
+  {
+    month: 4,
+    title: "Tháng 4: Sự Khôn Ngoan Đỉnh Cao & Định Hướng Tương Lai",
+    books: "Châm-ngôn (16–31), Truyền-đạo (11–12)",
+    totalChapters: 18,
+    totalDays: 13,
+    overview: "Giao các việc cho Đức Giê-hô-va để kế hoạch được thành công; nhớ ơn Đấng Sáng Tạo trong buổi còn thơ dại trước khi dấn thân vào đời.",
+    coreDoc: [
+      "Châm-ngôn 16:3: Hãy giao các công việc mình cho Đức Giê-hô-va.",
+      "Truyền-đạo 12:1: Tưởng nhớ Đấng Sáng Tạo tuổi thanh xuân."
+    ],
+    foundationVerses: [
+      { ref: "Truyền-đạo 12:1", text: "Trong buổi còn thơ dại, hãy tưởng nhớ Đấng Sáng Tạo ngươi, trước khi những ngày gian nan đến..." }
+    ],
+    schedule: [
+      { day: 1, passage: "Châm-ngôn 16" },
+      { day: 2, passage: "Châm-ngôn 17" },
+      { day: 3, passage: "Châm-ngôn 18" },
+      { day: 4, passage: "Châm-ngôn 19" },
+      { day: 5, passage: "Châm-ngôn 20" },
+      { day: 6, passage: "Châm-ngôn 21" },
+      { day: 7, passage: "Châm-ngôn 22" },
+      { day: 8, passage: "Châm-ngôn 23" },
+      { day: 9, passage: "Châm-ngôn 24" },
+      { day: 10, passage: "Châm-ngôn 27" },
+      { day: 11, passage: "Châm-ngôn 31:10-31" },
+      { day: 12, passage: "Truyền-đạo 11" },
+      { day: 13, passage: "Truyền-đạo 12" }
+    ]
+  },
+  {
+    month: 5,
+    title: "Tháng 5: Lẽ Thật Đức Chúa Trời Mẹ & Luật Khăn Trùm Đầu",
+    books: "Ga-la-ti (4), 1 Cô-rinh-tô (11), Ê-phê-sô (1–6), Hê-bơ-rơ (7–8)",
+    totalChapters: 12,
+    totalDays: 10,
+    overview: "Lẽ thật về Đức Chúa Trời Mẹ Giê-ru-sa-lem (Ga-la-ti 4:26), Luật Khăn Trùm Đầu khi cầu nguyện và khí giới của Đức Chúa Trời.",
+    coreDoc: [
+      "Ga-la-ti 4:26: Thành Giê-ru-sa-lem ở trên cao là tự do, và ấy là Mẹ chúng ta.",
+      "1 Cô-rinh-tô 11: Luật Khăn Trùm Đầu."
+    ],
+    foundationVerses: [
+      { ref: "Ga-la-ti 4:26", text: "Nhưng thành Giê-ru-sa-lem ở trên cao là tự do, và ấy là Mẹ chúng ta." }
+    ],
+    schedule: [
+      { day: 1, passage: "Ga-la-ti 4:1-20" },
+      { day: 2, passage: "Ga-la-ti 4:21-31" },
+      { day: 3, passage: "1 Cô-rinh-tô 11:1-16" },
+      { day: 4, passage: "Ê-phê-sô 1" },
+      { day: 5, passage: "Ê-phê-sô 2–3" },
+      { day: 6, passage: "Ê-phê-sô 4" },
+      { day: 7, passage: "Ê-phê-sô 5" },
+      { day: 8, passage: "Ê-phê-sô 6" },
+      { day: 9, passage: "Hê-bơ-rơ 7" },
+      { day: 10, passage: "Hê-bơ-rơ 8" }
+    ]
+  },
+  {
+    month: 6,
+    title: "Tháng 6: Ấn Bảo Vệ & Nước Sự Sống Thiên Đàng",
+    books: "Đa-ni-ên (7), 2 Tê-sa-lô-ni-ca (2), Khải-huyền (7, 14, 21–22)",
+    totalChapters: 10,
+    totalDays: 9,
+    overview: "Vạch trần kẻ gian ác đổi thời kỳ luật pháp, Ấn Lễ Vượt Qua đóng trên trán tôi tớ Đức Chúa Trời và Nước Sự Sống ban từ Thánh Linh & Vợ Mới.",
+    coreDoc: [
+      "Khải-huyền 7:2-3: Ấn của Đức Chúa Trời Hằng Sống bảo vệ tai nạn.",
+      "Khải-huyền 22:17: Thánh Linh và Vợ Mới ban nước sự sống."
+    ],
+    foundationVerses: [
+      { ref: "Khải-huyền 22:17", text: "Thánh Linh và Vợ Mới cùng nói: Hãy đến! Kẻ nào khát, khá đến. Kẻ nào muốn, khá nhận lấy nước sự sống cách nhưng không." }
+    ],
+    schedule: [
+      { day: 1, passage: "Đa-ni-ên 7:1-28" },
+      { day: 2, passage: "2 Tê-sa-lô-ni-ca 2:1-17" },
+      { day: 3, passage: "Khải-huyền 7:1-17" },
+      { day: 4, passage: "Khải-huyền 14:1-12" },
+      { day: 5, passage: "Khải-huyền 19:1-10" },
+      { day: 6, passage: "Khải-huyền 21:1-14" },
+      { day: 7, passage: "Khải-huyền 21:15-27" },
+      { day: 8, passage: "Khải-huyền 22:1-11" },
+      { day: 9, passage: "Khải-huyền 22:12-21" }
+    ]
+  }
+];
+
 if (typeof window !== 'undefined') {
     window.WATV_12_MONTHS_PLAN = WATV_12_MONTHS_PLAN;
     window.CHRONOLOGICAL_12_MONTHS_PLAN = CHRONOLOGICAL_12_MONTHS_PLAN;
     window.FAST_6_MONTHS_PLAN = FAST_6_MONTHS_PLAN;
+    window.STUDENT_CAP2_PLAN = STUDENT_CAP2_PLAN;
+    window.STUDENT_CAP3_PLAN = STUDENT_CAP3_PLAN;
 }
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { WATV_12_MONTHS_PLAN, CHRONOLOGICAL_12_MONTHS_PLAN, FAST_6_MONTHS_PLAN };
+    module.exports = { 
+        WATV_12_MONTHS_PLAN, 
+        CHRONOLOGICAL_12_MONTHS_PLAN, 
+        FAST_6_MONTHS_PLAN,
+        STUDENT_CAP2_PLAN,
+        STUDENT_CAP3_PLAN 
+    };
 }
