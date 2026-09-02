@@ -1726,7 +1726,7 @@
     </footer>
 
     <!-- JavaScript Application Logic -->
-    <script src="./watvPlanData1925.js?v=20260819_v12"></script>
+    <script src="./watvPlanData1925.js?v=20260902_v13"></script>
     <script>
         // Data Bank WATV 12 Tháng
         const WATV_DATA_PLAN = (typeof WATV_12_MONTHS_PLAN !== 'undefined' ? WATV_12_MONTHS_PLAN : []);
@@ -1929,9 +1929,6 @@
                         </div>` : ''}
                     </div>
                 `;
-                setTimeout(() => {
-                    detailContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 100);
             } else if (detailContainer) {
                 detailContainer.style.display = 'none';
             }
