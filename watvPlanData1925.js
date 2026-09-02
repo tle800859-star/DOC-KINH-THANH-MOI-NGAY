@@ -524,21 +524,21 @@ const WATV_12_MONTHS_PLAN = [
 ];
 
 // ========================================================
-// LỘ TRÌNH 1: ĐỌC THEO TIẾN TRÌNH LỊCH SỬ THUẦN TUÝ (CHRONOLOGICAL PLAN)
-// (Từ Sáng-thế-ký đến Khải-huyền theo đúng trình tự thời gian)
+// LỘ TRÌNH 1: TIẾN TRÌNH LỊCH SỬ & LỜI TIÊN TRI ỨNG NGHIỆM (CHRONOLOGICAL PLAN)
+// (Sắp xếp các sách Cựu Ước & Tân Ước chuẩn xác theo thời gian xuất hiện & ứng nghiệm)
 // ========================================================
 const CHRONOLOGICAL_12_MONTHS_PLAN = [
   {
     month: 1,
-    title: "Tháng 1 (Lịch Sử): Thời Đại Sáng Tạo & Đất Hứa Cổ Đại",
+    title: "Tháng 1: Khởi Đầu Sáng Tạo, Thời Đại Các Tổ Phụ & Đức Tin Thử Thách",
     books: "Sáng-thế-ký, Gióp",
     totalChapters: 92,
     totalDays: 30,
-    overview: "Khởi đầu lịch sử loài người từ Sự Sáng Tạo, Vườn Ê-đen, Tháp Ba-ben, Cuộc đời các tổ phụ A-bra-ham, Y-sác, Gia-cốp, Giô-sép và đức tin kiên định của Gióp trong thời cổ đại.",
+    overview: "Khởi đầu lịch sử sáng tạo vũ trụ loài người với Đức Chúa Trời Elohim, vườn Ê-đen, ngày Sa-bát thánh, tháp Ba-ben, cuộc đời các tổ phụ A-bra-ham, Y-sác, Gia-cốp, Giô-sép và đức tin thử thách kiên định của Gióp thời cổ đại.",
     coreDoc: [
-      "Sáng-thế-ký 1: Khởi đầu công cuộc sáng tạo của Đức Chúa Trời Elohim.",
-      "Sáng-thế-ký 12: Lời hứa ban phước cho A-bra-ham và dòng dõi ông.",
-      "Gióp 1 & 42: Bài học về lòng trung kiên thử thách qua gian khó."
+      "Sáng-thế-ký 1:26-27: Khởi đầu công cuộc sáng tạo của Đức Chúa Trời Elohim ('Chúng ta').",
+      "Sáng-thế-ký 2:1-3: Ban phước và đặt ngày thứ bảy làm Ngày Sa-bát thánh.",
+      "Gióp 1 & 42: Bài học kiên trì đức tin vượt qua thử thách gian khổ."
     ],
     foundationVerses: [
       { ref: "Sáng-thế-ký 1:1", text: "Ban đầu Đức Chúa Trời dựng nên trời đất." },
@@ -548,15 +548,15 @@ const CHRONOLOGICAL_12_MONTHS_PLAN = [
       { day: 1, passage: "Sáng-thế-ký 1–4" },
       { day: 2, passage: "Sáng-thế-ký 5–9" },
       { day: 3, passage: "Sáng-thế-ký 10–14" },
-      { day: 4, passage: "Sáng-thế-ký 15–19" },
-      { day: 5, passage: "Sáng-thế-ký 20–24" },
-      { day: 6, passage: "Sáng-thế-ký 25–28" },
-      { day: 7, passage: "Sáng-thế-ký 29–32" },
-      { day: 8, passage: "Sáng-thế-ký 33–36" },
-      { day: 9, passage: "Sáng-thế-ký 37–40" },
-      { day: 10, passage: "Sáng-thế-ký 41–44" },
-      { day: 11, passage: "Sáng-thế-ký 45–48" },
-      { day: 12, passage: "Sáng-thế-ký 49–50" },
+      { day: 4, passage: "Sáng-thế-ký 15–18" },
+      { day: 5, passage: "Sáng-thế-ký 19–22" },
+      { day: 6, passage: "Sáng-thế-ký 23–26" },
+      { day: 7, passage: "Sáng-thế-ký 27–30" },
+      { day: 8, passage: "Sáng-thế-ký 31–34" },
+      { day: 9, passage: "Sáng-thế-ký 35–38" },
+      { day: 10, passage: "Sáng-thế-ký 39–42" },
+      { day: 11, passage: "Sáng-thế-ký 43–46" },
+      { day: 12, passage: "Sáng-thế-ký 47–50" },
       { day: 13, passage: "Gióp 1–4" },
       { day: 14, passage: "Gióp 5–8" },
       { day: 15, passage: "Gióp 9–12" },
@@ -565,22 +565,22 @@ const CHRONOLOGICAL_12_MONTHS_PLAN = [
       { day: 18, passage: "Gióp 21–24" },
       { day: 19, passage: "Gióp 25–28" },
       { day: 20, passage: "Gióp 29–32" },
-      { day: 21, passage: "Gióp 33–36" },
-      { day: 22, passage: "Gióp 37–40" },
-      { day: 23, passage: "Gióp 41–42" }
+      { day: 21, passage: "Gióp 33–35" },
+      { day: 22, passage: "Gióp 36–38" },
+      { day: 23, passage: "Gióp 39–42" }
     ]
   },
   {
     month: 2,
-    title: "Tháng 2 (Lịch Sử): Xuất Ai Cập & Luật Pháp Trong Đồng Vắng",
+    title: "Tháng 2: Lễ Vượt Qua Giải Thoát, Xuất Ai Cập & Luật Pháp Tại Núi Si-na-i",
     books: "Xuất Ê-đíp-tô Ký, Lê-vi Ký",
     totalChapters: 67,
     totalDays: 25,
-    overview: "Hành trình ra khỏi Ai Cập nhờ Lễ Vượt Qua, nhận 10 Điều Răn tại núi Si-na-i, dựng Đền Tụ Hội và quy chế các lễ nghi thờ phượng thánh.",
+    overview: "Cuộc giải phóng dân sự khỏi ách nô lệ nhờ Huyết Chiên Con Lễ Vượt Qua, nhận 10 Điều Răn tại núi Si-na-i, dựng Đền Tụ Hội và quy định 3 kỳ 7 lễ trọng thể.",
     coreDoc: [
-      "Xuất Ê-đíp-tô Ký 12: Lễ Vượt Qua đầu tiên và cuộc giải phóng lịch sử.",
-      "Xuất Ê-đíp-tô Ký 20: 10 Điều Răn của Đức Chúa Trời.",
-      "Lê-vi Ký 23: Quy định 3 kỳ 7 lễ trọng thể."
+      "Xuất Ê-đíp-tô Ký 12: Lễ Vượt Qua là dấu hiệu duy nhất để tai vạ diệt trừ vượt qua.",
+      "Xuất Ê-đíp-tô Ký 20:4-5: Điều răn thứ hai cấm thờ ngẫu tượng và hình tượng.",
+      "Lê-vi Ký 23: Quy chế 3 kỳ 7 Lễ Trọng Thể đời đời của Đức Chúa Trời."
     ],
     foundationVerses: [
       { ref: "Xuất Ê-đíp-tô Ký 12:14", text: "Các ngươi hãy kỷ niệm ngày đó... như một lễ đời đời." }
@@ -607,15 +607,14 @@ const CHRONOLOGICAL_12_MONTHS_PLAN = [
   },
   {
     month: 3,
-    title: "Tháng 3 (Lịch Sử): 40 Năm Đồng Vắng & Vào Đất Hứa Ca-na-an",
-    books: "Dân-số-ký, Phục-truyền, Giô-suê",
+    title: "Tháng 3: 40 Năm Đồng Vắng, Nhắc Lại Luật Pháp & Chiếm Đất Hứa Ca-na-an",
+    books: "Dân-số-ký, Phục-truyền Luật-lệ Ký, Giô-suê",
     totalChapters: 94,
     totalDays: 27,
-    overview: "Hành trình 40 năm trong đồng vắng, lời dặn dò của Môi-se trước khi qua đời và cuộc chinh phục Đất Hứa dưới sự dẫn dắt của Giô-suê.",
+    overview: "Sự luyện rèn đức tin 40 năm trong đồng vắng, quy định Lễ Vượt Qua tháng 2 cho người lỡ kỳ, lời dặn dò của Môi-se và cuộc chinh phục Đất Hứa thành công rực rỡ với Giô-suê.",
     coreDoc: [
-      "Dân-số-ký 9: Lễ Vượt Qua tháng thứ hai.",
-      "Phục-truyền 6: Mạng lệnh kính sợ Đức Chúa Trời.",
-      "Giô-suê 6: Sự sụp đổ của thành Giê-ri-cô."
+      "Dân-số-ký 9: Cơ hội giữ Lễ Vượt Qua tháng thứ hai cho người lỡ kỳ.",
+      "Giô-suê 5:10: Giữ Lễ Vượt Qua tại Ghinh-ganh trước khi hạ gục thành Giê-ri-cô."
     ],
     foundationVerses: [
       { ref: "Giô-suê 1:9", text: "Hãy vững lòng bền chí, chớ run sợ, chớ kinh hãi; vì Giê-hô-va Đức Chúa Trời ngươi vẫn ở cùng ngươi trong mọi nơi ngươi đi." }
@@ -645,17 +644,17 @@ const CHRONOLOGICAL_12_MONTHS_PLAN = [
   },
   {
     month: 4,
-    title: "Tháng 4 (Lịch Sử): Thời Các Quan Xét & Khởi Đầu Vương Triều Đa-vít",
+    title: "Tháng 4: Thời Các Quan Xét, Tình Yêu Ru-tơ & Khởi Đầu Vương Triều Đa-vít",
     books: "Các Quan-xét, Ru-tơ, 1-2 Sa-mu-ên",
     totalChapters: 80,
     totalDays: 24,
-    overview: "Thời kỳ các Quan xét giải cứu dân sự, tình yêu hiếu thảo của Ru-tơ, cuộc đời tiên tri Sa-mu-ên, vua Sáp-lơ và sự dấy lên của vua Đa-vít.",
+    overview: "Thời kỳ các Quan xét giải cứu dân sự, tình yêu trung kiên của Ru-tơ, cuộc đời tiên tri Sa-mu-ên và sự dấy lên của vua Đa-vít lập vương triều Si-ôn.",
     coreDoc: [
-      "1 Sa-mu-ên 16: Đức Chúa Trời xức dầu cho Đa-vít.",
-      "2 Sa-mu-ên 7: Lời hứa lập vương triều Đa-vít đến đời đời."
+      "1 Sa-mu-ên 16:7: Đức Chúa Trời chẳng xem bề ngoài nhưng nhìn thấy trong lòng.",
+      "2 Sa-mu-ên 7: Lời hứa lập vương triều Đa-vít vững bền đến đời đời."
     ],
     foundationVerses: [
-      { ref: "1 Sa-mu-ên 16:7", text: "Đức Giê-hô-va chẳng xem theo loài người; loài người xem bề ngoài, nhưng Đức Giê-hô-va nhìn thấy trong lòng." }
+      { ref: "2 Sa-mu-ên 7:16", text: "Nhà ngươi và nước ngươi sẽ được bền vững trước mặt ngươi đời đời; ngai ngươi sẽ được ban cho vững bền đến đời đời." }
     ],
     schedule: [
       { day: 1, passage: "Các Quan-xét 1–5" },
@@ -678,15 +677,14 @@ const CHRONOLOGICAL_12_MONTHS_PLAN = [
   },
   {
     month: 5,
-    title: "Tháng 5 (Lịch Sử): Vương Triều Thống Nhất & Thi Ca Khôn Ngoan Vua Sô-lô-môn",
+    title: "Tháng 5: Đền Thờ Sô-lô-môn & Kho Tàng Thi Ca Khôn Ngoan Ca Ngợi Luật Pháp",
     books: "1 Các Vua (1–11), 1 Sử-ký, Thi-thiên, Châm-ngôn, Truyền-đạo, Nhã-ca",
     totalChapters: 120,
     totalDays: 30,
-    overview: "Sự hưng thịnh của Đền Thờ Giê-ru-sa-lem thời Sô-lô-môn cùng kho tàng thơ ca, châm ngôn khôn ngoan ca ngợi Luật Pháp Đức Chúa Trời.",
+    overview: "Sự hưng thịnh của Đền Thờ Giê-ru-sa-lem thời Sô-lô-môn cùng kho tàng thơ ca, châm ngôn khôn ngoan tôn vinh Si-ôn và Luật Pháp thánh khiết.",
     coreDoc: [
-      "1 Các Vua 8: Sô-lô-môn khánh thành Đền Thờ Giê-ru-sa-lem.",
-      "Thi-thiên 133: Sự sống đời đời tại Si-ôn.",
-      "Truyền-đạo 12:13: Bổn phận trọn vẹn của con người."
+      "Thi-thiên 133:3: Si-ôn là nơi Đức Chúa Trời ban phước sự sống đời đời.",
+      "Truyền-đạo 12:13: Bổn phận trọn vẹn của con người là kính sợ Đức Chúa Trời và vâng giữ các điều răn Ngài."
     ],
     foundationVerses: [
       { ref: "Thi-thiên 119:105", text: "Lời Chúa là ngọn đèn cho chân tôi, là ánh sáng cho đường lối tôi." }
@@ -709,17 +707,17 @@ const CHRONOLOGICAL_12_MONTHS_PLAN = [
   },
   {
     month: 6,
-    title: "Tháng 6 (Lịch Sử): Vương Quốc Phân Chia & Các Tiên Tri Cảnh Báo",
+    title: "Tháng 6: Vương Quốc Phân Chia & Phục Hưng Lễ Vượt Qua Triệt Hạ Thần Tượng",
     books: "1 Các Vua (12–22), 2 Các Vua, 2 Sử-ký",
     totalChapters: 83,
     totalDays: 25,
-    overview: "Lịch sử hai vương quốc Y-sơ-ra-ên và Giu-đa, các cuộc canh tân phục hưng Lễ Vượt Qua của vua Ê-xê-chia và Giô-si-a.",
+    overview: "Lịch sử hai vương quốc Y-sơ-ra-ên và Giu-đa, cuộc phục hưng Lễ Vượt Qua của vua Ê-xê-chia và Giô-si-a để đập nát thần tượng con rắn đồng.",
     coreDoc: [
-      "2 Các Vua 18: Vua Ê-xê-chia đập nát con rắn đồng.",
-      "2 Sử-ký 30: Giữ Lễ Vượt Qua phá sạch thần tượng."
+      "2 Các Vua 18:4: Vua Ê-xê-chia đập nát con rắn đồng Nê-hu-sơ-tan.",
+      "2 Sử-ký 30: Trở lại giữ Lễ Vượt Qua được Đức Chúa Trời ban sự che chở."
     ],
     foundationVerses: [
-      { ref: "2 Các Vua 18:4", text: "Người đập nát con rắn đồng... người ta gọi nó là Nê-hu-sơ-tan." }
+      { ref: "2 Các Vua 18:4", text: "Người đập nát con rắn đồng mà Môi-se đã làm... người ta gọi nó là Nê-hu-sơ-tan." }
     ],
     schedule: [
       { day: 1, passage: "1 Các Vua 12–16" },
@@ -737,18 +735,18 @@ const CHRONOLOGICAL_12_MONTHS_PLAN = [
   },
   {
     month: 7,
-    title: "Tháng 7 (Lịch Sử): Thời Kỳ Tiên Tri Cựu Ước (Đại Tiên Tri & Tiên Tri Nhỏ)",
+    title: "Tháng 7: Lời Tiên Tri Về Tiệc Rượu Nho Lâu Năm & Giao Ước Mới",
     books: "Ê-sai, Giê-rê-mi, Ca-thương, Ê-zê-chi-ên, Đa-ni-ên, 12 Tiên Tri Nhỏ",
     totalChapters: 120,
     totalDays: 30,
-    overview: "Lời tiên tri về Đấng Mê-si giáng sinh, Tiệc Rượu Nho Lâu Năm, Giao Ước Mới và lời cảnh báo về kẻ gian ác toan định đổi thời kỳ luật pháp.",
+    overview: "Các lời tiên tri vĩ đại về Đấng Cứu Chúa sẽ đãi tiệc Rượu Nho Lâu Năm (Ê-sai 25), lập Giao Ước Mới (Giê-rê-mi 31) và vạch trần kẻ gian ác toan định đổi thời kỳ luật pháp (Đa-ni-ên 7).",
     coreDoc: [
-      "Ê-sai 25: Tiệc rượu nho lâu năm nuốt sự chết.",
-      "Giê-rê-mi 31: Lời hứa Giao Ước Mới.",
-      "Đa-ni-ên 7: Tiên tri đổi thời kỳ và luật pháp."
+      "Ê-sai 25:6-9: Tiệc rượu nho lâu năm nuốt sự chết đến đời đời.",
+      "Giê-rê-mi 31:31-34: Đức Chúa Trời lập Giao Ước Mới với nhà Y-sơ-ra-ên.",
+      "Đa-ni-ên 7:25: Kẻ thù toan định đổi thời kỳ và luật pháp."
     ],
     foundationVerses: [
-      { ref: "Ê-sai 25:6", text: "Đức Giê-hô-va vạn quân sẽ đãi muôn dân một tiệc rượu nho lâu năm." }
+      { ref: "Ê-sai 25:6", text: "Đức Giê-hô-va vạn quân sẽ đãi muôn dân... một tiệc rượu nho lâu năm." }
     ],
     schedule: [
       { day: 1, passage: "Ê-sai 1–15" },
@@ -765,16 +763,16 @@ const CHRONOLOGICAL_12_MONTHS_PLAN = [
   },
   {
     month: 8,
-    title: "Tháng 8 (Lịch Sử): Trở Về Tái Thiết Đền Thờ & Si-ôn",
+    title: "Tháng 8: Trở Về Từ Ba-by-lôn, Tái Thiết Si-ôn & Lễ Lều Tạm",
     books: "Ê-xơ-ra, Nê-hê-mi, Ê-xơ-thê",
     totalChapters: 33,
     totalDays: 15,
-    overview: "Cuộc trở về từ Ba-by-lôn, tái thiết Đền Thờ Giê-ru-sa-lem, vâng giữ Lễ Vượt Qua và Lễ Lều Tạm.",
+    overview: "Cuộc trở về lịch sử sau 70 năm lưu đày Ba-by-lôn, tái thiết Đền Thờ, vui vẻ vâng giữ Lễ Vượt Qua và Lễ Lều Tạm.",
     coreDoc: [
-      "Ê-xơ-ra 6: Dân sự lưu đày trở về vui vẻ giữ Lễ Vượt Qua."
+      "Ê-xơ-ra 6:19-22: Dân sự lưu đày trở về liền vui vẻ vâng giữ Lễ Vượt Qua và Lễ Bánh Không Men."
     ],
     foundationVerses: [
-      { ref: "Ê-xơ-ra 6:22", text: "Lại giữ lễ Bánh Không Men trong bảy ngày cách vui vẻ." }
+      { ref: "Ê-xơ-ra 6:22", text: "Lại giữ lễ Bánh-không-men trong bảy ngày cách vui-vẻ." }
     ],
     schedule: [
       { day: 1, passage: "Ê-xơ-ra 1–5" },
@@ -786,14 +784,14 @@ const CHRONOLOGICAL_12_MONTHS_PLAN = [
   },
   {
     month: 9,
-    title: "Tháng 9 (Lịch Sử): Cuộc Đời Đức Chúa Giê-xu Christ & Giao Ước Mới",
+    title: "Tháng 9: Sự Giáng Sinh Của Đấng Christ & Lễ Vượt Qua Giao Ước Mới Ứng Nghiệm",
     books: "Ma-thi-ơ, Mác, Lu-ca, Giăng",
     totalChapters: 89,
     totalDays: 25,
-    overview: "Đức Chúa Giê-xu giáng sinh, chịu báp-têm, rao giảng Tin Lành, giữ ngày Sa-bát và lập Lễ Vượt Qua Giao Ước Mới trước khi chịu thương khó.",
+    overview: "Ứng nghiệm các lời tiên tri Cựu Ước: Đức Chúa Giê-xu giáng sinh, chịu báp-têm, giữ ngày Sa-bát thứ Bảy và lập Lễ Vượt Qua Giao Ước Mới ban sự sống đời đời.",
     coreDoc: [
-      "Lu-ca 4:16: Thói quen giữ ngày Sa-bát thứ Bảy.",
-      "Ma-thi-ơ 26 & Lu-ca 22: Lễ Vượt Qua Giao Ước Mới."
+      "Lu-ca 4:16: Đức Chúa Giê-xu giữ ngày Sa-bát theo thói quen Ngài.",
+      "Ma-thi-ơ 26 & Lu-ca 22: Đức Chúa Giê-xu dùng Bánh và Rượu Nho Lễ Vượt Qua lập Giao Ước Mới."
     ],
     foundationVerses: [
       { ref: "Lu-ca 22:20", text: "Chén nầy là giao ước mới trong huyết ta vì các ngươi mà đổ ra." }
@@ -815,17 +813,17 @@ const CHRONOLOGICAL_12_MONTHS_PLAN = [
   },
   {
     month: 10,
-    title: "Tháng 10 (Lịch Sử): Hội Thánh Sơ Khai & Hành Trình Truyền Giáo",
+    title: "Tháng 10: Lễ Ngũ Tuần Hội Thánh Sơ Khai & Hành Trình Truyền Giáo Sa-bát",
     books: "Công-vụ các Sứ-đồ, Rô-ma, 1-2 Cô-rinh-tô",
     totalChapters: 73,
     totalDays: 24,
-    overview: "Lễ Ngũ Tuần nhận mưa Thánh Linh, Sứ đồ Phao-lô truyền giáo giữ ngày Sa-bát, Lễ Vượt Qua và Luật Khăn Trùm Đầu.",
+    overview: "Đức Thánh Linh giáng lâm vào Lễ Ngũ Tuần, Sứ đồ Phao-lô luôn giữ ngày Sa-bát theo thói quen, Luật Đội Khăn Trùm Đầu và vâng giữ Lễ Vượt Qua.",
     coreDoc: [
-      "Công-vụ 17:2: Phao-lô giữ ngày Sa-bát 3 tuần liên tiếp.",
-      "1 Cô-rinh-tô 11: Luật Đội Khăn Trùm Đầu."
+      "Công-vụ 17:2: Phao-lô giữ ngày Sa-bát theo thói quen mình.",
+      "1 Cô-rinh-tô 11: Luật Đội Khăn Trùm Đầu cho nữ tín đồ."
     ],
     foundationVerses: [
-      { ref: "1 Cô-rinh-tô 5:7", text: "Vì Đấng Christ là con sinh lễ Vượt Qua của chúng ta đã bị hi sinh rồi. Vậy thì chúng ta hãy giữ lễ." }
+      { ref: "1 Cô-rinh-tô 5:7", text: "Vì Đấng Christ là con sinh lễ Vượt-qua của chúng ta, đã bị hi sinh rồi. Vậy thì, chúng ta hãy giữ lễ." }
     ],
     schedule: [
       { day: 1, passage: "Công-vụ 1–7" },
@@ -841,13 +839,13 @@ const CHRONOLOGICAL_12_MONTHS_PLAN = [
   },
   {
     month: 11,
-    title: "Tháng 11 (Lịch Sử): Các Thư Tín Sứ Đồ & Lẽ Thật Mẹ Giê-ru-sa-lem",
+    title: "Tháng 11: Các Thư Tín Sứ Đồ & Lẽ Thật Tối Thượng Đức Chúa Trời Mẹ",
     books: "Ga-la-ti đến Giu-đơ (Các Thư Tín)",
     totalChapters: 61,
     totalDays: 20,
-    overview: "Sự xác minh Lẽ Thật Mẹ Giê-ru-sa-lem trên trời, đời sống thánh sạch của con cái Giao Ước Mới và sự kiên trì trong đức tin.",
+    overview: "Xác minh Lẽ Thật Đức Chúa Trời Mẹ Giê-ru-sa-lem trên trời, đời sống thánh sạch của con cái Giao Ước Mới và sự kiên trì giữ đạo.",
     coreDoc: [
-      "Ga-la-ti 4:26: Thành Giê-ru-sa-lem ở trên cao là Mẹ chúng ta."
+      "Ga-la-ti 4:26: Thành Giê-ru-sa-lem ở trên cao là tự do, và ấy là Mẹ chúng ta."
     ],
     foundationVerses: [
       { ref: "Ga-la-ti 4:26", text: "Nhưng thành Giê-ru-sa-lem ở trên cao là tự do, và ấy là Mẹ chúng ta." }
@@ -866,13 +864,13 @@ const CHRONOLOGICAL_12_MONTHS_PLAN = [
   },
   {
     month: 12,
-    title: "Tháng 12 (Lịch Sử): Tiên Tri Ngày Sau Rốt & Nước Sự Sống",
+    title: "Tháng 12: Tiên Tri Ngày Sau Rốt & Thánh Linh Cùng Vợ Mới Ban Nước Sự Sống",
     books: "Khải-huyền",
     totalChapters: 22,
     totalDays: 15,
-    overview: "Ấn Đức Chúa Trời Hằng Sống bảo vệ tai nạn, 144,000 người trên núi Si-ôn và Thánh Linh cùng Vợ Mới ban Nước Sự Sống.",
+    overview: "Ấn Đức Chúa Trời Hằng Sống bảo vệ tai nạn diệt vong, 144,000 người trên núi Si-ôn và Thánh Linh cùng Vợ Mới (Đức Chúa Trời Mẹ) ban Nước Sự Sống ở Khải-huyền 22:17.",
     coreDoc: [
-      "Khải-huyền 22:17: Thánh Linh và Vợ Mới ban nước sự sống."
+      "Khải-huyền 22:17: Thánh Linh và Vợ Mới cùng nói: Hãy đến... nhận lấy nước sự sống cách nhưng không."
     ],
     foundationVerses: [
       { ref: "Khải-huyền 22:17", text: "Thánh Linh và Vợ Mới cùng nói: Hãy đến! Kẻ nào khát, khá đến. Kẻ nào muốn, khá nhận lấy nước sự sống cách nhưng không." }
@@ -886,6 +884,14 @@ const CHRONOLOGICAL_12_MONTHS_PLAN = [
     ]
   }
 ];
+
+if (typeof window !== 'undefined') {
+    window.WATV_12_MONTHS_PLAN = WATV_12_MONTHS_PLAN;
+    window.CHRONOLOGICAL_12_MONTHS_PLAN = CHRONOLOGICAL_12_MONTHS_PLAN;
+}
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { WATV_12_MONTHS_PLAN, CHRONOLOGICAL_12_MONTHS_PLAN };
+}
 
 if (typeof window !== 'undefined') {
     window.WATV_12_MONTHS_PLAN = WATV_12_MONTHS_PLAN;
