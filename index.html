@@ -910,25 +910,28 @@
                     <p class="section-subtitle" id="planSectionSubtitle">Phương Pháp Song Song: Cựu Ước & Tân Ước (Tiên Tri & Ứng Nghiệm, Hình Bóng & Thực Thể) • WATV.ORG</p>
                 </div>
 
-                <!-- BỘ CHỌN LỘ TRÌNH ĐỌC (PLAN SELECTOR DROPDOWN TOGGLE) -->
-                <div style="background: white; border: 2px solid var(--primary); border-radius: 16px; padding: 20px; margin-bottom: 24px; box-shadow: 0 6px 16px rgba(27,73,101,0.08); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                        <div style="background: var(--primary); color: white; width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: bold;">
-                            <i class="fa-solid fa-route"></i>
+                <!-- BỘ CHỌN LỘ TRÌNH ĐỌC (MODERN CARD UI KHOA HỌC & THẨM MỸ) -->
+                <div style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%); border: 1px solid #cbd5e1; border-left: 5px solid var(--primary); border-radius: 16px; padding: 22px 24px; margin-bottom: 24px; box-shadow: 0 10px 25px -5px rgba(27,73,101,0.08); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 18px;">
+                    <div style="display: flex; align-items: center; gap: 16px; flex: 1; min-width: 280px;">
+                        <div style="background: linear-gradient(135deg, var(--primary) 0%, #0f2b3c 100%); color: white; width: 50px; height: 50px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; box-shadow: 0 4px 12px rgba(27,73,101,0.25);">
+                            <i class="fa-solid fa-layer-group"></i>
                         </div>
                         <div>
-                            <h3 style="color: var(--primary); font-size: 1.05rem; margin: 0; font-weight: 700;">Chọn Lộ Trình Đọc Phù Hợp Cho Bạn:</h3>
-                            <p style="color: #64748b; font-size: 0.82rem; margin: 2px 0 0 0;">Thay đổi 100% danh sách bài đọc & lộ trình 12 tháng theo thói quen đọc</p>
+                            <span style="background: #e0f2fe; color: #0369a1; font-size: 0.72rem; font-weight: 800; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px;">BỘ CHỌN ĐỒNG BỘ 100%</span>
+                            <h3 style="color: var(--primary); font-size: 1.15rem; margin: 4px 0 2px 0; font-weight: 800; letter-spacing: -0.2px;">Lựa Chọn Lộ Trình Đọc Phù Hợp:</h3>
+                            <p style="color: #64748b; font-size: 0.85rem; margin: 0; line-height: 1.4;">Tự động chuyển đổi 100% Tiêu đề, Bản chất Lẽ Thật & Danh sách 365 Ngày đọc</p>
                         </div>
                     </div>
-                    <div>
-                        <select id="mainPlanSelector" onchange="switchReadingPlan(this.value)" style="padding: 12px 20px; border-radius: 12px; border: 2px solid var(--primary); font-weight: 700; color: var(--primary); background: #f0f7ff; cursor: pointer; font-size: 0.95rem; outline: none; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-                            <option value="chronological">📜 LỘ TRÌNH 1: Theo Tiến Trình Lịch Sử & Lời Tiên Tri (Cựu Ước ➔ Tân Ước)</option>
-                            <option value="doctrinal" selected>🕊️ LỘ TRÌNH 2: Theo Chuyên Đề Lẽ Thật Giao Ước Mới (Song Song 2 Ước - WATV.ORG)</option>
-                            <option value="fast6">⚡ LỘ TRÌNH 3: Lộ Trình 6 Tháng Nhanh (Tân Ước & Tiên Tri Trọng Tâm - 2 Chương/Ngày)</option>
-                            <option value="cap2">🎒 LỘ TRÌNH 4: Lộ Trình Học Sinh Cấp 2 (THCS: 11-14 Tuổi - Thiếu Niên Đức Tin)</option>
-                            <option value="cap3">🎓 LỘ TRÌNH 5: Lộ Trình Học Sinh Cấp 3 (THPT: 15-18 Tuổi - Định Hướng & Lẽ Thật)</option>
-                        </select>
+                    <div style="flex: 1; min-width: 300px;">
+                        <div style="position: relative;">
+                            <select id="mainPlanSelector" onchange="switchReadingPlan(this.value)" style="width: 100%; padding: 14px 20px; border-radius: 12px; border: 2px solid var(--primary-light); font-weight: 700; color: #0f172a; background: #ffffff; cursor: pointer; font-size: 0.95rem; outline: none; box-shadow: 0 4px 14px rgba(0,0,0,0.06); transition: all 0.2s ease;">
+                                <option value="doctrinal" selected>🕊️ LỘ TRÌNH 2: Theo Chuyên Đề Lẽ Thật Giao Ước Mới (Song Song 2 Ước - WATV.ORG)</option>
+                                <option value="chronological">📜 LỘ TRÌNH 1: Theo Tiến Trình Lịch Sử & Lời Tiên Tri (Cựu Ước ➔ Tân Ước)</option>
+                                <option value="fast6">⚡ LỘ TRÌNH 3: Lộ Trình 6 Tháng Nhanh (Tân Ước & Tiên Tri Trọng Tâm - 2 Chương/Ngày)</option>
+                                <option value="cap2">🎒 LỘ TRÌNH 4: Lộ Trình Học Sinh Cấp 2 (THCS: 11-14 Tuổi - Thiếu Niên Đức Tin)</option>
+                                <option value="cap3">🎓 LỘ TRÌNH 5: Lộ Trình Học Sinh Cấp 3 (THPT: 15-18 Tuổi - Định Hướng & Lẽ Thật)</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
