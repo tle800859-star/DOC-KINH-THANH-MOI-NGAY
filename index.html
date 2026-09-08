@@ -66,6 +66,22 @@
             padding: 0 20px;
         }
 
+        /* Section Visibility & Transitions */
+        .section {
+            display: none;
+            padding: 40px 0;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* Header & Navigation */
         header {
             position: sticky;
