@@ -2348,7 +2348,47 @@
         // NGÂN HÀNG CÂU HỎI TRẮC NGHIỆM ĐỒNG NHẤT 100% VỚI 12 THÁNG LỘ TRÌNH ĐỌC
         // (BẢN DỊCH PHAN KHÔI 1925 - CHUẨN WATV.ORG)
         // ========================================================
-        const WATV_QUIZ_BANK = {
+        // ========================================================
+        // NGÂN HÀNG CÂU HỎI TRẮC NGHIỆM ĐỒNG NHẤT 100% THEO TỪNG LỘ TRÌNH ĐỌC
+        // ========================================================
+        const WATV_QUIZ_BANK_CHRONOLOGICAL = {
+            1: {
+                title: "Tháng 1 (Lịch Sử): Sáng-thế-ký & Gióp – Khởi Đầu Sáng Tạo & Thử Thách Cổ Đại",
+                q1: { question: "Trong Sáng-thế-ký 1-3, lý do loài người bị đuổi khỏi Vườn Ê-đen và bị chặn đường đến Cây Sự Sống là gì?", options: [{ label: "A. Vì ăn trái cây biết điều thiện và điều ác mà Đức Chúa Trời đã cấm", value: "A" }, { label: "B. Vì không xây tháp Ba-ben", value: "B" }, { label: "C. Vì không đi sang Ai Cập", value: "C" }], correct: "A", exp: "Chính xác! Tội không vâng lời ăn trái cấm khiến loài người phạm tội và bị chặn đường đến Cây Sự Sống." },
+                q2: { question: "Đúng hay Sai: Ông Gióp dù chịu thử thách mất mát tai họa nặng nề vẫn giữ vững đức tin tôn kính Đức Giê-hô-va?", options: [{ label: "Đúng (True)", value: "True" }, { label: "Sai (False)", value: "False" }], correct: "True", exp: "Chính xác! Gióp phán: 'Đức Giê-hô-va đã ban cho, Đức Giê-hô-va lại lấy về; đáng ngợi khen danh Đức Giê-hô-va!'" },
+                q3: { guide: "💡 Gợi ý suy ngẫm: Gióp 42:5 'Trước tôi nghe đồn về Ngài, nhưng bây giờ mắt tôi đã thấy Ngài'.", prompt: "Bài học về sự kiên trì đức tin qua cuộc đời ông Gióp giúp ích gì cho bạn trong khó khăn thử thách?" }
+            },
+            2: {
+                title: "Tháng 2 (Lịch Sử): Xuất Ê-đíp-tô Ký & Lê-vi Ký – Lễ Vượt Qua Giải Thoát & Luật Pháp",
+                q1: { question: "Đêm ngày 14 tháng 1 thánh lịch trong Xuất Ê-đíp-tô Ký 12, dân Y-sơ-ra-ên bôi huyết chiên con lên đâu để được bảo vệ khỏi thiên sứ diệt vong?", options: [{ label: "A. Hai cây cột và ngạch cửa nhà", value: "A" }, { label: "B. Trên trán mình", value: "B" }, { label: "C. Trên nóc Đền Thờ", value: "C" }], correct: "A", exp: "Chính xác! Huyết Chiên Con Lễ Vượt Qua bôi trên ngạch cửa bảo vệ dân Y-sơ-ra-ên bình an vượt qua tai nạn." },
+                q2: { question: "Đúng hay Sai: Lê-vi Ký 23 liệt kê chi tiết các kỳ lễ trọng thể của Đức Giê-hô-va từ Ngày Sa-bát đến 3 kỳ 7 Lễ Trọng Thể?", options: [{ label: "Đúng (True)", value: "True" }, { label: "Sai (False)", value: "False" }], correct: "True", exp: "Chính xác! Lê-vi Ký 23 là chương đúc kết toàn bộ lịch 3 kỳ 7 Lễ Trọng Thể." },
+                q3: { guide: "💡 Gợi ý suy ngẫm: Huyết Chiên Con Lễ Vượt Qua Cựu Ước là hình bóng tuyệt đối của Huyết Đấng Christ Tân Ước.", prompt: "Cảm nhận của bạn về giá trị cứu rỗi linh thiêng của Lễ Vượt Qua từ thời Cựu Ước đến nay?" }
+            },
+            3: {
+                title: "Tháng 3 (Lịch Sử): Dân-số-ký, Phục-truyền & Giô-suê – 40 Năm Đồng Vắng & Đất Hứa",
+                q1: { question: "Khi dân Y-sơ-ra-ên bị rắn lửa cắn trong đồng vắng (Dân-số-ký 21), Môi-se làm theo lệnh Đức Chúa Trời treo vật gì lên cột để ai nhìn thì được sống?", options: [{ label: "A. Một con rắn bằng đồng", value: "A" }, { label: "B. Một cây thập tự giá", value: "B" }, { label: "C. Một cây gậy", value: "C" }], correct: "A", exp: "Chính xác! Yếu tố chữa lành là Lời hứa Đức Chúa Trời, không phải bản thân con rắn đồng." },
+                q2: { question: "Đúng hay Sai: Thành Giê-ri-cô sụp đổ nhờ dân Y-sơ-ra-ên vâng lời đi quanh thành 7 ngày theo lệnh phán của Đức Chúa Trời?", options: [{ label: "Đúng (True)", value: "True" }, { label: "Sai (False)", value: "False" }], correct: "True", exp: "Chính xác! Sự vâng lời phán dặn của Đức Chúa Trời mang lại chiến thắng thần kỳ tại Giê-ri-cô." },
+                q3: { guide: "💡 Gợi ý suy ngẫm: Giô-suê 1:9 'Hãy vững lòng bền chí... vì Đức Giê-hô-va Đức Chúa Trời ngươi vẫn ở cùng ngươi'.", prompt: "Lời hứa ở cùng của Đức Chúa Trời giúp bạn có thêm sức mạnh thế nào khi đối mặt thách thức?" }
+            }
+        };
+
+        const WATV_QUIZ_BANK_CAP2 = {
+            1: {
+                title: "Tháng 1 (Cấp 2): Thiếu Niên Anh Hùng Đức Tin & Lắng Nghe Lời Đức Chúa Trời",
+                q1: { question: "Trong 1 Sa-mu-ên 17, thiếu niên Đa-vít đã đánh bại gã khổng lồ Gô-li-át bằng vũ khí và quyền năng nào?", options: [{ label: "A. Nhờ Nhân Danh Đức Giê-hô-va vạn quân & Dùng một viên đá trơn", value: "A" }, { label: "B. Dùng áo giáp và gươm báu của vua Sáp-lơ", value: "B" }, { label: "C. Dùng súng cung nỏ", value: "C" }], correct: "A", exp: "Chính xác! Đa-vít phán: 'Ta đến cùng ngươi nhân danh Đức Giê-hô-va vạn quân'." },
+                q2: { question: "Đúng hay Sai: Đa-ni-ên và 3 bạn trẻ kiên quyết không ăn đồ cúng thần tượng của vua Ba-by-lôn và được ban sự khôn ngoan gấp 10 lần?", options: [{ label: "Đúng (True)", value: "True" }, { label: "Sai (False)", value: "False" }], correct: "True", exp: "Chính xác! Sự giữ gìn lòng thánh sạch được Đức Chúa Trời ban phước khôn ngoan trội vượt." },
+                q3: { guide: "💡 Gợi ý suy ngẫm: Đa-ni-ên 6 ghi nhận Đa-ni-ên cầu nguyện 3 lần mỗi ngày hướng về Giê-ru-sa-lem.", prompt: "Bạn học tập thói quen cầu nguyện và lòng dũng cảm của các thiếu niên Kinh Thánh như thế nào trong trường học?" }
+            }
+        };
+
+        const WATV_QUIZ_BANK_CAP3 = {
+            1: {
+                title: "Tháng 1 (Cấp 3): Bản Sắc Con Cái Đức Chúa Trời & Lẽ Thật Elohim",
+                q1: { question: "Trong Sáng-thế-ký 1:26-27 & Rô-ma 8:16-17, bằng chứng nào khẳng định chúng ta là Con Cái của Đức Chúa Trời Cha và Đức Chúa Trời Mẹ?", options: [{ label: "A. Danh xưng 'Chúng ta' (Elohim) & Linh Ngài chứng nhận chúng ta là con cái và kẻ thừa tự Thiên Đàng", value: "A" }, { label: "B. Nhờ có sức khỏe thể chất", value: "B" }, { label: "C. Nhờ giỏi môn lịch sử", value: "C" }], correct: "A", exp: "Chính xác! Đức Chúa Trời Elohim tạo dựng loài người và nhận chúng ta làm con cái thừa tự Nước Trời." },
+                q2: { question: "Đúng hay Sai: Rô-ma 5:14 khẳng định A-đam là hình bóng của Đấng phải đến (Đức Chúa Trời Cha & Đức Chúa Trời Mẹ)?", options: [{ label: "Đúng (True)", value: "True" }, { label: "Sai (False)", value: "False" }], correct: "True", exp: "Chính xác! A-đam và Ê-va Cựu Ước là hình bóng tiên tri về Đức Chúa Trời Cha và Đức Chúa Trời Mẹ." },
+                q3: { guide: "💡 Gợi ý suy ngẫm: Nhận biết bản sắc con cái Vua Trời giúp thanh thiếu niên vượt qua áp lực đồng lứa.", prompt: "Lẽ thật về Đức Chúa Trời Elohim mang lại định hướng và niềm tự hào đức tin ra sao cho bạn ở lứa tuổi THPT?" }
+            }
+        };
             1: {
                 title: "Tháng 1: Đức Chúa Trời Elohim, Ngày Sa-bát & Lễ Vượt Qua Giao Ước Mới",
                 q1: { question: "Trong Sáng-thế-ký 1:26-27, danh xưng Đức Chúa Trời dạng số nhiều trong nguyên bản Hê-bơ-rơ mang ý nghĩa gì?", options: [{ label: "A. Chỉ có một Ngôi duy nhất tạo dựng loài người", value: "A" }, { label: "B. Khẳng định sự hiện hữu của Đức Chúa Trời Cha và Đức Chúa Trời Mẹ (Elohim)", value: "B" }, { label: "C. Chỉ sự hiệp một của các thiên sứ", value: "C" }], correct: "B", exp: "Chính xác! Từ 'Chúng ta' và danh xưng 'Elohim' khẳng định sự hiện hữu của Đức Chúa Trời Cha và Đức Chúa Trời Mẹ." },
@@ -2423,10 +2463,20 @@
             }
         };
 
-        // Hàm Render Bộ Trắc Nghiệm Động Đồng Nhất 100% Theo Tháng Được Chọn
+        // Hàm Render Bộ Trắc Nghiệm Động Đồng Nhất 100% Theo Tháng & Lộ Trình Được Chọn
         function renderQuizForMonth(mNum) {
             const monthVal = parseInt(mNum) || 1;
-            const qData = WATV_QUIZ_BANK[monthVal] || WATV_QUIZ_BANK[1];
+            
+            let targetBank = WATV_QUIZ_BANK;
+            if (currentPlanMode === 'chronological') {
+                targetBank = WATV_QUIZ_BANK_CHRONOLOGICAL;
+            } else if (currentPlanMode === 'cap2') {
+                targetBank = WATV_QUIZ_BANK_CAP2;
+            } else if (currentPlanMode === 'cap3') {
+                targetBank = WATV_QUIZ_BANK_CAP3;
+            }
+
+            const qData = targetBank[monthVal] || targetBank[1] || WATV_QUIZ_BANK[monthVal] || WATV_QUIZ_BANK[1];
             const container = document.getElementById('dynamicQuizContent');
             if (!container) return;
 
@@ -2482,7 +2532,17 @@
             event.preventDefault();
 
             const monthVal = parseInt(document.getElementById('quizMonthSelect')?.value) || 1;
-            const qData = WATV_QUIZ_BANK[monthVal] || WATV_QUIZ_BANK[1];
+            
+            let targetBank = WATV_QUIZ_BANK;
+            if (currentPlanMode === 'chronological') {
+                targetBank = WATV_QUIZ_BANK_CHRONOLOGICAL;
+            } else if (currentPlanMode === 'cap2') {
+                targetBank = WATV_QUIZ_BANK_CAP2;
+            } else if (currentPlanMode === 'cap3') {
+                targetBank = WATV_QUIZ_BANK_CAP3;
+            }
+
+            const qData = targetBank[monthVal] || targetBank[1] || WATV_QUIZ_BANK[monthVal] || WATV_QUIZ_BANK[1];
 
             // Q1 Validation
             const q1Val = document.querySelector('input[name="q1"]:checked')?.value;
@@ -2594,8 +2654,9 @@
                 showToast("Đã chuyển sang LỘ TRÌNH 2: Theo Chuyên Đề Lẽ Thật Giao Ước Mới!");
             }
 
-            // Vẽ lại 12 thẻ tháng giao diện
+            // Vẽ lại 12 thẻ tháng giao diện & Đồng bộ Bài kiểm tra kiến thức
             renderMonthCardsGrid(1);
+            renderQuizForMonth(1);
 
             // Tải lại Tháng 1 theo Lộ Trình Mới
             const month1Btn = document.querySelector('.month-card[data-month="1"]');
