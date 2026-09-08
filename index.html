@@ -2273,9 +2273,18 @@
             // Close Mobile menu if open
             document.getElementById('navLinks').classList.remove('show');
 
-            // Scroll to section smoothly
+            // Scroll smoothly to exact top header offset of target section
             if (activeSection && tabId !== 'home') {
-                activeSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                setTimeout(() => {
+                    const headerHeight = document.querySelector('header')?.offsetHeight || 76;
+                    const elementPosition = activeSection.getBoundingClientRect().top + window.pageYOffset;
+                    const offsetPosition = elementPosition - headerHeight - 10;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }, 50);
             } else {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
