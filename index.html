@@ -2257,8 +2257,12 @@
             // Close Mobile menu if open
             document.getElementById('navLinks').classList.remove('show');
 
-            // Scroll to top smooth
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Scroll to section smoothly
+            if (activeSection && tabId !== 'home') {
+                activeSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
 
             // Tự động kích hoạt hiển thị Tháng 1 khi người dùng mở trang Lộ Trình #plans
             if (tabId === 'plans') {
