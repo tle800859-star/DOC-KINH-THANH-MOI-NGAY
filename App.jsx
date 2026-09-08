@@ -157,6 +157,36 @@ export default function App() {
                 <button onClick={() => setActiveTab('quotes')} className="px-5 py-2.5 rounded-full border border-[#62b6cb] text-[#1b4965] dark:text-sky-300 text-sm font-semibold hover:bg-[#cae9ff]/30 transition">💡 Lời Chúa Theo Tình Trạng Nhau</button>
               </div>
             </div>
+
+            <div className="pt-6">
+              <div className="text-center mb-6">
+                <h3 className="text-2xl font-bold text-[#1b4965] dark:text-sky-400">Bắt Đầu Hành Trình Của Bạn</h3>
+                <p className="text-slate-500 text-sm">Duy trì thói quen học và đọc Kinh Thánh dễ dàng mỗi ngày với lộ trình được thiết kế riêng.</p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm text-center flex flex-col justify-between items-center">
+                  <div className="text-4xl mb-3">🧩</div>
+                  <h4 className="font-bold text-lg text-[#1b4965] dark:text-sky-300 mb-2">Lộ Trình Đọc Kinh Thánh Trong 1 Năm</h4>
+                  <p className="text-xs text-slate-500 mb-4">Đọc trọn vẹn 66 sách Kinh Thánh (Cựu Ước & Tân Ước) trong 365 ngày.</p>
+                  <button onClick={() => setActiveTab('plans')} className="px-5 py-2 rounded-full bg-[#1b4965] text-white text-xs font-bold shadow hover:bg-[#123347] transition">Xem Lộ Trình</button>
+                </div>
+
+                <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm text-center flex flex-col justify-between items-center">
+                  <div className="text-4xl mb-3">🧠</div>
+                  <h4 className="font-bold text-lg text-[#1b4965] dark:text-sky-300 mb-2">Ôn Tập Kiến Thức</h4>
+                  <p className="text-xs text-slate-500 mb-4">Củng cố bài học qua các câu hỏi trắc nghiệm & tự luận ngắn.</p>
+                  <button onClick={() => setActiveTab('quotes')} className="px-5 py-2 rounded-full border border-[#1b4965] text-[#1b4965] dark:text-sky-300 text-xs font-bold hover:bg-[#cae9ff]/30 transition">Làm Bài Kiểm Tra</button>
+                </div>
+
+                <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm text-center flex flex-col justify-between items-center">
+                  <div className="text-4xl mb-3">❤️</div>
+                  <h4 className="font-bold text-lg text-[#1b4965] dark:text-sky-300 mb-2">Bài Suy Ngẫm</h4>
+                  <p className="text-xs text-slate-500 mb-4">Đọc các bài tĩnh nguyện ngắn giúp áp dụng lời Chúa vào đời sống.</p>
+                  <button onClick={() => setActiveTab('reflections')} className="px-5 py-2 rounded-full border border-[#1b4965] text-[#1b4965] dark:text-sky-300 text-xs font-bold hover:bg-[#cae9ff]/30 transition">Đọc Bài Suy Ngẫm</button>
+                </div>
+              </div>
+            </div>
           </section>
         )}
 
