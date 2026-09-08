@@ -2742,8 +2742,8 @@
             if (container) {
                 let html = '';
                 if (monthNum === 0) {
-                    // Hiển thị toàn bộ 12 tháng (365 ngày)
-                    WATV_12_MONTHS_PLAN.forEach(m => {
+                    // Hiển thị toàn bộ các tháng của Lộ Trình đang chọn
+                    dataSource.forEach(m => {
                         m.schedule.forEach(s => {
                             const globalDay = (m.month - 1) * 30 + s.day;
                             html += `
@@ -2753,7 +2753,7 @@
                                     <i class="fa-regular fa-circle" style="color: var(--text-muted);" id="icon-day-${globalDay}"></i>
                                 </div>
                                 <h3 class="day-title">${s.passage}</h3>
-                                <p class="day-passage"><i class="fa-solid fa-book-open"></i> Lộ trình đọc Kinh Thánh 1925 (WATV.ORG)</p>
+                                <p class="day-passage"><i class="fa-solid fa-book-open"></i> ${m.books || 'Lộ trình đọc Kinh Thánh 1925 (WATV.ORG)'}</p>
                                 <label class="checkbox-label">
                                     <input type="checkbox" onchange="toggleDayProgress(${globalDay}, this)"> Đã đọc xong
                                 </label>
