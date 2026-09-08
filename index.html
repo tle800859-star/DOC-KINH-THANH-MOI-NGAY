@@ -2252,7 +2252,7 @@
         }
 
         // Tab Navigation Router
-        function switchTab(tabId) {
+        function switchTab(tabId, pushHash = true) {
             // Update Navigation Links
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
@@ -2268,6 +2268,11 @@
             const activeSection = document.getElementById(tabId);
             if (activeSection) {
                 activeSection.classList.add('active');
+            }
+
+            // Đồng bộ URL hashtag (#plans, #quizzes, #reflections...) để chia sẻ link trực tiếp
+            if (pushHash && history.replaceState) {
+                history.replaceState(null, null, '#' + tabId);
             }
 
             // Close Mobile menu if open
@@ -2297,6 +2302,21 @@
                 }, 50);
             }
         }
+
+        // Tự động mở đúng Tab dựa theo URL hashtag khi vừa load trang
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash && document.getElementById(hash)) {
+                switchTab(hash, false);
+            }
+        });
+
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash && document.getElementById(hash)) {
+                switchTab(hash, false);
+            }
+        });
 
         // Toggle Mobile Menu
         function toggleMobileMenu() {
