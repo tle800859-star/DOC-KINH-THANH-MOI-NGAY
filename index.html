@@ -2638,9 +2638,16 @@
         // Tự động khởi tạo Quiz & Thẻ Lộ Trình 12 Tháng ngay khi trang nạp xong
         document.addEventListener('DOMContentLoaded', () => {
             window.ACTIVE_12_MONTHS_PLAN = (typeof WATV_12_MONTHS_PLAN !== 'undefined' ? WATV_12_MONTHS_PLAN : []);
-            renderQuizForMonth(1);
-            renderMonthCardsGrid(1);
-            filterMonthPlan(1);
+            
+            // Khôi phục Lộ Trình mà thầy đã chọn ở lần truy cập trước từ localStorage
+            const savedPlan = localStorage.getItem('saved_reading_plan_mode');
+            if (savedPlan) {
+                switchReadingPlan(savedPlan, false);
+            } else {
+                renderQuizForMonth(1);
+                renderMonthCardsGrid(1);
+                filterMonthPlan(1);
+            }
         });
 
         // Lộ Trình Đọc Hiện Tại (Mặc định: 'doctrinal' - Lộ Trình 2)
@@ -2676,38 +2683,45 @@
         }
 
         // Hàm Đổi Lộ Trình Đọc (Dropdown Toggle)
-        function switchReadingPlan(planType) {
+        function switchReadingPlan(planType, isUserInitiated = true) {
             currentPlanMode = planType;
+            if (isUserInitiated) {
+                localStorage.setItem('saved_reading_plan_mode', planType);
+            }
 
             const mainTitle = document.getElementById('planSectionTitle');
             const mainSubtitle = document.getElementById('planSectionSubtitle');
+            const selector = document.getElementById('mainPlanSelector');
+            if (selector && selector.value !== planType) {
+                selector.value = planType;
+            }
 
             // Cập nhật mảng dữ liệu active & Tiêu đề giao diện
             if (planType === 'chronological') {
                 window.ACTIVE_12_MONTHS_PLAN = (typeof CHRONOLOGICAL_12_MONTHS_PLAN !== 'undefined' ? CHRONOLOGICAL_12_MONTHS_PLAN : []);
                 if (mainTitle) mainTitle.innerText = "📜 Lộ Trình Đọc Kinh Thánh Theo Tiến Trình Lịch Sử & Lời Tiên Tri";
                 if (mainSubtitle) mainSubtitle.innerText = "Sắp xếp chính xác theo thời gian lịch sử xuất hiện và lời tiên tri ứng nghiệm • Bản Dịch Phan Khôi 1925 (WATV.ORG)";
-                showToast("Đã chuyển sang LỘ TRÌNH 1: Theo Tiến Trình Lịch Sử Thuần Tuý!");
+                if (isUserInitiated) showToast("Đã chuyển sang LỘ TRÌNH 1: Theo Tiến Trình Lịch Sử Thuần Tuý!");
             } else if (planType === 'fast6') {
                 window.ACTIVE_12_MONTHS_PLAN = (typeof FAST_6_MONTHS_PLAN !== 'undefined' ? FAST_6_MONTHS_PLAN : []);
                 if (mainTitle) mainTitle.innerText = "⚡ Lộ Trình Đọc Kinh Thánh 6 Tháng Nhanh (Tân Ước & Tiên Tri Trọng Tâm)";
                 if (mainSubtitle) mainSubtitle.innerText = "Rút ngắn thời gian, tập trung Tân Ước & Các Tiên Tri (Ê-sai, Đa-ni-ên, Sa-cha-ri) • 2 Chương/Ngày";
-                showToast("Đã chuyển sang LỘ TRÌNH 3: Lộ Trình 6 Tháng Nhanh (2 Chương/Ngày)!");
+                if (isUserInitiated) showToast("Đã chuyển sang LỘ TRÌNH 3: Lộ Trình 6 Tháng Nhanh (2 Chương/Ngày)!");
             } else if (planType === 'cap2') {
                 window.ACTIVE_12_MONTHS_PLAN = (typeof STUDENT_CAP2_PLAN !== 'undefined' ? STUDENT_CAP2_PLAN : []);
                 if (mainTitle) mainTitle.innerText = "🎒 Lộ Trình Đọc Kinh Thánh Cho Học Sinh Cấp 2 (THCS: 11 – 14 Tuổi)";
                 if (mainSubtitle) mainSubtitle.innerText = "Thiếu niên anh hùng đức tin, lòng hiếu kính cha mẹ & Lẽ Thật cứu rỗi • 1 Chương/Ngày (5–7 Phút)";
-                showToast("Đã chuyển sang LỘ TRÌNH 4: Học Sinh Cấp 2 (Thiếu Niên Đức Tin)!");
+                if (isUserInitiated) showToast("Đã chuyển sang LỘ TRÌNH 4: Học Sinh Cấp 2 (Thiếu Niên Đức Tin)!");
             } else if (planType === 'cap3') {
                 window.ACTIVE_12_MONTHS_PLAN = (typeof STUDENT_CAP3_PLAN !== 'undefined' ? STUDENT_CAP3_PLAN : []);
                 if (mainTitle) mainTitle.innerText = "🎓 Lộ Trình Đọc Kinh Thánh Cho Học Sinh Cấp 3 (THPT: 15 – 18 Tuổi)";
                 if (mainSubtitle) mainSubtitle.innerText = "Bản sắc con cái Đức Chúa Trời, sự khôn ngoan thi cử & định hướng tương lai • 2 Chương/Ngày (10–12 Phút)";
-                showToast("Đã chuyển sang LỘ TRÌNH 5: Học Sinh Cấp 3 (Định Hướng & Lẽ Thật)!");
+                if (isUserInitiated) showToast("Đã chuyển sang LỘ TRÌNH 5: Học Sinh Cấp 3 (Định Hướng & Lẽ Thật)!");
             } else {
                 window.ACTIVE_12_MONTHS_PLAN = (typeof WATV_12_MONTHS_PLAN !== 'undefined' ? WATV_12_MONTHS_PLAN : []);
                 if (mainTitle) mainTitle.innerText = "🕊️ Lộ Trình Đọc Kinh Thánh Theo Chuyên Đề Lẽ Thật Giao Ước Mới";
                 if (mainSubtitle) mainSubtitle.innerText = "Phương Pháp Song Song: Cựu Ước & Tân Ước (Tiên Tri & Ứng Nghiệm, Hình Bóng & Thực Thể) • WATV.ORG";
-                showToast("Đã chuyển sang LỘ TRÌNH 2: Theo Chuyên Đề Lẽ Thật Giao Ước Mới!");
+                if (isUserInitiated) showToast("Đã chuyển sang LỘ TRÌNH 2: Theo Chuyên Đề Lẽ Thật Giao Ước Mới!");
             }
 
             // Vẽ lại 12 thẻ tháng giao diện & Đồng bộ Bài kiểm tra kiến thức
