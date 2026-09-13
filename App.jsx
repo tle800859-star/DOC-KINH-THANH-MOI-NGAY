@@ -2,6 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { BIBLE_PLAN_365 } from './planData1925';
 import { BIBLE_QUOTES_1925, BIBLE_QUOTES_CATEGORIES } from './quotesData1925';
+import { 
+  WATV_12_MONTHS_PLAN, 
+  CHRONOLOGICAL_12_MONTHS_PLAN, 
+  FAST_6_MONTHS_PLAN,
+  STUDENT_CAP2_PLAN,
+  STUDENT_CAP3_PLAN 
+} from './watvPlanData1925';
 
 // 1. SUPABASE CLIENT SDK WITH EDGE CACHING & PERSISTENCE
 const SUPABASE_URL = "https://poivvectmogswfdurpmh.supabase.co";
@@ -15,22 +22,6 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
   }
 });
 
-// DANH MỤC 12 THÁNG ĐỌC KINH THÁNH THEO CHỦ ĐỀ (WATV.ORG - PHAN KHÔI 1925)
-const MONTH_CATEGORIES = [
-  { id: 1, name: "Tháng 1 (106ch)", title: "Đức Chúa Trời Elohim, Ngày Sa-bát & Lễ Vượt Qua", desc: "Sáng-thế-ký, Ma-thi-ơ, Giăng, 1-2-3 Giăng" },
-  { id: 2, name: "Tháng 2 (96ch)", title: "Lễ Vượt Qua, 3 Kỳ 7 Lễ & Mên-chi-xê-đéc", desc: "Xuất Ê-đíp-tô Ký, Lê-vi Ký, Mác, Hê-bơ-rơ" },
-  { id: 3, name: "Tháng 3 (94ch)", title: "Thói Quen Giữ Ngày Sa-bát", desc: "Dân-số-ký, Phục-truyền, Lu-ca" },
-  { id: 4, name: "Tháng 4 (93ch)", title: "Lễ Ngũ Tuần & Sự Sống Lại", desc: "Giô-suê, Các Quan-xét, Ru-tơ, Công-vụ, Rô-ma" },
-  { id: 5, name: "Tháng 5 (112ch)", title: "Đức Chúa Trời Mẹ & Luật Khăn Trùm Đầu", desc: "1-2 Sa-mu-ên, 1 Các Vua, 1-2 Cô-rinh-tô, Ga-la-ti" },
-  { id: 6, name: "Tháng 6 (104ch)", title: "Lễ Vượt Qua Phá Thần Tượng & Tha Tội", desc: "2 Các Vua, 1-2 Sử-ký, Ê-phê-sô, Phi-líp, Cô-lô-se" },
-  { id: 7, name: "Tháng 7 (97ch)", title: "Tái Thiết Si-ôn & Lễ Lều Tạm", desc: "Ê-xơ-ra, Nê-hê-mi, Ê-xơ-thê, Gióp, Tê-sa-lô-ni-ca, Ti-mô-thê..." },
-  { id: 8, name: "Tháng 8 (113ch)", title: "Si-ôn Ban Sự Sống Đời Đời & Huyết Báu", desc: "Thi-thiên (1-100), Gia-cơ, 1-2 Phi-e-rơ" },
-  { id: 9, name: "Tháng 9 (102ch)", title: "Sự Khôn Ngoan & Tiệc Rượu Nho", desc: "Thi-thiên (101-150), Châm-ngôn, Truyền-đạo, Nhã-ca, Giu-đơ" },
-  { id: 10, name: "Tháng 10 (101ch)", title: "Tiệc Rượu Nho Lâu Năm & Si-ôn Lễ Trọng", desc: "Ê-sai, Giê-rê-mi (1–35)" },
-  { id: 11, name: "Tháng 11 (82ch)", title: "Dấu Ấn Đức Chúa Trời & Nước Sự Sống", desc: "Giê-rê-mi (36–52), Ca-thương, Ê-zê-chi-ên, Đa-ni-ên" },
-  { id: 12, name: "Tháng 12 (89ch)", title: "Thánh Linh & Vợ Mới Ban Nước Sự Sống", desc: "12 Tiên Tri Nhỏ, Khải-huyền" }
-];
-
 export default function App() {
   const [activeTab, setActiveTab] = useState('home');
   const [user, setUser] = useState(null);
@@ -41,7 +32,8 @@ export default function App() {
   const [toastMsg, setToastMsg] = useState('');
   const [darkMode, setDarkMode] = useState(false);
 
-  // 365 Plan Filter States
+  // 5 Lộ Trình States
+  const [planMode, setPlanMode] = useState(() => localStorage.getItem('saved_reading_plan_mode') || 'doctrinal');
   const [selectedMonth, setSelectedMonth] = useState(0);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -191,57 +183,126 @@ export default function App() {
         )}
 
         {/* 365-DAY BIBLE READING PLAN TAB */}
-        {activeTab === 'plans' && (
-          <section className="space-y-8">
-            <div className="text-center space-y-2">
-              <h2 className="text-3xl font-bold text-[#1b4965] dark:text-sky-400">Danh Mục Lộ Trình 12 Tháng Đọc Trọn Vẹn Kinh Thánh (1925)</h2>
-              <p className="text-slate-500 text-sm">Sắp Xếp Song Song: Cựu Ước & Tân Ước (Tiên Tri & Ứng Nghiệm, Hình Bóng & Thực Thể)</p>
-            </div>
+        {activeTab === 'plans' && (() => {
+          let currentPlanData = WATV_12_MONTHS_PLAN;
+          let planTitle = "🕊️ Lộ Trình Đọc Kinh Thánh Theo Chuyên Đề Lẽ Thật Giao Ước Mới";
+          let planSubtitle = "Phương Pháp Song Song: Cựu Ước & Tân Ước (Tiên Tri & Ứng Nghiệm, Hình Bóng & Thực Thể) • WATV.ORG";
 
-            {/* 12 MONTHS CATEGORIES GRID */}
-            <div className="space-y-4">
+          if (planMode === 'chronological') {
+            currentPlanData = CHRONOLOGICAL_12_MONTHS_PLAN;
+            planTitle = "📜 Lộ Trình Đọc Kinh Thánh Theo Tiến Trình Lịch Sử & Lời Tiên Tri";
+            planSubtitle = "Sắp xếp chính xác theo thời gian lịch sử xuất hiện và lời tiên tri ứng nghiệm • Bản Dịch Phan Khôi 1925";
+          } else if (planMode === 'fast6') {
+            currentPlanData = FAST_6_MONTHS_PLAN;
+            planTitle = "⚡ Lộ Trình Đọc Kinh Thánh 6 Tháng Nhanh (Tân Ước & Tiên Tri Trọng Tâm)";
+            planSubtitle = "Rút ngắn thời gian, tập trung Tân Ước & Các Tiên Tri (Ê-sai, Đa-ni-ên, Sa-cha-ri) • 2 Chương/Ngày";
+          } else if (planMode === 'cap2') {
+            currentPlanData = STUDENT_CAP2_PLAN;
+            planTitle = "🎒 Lộ Trình Đọc Kinh Thánh Cho Học Sinh Cấp 2 (THCS: 11 – 14 Tuổi)";
+            planSubtitle = "Thiếu niên anh hùng đức tin, lòng hiếu kính cha mẹ & Lẽ Thật cứu rỗi • 1 Chương/Ngày (5–7 Phút)";
+          } else if (planMode === 'cap3') {
+            currentPlanData = STUDENT_CAP3_PLAN;
+            planTitle = "🎓 Lộ Trình Đọc Kinh Thánh Cho Học Sinh Cấp 3 (THPT: 15 – 18 Tuổi)";
+            planSubtitle = "Bản sắc con cái Đức Chúa Trời, sự khôn ngoan thi cử & định hướng tương lai • 2 Chương/Ngày (10–12 Phút)";
+          }
+
+          const activeMonthData = selectedMonth > 0 ? currentPlanData.find(m => m.month === selectedMonth) : null;
+          const displaySchedule = selectedMonth === 0 
+            ? currentPlanData.flatMap(m => m.schedule.map(s => ({ ...s, month: m.month, books: m.books })))
+            : (activeMonthData ? activeMonthData.schedule.map(s => ({ ...s, month: activeMonthData.month, books: activeMonthData.books })) : []);
+
+          return (
+            <section className="space-y-8">
+              <div className="text-center space-y-2">
+                <h2 className="text-3xl font-bold text-[#1b4965] dark:text-sky-400">{planTitle}</h2>
+                <p className="text-slate-500 text-sm">{planSubtitle}</p>
+              </div>
+
+              {/* BỘ CHỌN LỘ TRÌNH DROPDOWN */}
+              <div className="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-[#1b4965] text-white flex items-center justify-center font-bold text-lg">📚</div>
+                  <div>
+                    <span className="text-[10px] font-extrabold px-2 py-0.5 rounded bg-sky-100 text-sky-800 uppercase">BỘ CHỌN ĐỒNG BỘ 100%</span>
+                    <h3 className="font-bold text-sm text-[#1b4965] dark:text-sky-300">Lựa Chọn Lộ Trình Đọc Phù Hợp:</h3>
+                  </div>
+                </div>
+                <select 
+                  value={planMode} 
+                  onChange={(e) => {
+                    setPlanMode(e.target.value);
+                    localStorage.setItem('saved_reading_plan_mode', e.target.value);
+                    showToast(`Đã chuyển sang Lộ Trình Mới!`);
+                  }}
+                  className="w-full md:w-auto px-4 py-2.5 rounded-xl border-2 border-[#62b6cb] font-bold text-sm bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 outline-none cursor-pointer"
+                >
+                  <option value="doctrinal">🕊️ LỘ TRÌNH 2: Theo Chuyên Đề Lẽ Thật Giao Ước Mới (Song Song - WATV.ORG)</option>
+                  <option value="chronological">📜 LỘ TRÌNH 1: Theo Tiến Trình Lịch Sử & Lời Tiên Tri (Cựu Ước ➔ Tân Ước)</option>
+                  <option value="fast6">⚡ LỘ TRÌNH 3: Lộ Trình 6 Tháng Nhanh (2 Chương/Ngày)</option>
+                  <option value="cap2">🎒 LỘ TRÌNH 4: Lộ Trình Học Sinh Cấp 2 (THCS: 11-14 Tuổi - Thiếu Niên Đức Tin)</option>
+                  <option value="cap3">🎓 LỘ TRÌNH 5: Lộ Trình Học Sinh Cấp 3 (THPT: 15-18 Tuổi - Định Hướng & Lẽ Thật)</option>
+                </select>
+              </div>
+
+              {/* 12 THẺ THÁNG GRID */}
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 <div onClick={() => setSelectedMonth(0)} className={`p-4 rounded-2xl border cursor-pointer transition-all ${selectedMonth === 0 ? 'bg-[#1b4965] text-white border-[#1b4965] shadow-lg scale-105' : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-[#62b6cb]'}`}>
-                  <span className="text-xs font-bold opacity-80 block">TẤT CẢ 365 NGÀY</span>
+                  <span className="text-xs font-bold opacity-80 block">TẤT CẢ THÁNG</span>
                   <h4 className="font-bold text-sm mb-1">Toàn Bộ Lộ Trình</h4>
-                  <p className="text-[11px] opacity-70">365 Bài Học Trọn Vẹn 66 Sách</p>
+                  <p className="text-[11px] opacity-70">Bản Dịch Phan Khôi 1925</p>
                 </div>
 
-                {MONTH_CATEGORIES.map(m => (
-                  <div key={m.id} onClick={() => setSelectedMonth(m.id)} className={`p-4 rounded-2xl border cursor-pointer transition-all ${selectedMonth === m.id ? 'bg-[#1b4965] text-white border-[#1b4965] shadow-lg scale-105' : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-[#62b6cb]'}`}>
+                {currentPlanData.map(m => (
+                  <div key={m.month} onClick={() => setSelectedMonth(m.month)} className={`p-4 rounded-2xl border cursor-pointer transition-all ${selectedMonth === m.month ? 'bg-[#1b4965] text-white border-[#1b4965] shadow-lg scale-105' : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 hover:border-[#62b6cb]'}`}>
                     <div className="flex justify-between items-center mb-1">
-                      <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${selectedMonth === m.id ? 'bg-sky-400 text-slate-900' : 'bg-[#cae9ff] text-[#1b4965]'}`}>{m.name}</span>
+                      <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold ${selectedMonth === m.month ? 'bg-sky-400 text-slate-900' : 'bg-[#cae9ff] text-[#1b4965]'}`}>Tháng {m.month} ({m.totalChapters}ch)</span>
                     </div>
-                    <h4 className="font-bold text-xs mb-1 line-clamp-1">{m.title}</h4>
-                    <p className="text-[10px] opacity-75 line-clamp-1">{m.desc}</p>
+                    <h4 className="font-bold text-xs mb-1 line-clamp-1">{m.title.replace(/^Tháng \d+:\s*/, '').replace(/^Tháng \d+\s*\([^)]+\):\s*/, '')}</h4>
+                    <p className="text-[10px] opacity-75 line-clamp-1">{m.books}</p>
                   </div>
                 ))}
               </div>
-            </div>
 
-            {/* 365 Day Cards Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredPlan.map(dayItem => (
-                <div key={dayItem.day} className={`p-6 rounded-2xl border transition-all duration-200 ${completedDays.includes(dayItem.day) ? 'bg-emerald-50/40 border-emerald-300 dark:bg-emerald-950/20 dark:border-emerald-800' : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md'}`}>
-                  <div className="flex justify-between items-center mb-3">
-                    <span className="px-3 py-1 rounded-full bg-[#cae9ff] text-[#1b4965] font-bold text-xs">Ngày {dayItem.day} (Tháng {dayItem.month})</span>
-                    {completedDays.includes(dayItem.day) && <span className="text-emerald-600 font-bold text-xs">✓ Đã đọc</span>}
-                  </div>
-                  <h3 className="font-bold text-base text-[#1b4965] dark:text-sky-300 mb-2">{dayItem.title}</h3>
-                  <div className="text-xs space-y-1 text-slate-600 dark:text-slate-300 mb-4">
-                    <p className="font-medium">📖 <strong>Cựu Ước:</strong> {dayItem.oldTestament}</p>
-                    <p className="font-medium">📘 <strong>Tân Ước:</strong> {dayItem.newTestament}</p>
-                    <p className="font-medium">✨ <strong>Thi Thiên:</strong> {dayItem.psalmProverb}</p>
-                  </div>
-                  <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold text-slate-700 dark:text-slate-200">
-                    <input type="checkbox" checked={completedDays.includes(dayItem.day)} onChange={() => toggleDay(dayItem.day)} className="w-4 h-4 rounded text-[#1b4965] focus:ring-0" />
-                    Đánh dấu đã đọc ngày này
-                  </label>
+              {/* DETAILS BOX IF MONTH SELECTED */}
+              {activeMonthData && (
+                <div className="bg-sky-50 dark:bg-slate-800/80 p-6 rounded-2xl border border-sky-200 dark:border-slate-700 space-y-4">
+                  <h3 className="font-bold text-lg text-[#1b4965] dark:text-sky-300">📖 {activeMonthData.title}</h3>
+                  <p className="text-sm text-slate-600 dark:text-slate-300"><strong>Tổng quan:</strong> {activeMonthData.overview}</p>
+                  {activeMonthData.coreDoc && (
+                    <div>
+                      <h4 className="font-bold text-xs text-sky-700 dark:text-sky-400 uppercase mb-1">🕊️ Bản Chất Cốt Lõi (WATV.ORG):</h4>
+                      <ul className="list-disc list-inside text-xs space-y-1 text-slate-700 dark:text-slate-300">
+                        {activeMonthData.coreDoc.map((c, idx) => <li key={idx}>{c}</li>)}
+                      </ul>
+                    </div>
+                  )}
                 </div>
-              ))}
-            </div>
-          </section>
-        )}
+              )}
+
+              {/* DAY CARDS GRID */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {displaySchedule.map((s, idx) => {
+                  const globalDay = s.day || idx + 1;
+                  const isDone = completedDays.includes(globalDay);
+                  return (
+                    <div key={idx} className={`p-6 rounded-2xl border transition-all duration-200 ${isDone ? 'bg-emerald-50/40 border-emerald-300 dark:bg-emerald-950/20 dark:border-emerald-800' : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md'}`}>
+                      <div className="flex justify-between items-center mb-3">
+                        <span className="px-3 py-1 rounded-full bg-[#cae9ff] text-[#1b4965] font-bold text-xs">Tháng {s.month} • Ngày {s.day || (idx + 1)}</span>
+                        {isDone && <span className="text-emerald-600 font-bold text-xs">✓ Đã đọc</span>}
+                      </div>
+                      <h3 className="font-bold text-base text-[#1b4965] dark:text-sky-300 mb-2">{s.passage}</h3>
+                      <p className="text-xs text-slate-500 mb-4">📖 {s.books || 'Phân đoạn Kinh Thánh Phan Khôi 1925'}</p>
+                      <label className="flex items-center gap-2 cursor-pointer text-xs font-semibold text-slate-700 dark:text-slate-200">
+                        <input type="checkbox" checked={isDone} onChange={() => toggleDay(globalDay)} className="w-4 h-4 rounded text-[#1b4965] focus:ring-0" />
+                        Đánh dấu đã đọc ngày này
+                      </label>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          );
+        })()}
 
         {/* BIBLE QUOTES BY HUMAN NEED CATEGORIES TAB */}
         {activeTab === 'quotes' && (
