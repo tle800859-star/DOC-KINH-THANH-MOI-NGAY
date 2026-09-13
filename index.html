@@ -2282,9 +2282,18 @@
             const navLinks = document.getElementById('navLinks');
             if (navLinks) navLinks.classList.remove('show');
 
-            // Scroll immediately to target section
+            // Scroll smoothly to exact top header offset of target section
             if (activeSection && tabId !== 'home') {
-                activeSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                setTimeout(() => {
+                    const headerHeight = document.querySelector('header')?.offsetHeight || 76;
+                    const elementPosition = activeSection.getBoundingClientRect().top + window.pageYOffset;
+                    const offsetPosition = elementPosition - headerHeight - 15;
+                    
+                    window.scrollTo({
+                        top: Math.max(0, offsetPosition),
+                        behavior: 'smooth'
+                    });
+                }, 40);
             } else {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
