@@ -1499,11 +1499,12 @@ if (typeof window !== 'undefined') {
     window.STUDENT_CAP2_PLAN = STUDENT_CAP2_PLAN;
     window.STUDENT_CAP3_PLAN = STUDENT_CAP3_PLAN;
 }
-
-export { 
-    WATV_12_MONTHS_PLAN, 
-    CHRONOLOGICAL_12_MONTHS_PLAN, 
-    FAST_6_MONTHS_PLAN,
-    STUDENT_CAP2_PLAN,
-    STUDENT_CAP3_PLAN 
-};
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { 
+        WATV_12_MONTHS_PLAN, 
+        CHRONOLOGICAL_12_MONTHS_PLAN, 
+        FAST_6_MONTHS_PLAN,
+        STUDENT_CAP2_PLAN,
+        STUDENT_CAP3_PLAN 
+    };
+}

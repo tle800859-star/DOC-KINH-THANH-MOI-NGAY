@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { BIBLE_PLAN_365 } from './planData1925';
 import { BIBLE_QUOTES_1925, BIBLE_QUOTES_CATEGORIES } from './quotesData1925';
-import { 
-  WATV_12_MONTHS_PLAN, 
-  CHRONOLOGICAL_12_MONTHS_PLAN, 
-  FAST_6_MONTHS_PLAN,
-  STUDENT_CAP2_PLAN,
-  STUDENT_CAP3_PLAN 
-} from './watvPlanData1925';
+const WATV_12_MONTHS_PLAN = window.WATV_12_MONTHS_PLAN || [];
+const CHRONOLOGICAL_12_MONTHS_PLAN = window.CHRONOLOGICAL_12_MONTHS_PLAN || [];
+const FAST_6_MONTHS_PLAN = window.FAST_6_MONTHS_PLAN || [];
+const STUDENT_CAP2_PLAN = window.STUDENT_CAP2_PLAN || [];
+const STUDENT_CAP3_PLAN = window.STUDENT_CAP3_PLAN || [];
 
 // 1. SUPABASE CLIENT SDK WITH EDGE CACHING & PERSISTENCE
 const SUPABASE_URL = "https://poivvectmogswfdurpmh.supabase.co";
