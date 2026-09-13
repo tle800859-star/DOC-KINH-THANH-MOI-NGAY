@@ -2531,6 +2531,8 @@
             const dataSource = window.ACTIVE_12_MONTHS_PLAN || (typeof WATV_12_MONTHS_PLAN !== 'undefined' ? WATV_12_MONTHS_PLAN : []);
             let html = '';
             
+            const currentValBefore = qSelect.value;
+            
             dataSource.forEach(m => {
                 let cleanTitle = m.title;
                 cleanTitle = cleanTitle.replace(/^Tháng \d+:\s*/, '').replace(/^Tháng \d+\s*\([^)]+\):\s*/, '');
@@ -2539,7 +2541,7 @@
 
             qSelect.innerHTML = html;
             
-            const desiredVal = targetMonth || qSelect.value || 1;
+            const desiredVal = targetMonth || currentValBefore || 1;
             if (dataSource.some(m => m.month == desiredVal)) {
                 qSelect.value = desiredVal;
             } else {
