@@ -2523,6 +2523,29 @@
             }
         };
 
+        // Hàm render lại các Option trong Select box Bài Kiểm Tra theo đúng Lộ Trình đang chọn
+        function updateQuizSelectDropdown() {
+            const qSelect = document.getElementById('quizMonthSelect');
+            if (!qSelect) return;
+
+            const dataSource = window.ACTIVE_12_MONTHS_PLAN || (typeof WATV_12_MONTHS_PLAN !== 'undefined' ? WATV_12_MONTHS_PLAN : []);
+            let html = '';
+            
+            dataSource.forEach(m => {
+                let cleanTitle = m.title;
+                cleanTitle = cleanTitle.replace(/^Tháng \d+:\s*/, '').replace(/^Tháng \d+\s*\([^)]+\):\s*/, '');
+                html += `<option value="${m.month}">Tháng ${m.month}: ${cleanTitle}</option>`;
+            });
+
+            const currentVal = qSelect.value;
+            qSelect.innerHTML = html;
+            if (dataSource.some(m => m.month == currentVal)) {
+                qSelect.value = currentVal;
+            } else {
+                qSelect.value = 1;
+            }
+        }
+
         // Hàm Render Bộ Trắc Nghiệm Động Đồng Nhất 100% Theo Tháng & Lộ Trình Được Chọn
         function renderQuizForMonth(mNum) {
             const monthVal = parseInt(mNum) || 1;
@@ -2648,6 +2671,7 @@
             if (savedPlan) {
                 switchReadingPlan(savedPlan, false);
             } else {
+                updateQuizSelectDropdown();
                 renderQuizForMonth(1);
                 renderMonthCardsGrid(1);
                 filterMonthPlan(1);
@@ -2728,8 +2752,9 @@
                 if (isUserInitiated) showToast("Đã chuyển sang LỘ TRÌNH 2: Theo Chuyên Đề Lẽ Thật Giao Ước Mới!");
             }
 
-            // Vẽ lại 12 thẻ tháng giao diện & Đồng bộ Bài kiểm tra kiến thức
+            // Vẽ lại 12 thẻ tháng giao diện, đồng bộ danh sách Tháng Kiểm Tra & Bài kiểm tra kiến thức
             renderMonthCardsGrid(1);
+            updateQuizSelectDropdown();
             renderQuizForMonth(1);
 
             // Tải lại Tháng 1 theo Lộ Trình Mới
