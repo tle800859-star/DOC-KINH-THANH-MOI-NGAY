@@ -2686,7 +2686,7 @@
             const gridContainer = document.getElementById('monthCategoriesGrid');
             if (!gridContainer) return;
 
-            const dataSource = window.ACTIVE_12_MONTHS_PLAN || (typeof CHRONOLOGICAL_12_MONTHS_PLAN !== 'undefined' ? CHRONOLOGICAL_12_MONTHS_PLAN : []);
+            const dataSource = window.ACTIVE_12_MONTHS_PLAN || (typeof WATV_12_MONTHS_PLAN !== 'undefined' ? WATV_12_MONTHS_PLAN : []);
             
             let html = `
                 <div class="month-card ${selectedMonthNum === 0 ? 'active' : ''}" onclick="filterMonthPlan(0, this)" data-month="0" style="background: ${selectedMonthNum === 0 ? '#1b4965' : '#f8fafc'}; color: ${selectedMonthNum === 0 ? 'white' : 'inherit'}; border: 1px solid #cbd5e1; padding: 12px; border-radius: 12px; cursor: pointer; transition: all 0.2s;">
