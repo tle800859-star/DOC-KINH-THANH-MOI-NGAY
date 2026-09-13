@@ -2524,7 +2524,7 @@
         };
 
         // Hàm render lại các Option trong Select box Bài Kiểm Tra theo đúng Lộ Trình đang chọn
-        function updateQuizSelectDropdown() {
+        function updateQuizSelectDropdown(targetMonth = null) {
             const qSelect = document.getElementById('quizMonthSelect');
             if (!qSelect) return;
 
@@ -2537,10 +2537,11 @@
                 html += `<option value="${m.month}">Tháng ${m.month}: ${cleanTitle}</option>`;
             });
 
-            const currentVal = qSelect.value;
             qSelect.innerHTML = html;
-            if (dataSource.some(m => m.month == currentVal)) {
-                qSelect.value = currentVal;
+            
+            const desiredVal = targetMonth || qSelect.value || 1;
+            if (dataSource.some(m => m.month == desiredVal)) {
+                qSelect.value = desiredVal;
             } else {
                 qSelect.value = 1;
             }
@@ -2787,11 +2788,8 @@
 
             // Đồng bộ 100% Bộ Chọn Kiểm Tra Kiến Thức sang Tháng tương ứng (nếu bấm chọn tháng > 0)
             if (monthNum > 0) {
-                const qSelect = document.getElementById('quizMonthSelect');
-                if (qSelect) {
-                    qSelect.value = monthNum;
-                    renderQuizForMonth(monthNum);
-                }
+                updateQuizSelectDropdown(monthNum);
+                renderQuizForMonth(monthNum);
             }
             const detailContainer = document.getElementById('monthDetailBox');
             const dataSource = window.ACTIVE_12_MONTHS_PLAN || (typeof WATV_12_MONTHS_PLAN !== 'undefined' ? WATV_12_MONTHS_PLAN : WATV_DATA_PLAN);
