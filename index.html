@@ -2300,16 +2300,18 @@
             }
         }
 
-        // Tự động kiểm tra & cập nhật tham số phiên bản Version (?v=1.0.2) để chống Cache cũ
+        // Tự động kiểm tra & cập nhật tham số phiên bản Version (?v=1.0.2) để chống Cache cũ (Chỉ áp dụng trên HTTP/HTTPS Server)
         const APP_VERSION = '1.0.2';
         window.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const currentVer = urlParams.get('v');
-            if (currentVer !== APP_VERSION) {
-                urlParams.set('v', APP_VERSION);
-                const newSearch = urlParams.toString();
-                const newUrl = window.location.pathname + '?' + newSearch + window.location.hash;
-                window.history.replaceState(null, '', newUrl);
+            if (window.location.protocol.startsWith('http')) {
+                const urlParams = new URLSearchParams(window.location.search);
+                const currentVer = urlParams.get('v');
+                if (currentVer !== APP_VERSION) {
+                    urlParams.set('v', APP_VERSION);
+                    const newSearch = urlParams.toString();
+                    const newUrl = window.location.pathname + '?' + newSearch + window.location.hash;
+                    window.history.replaceState(null, '', newUrl);
+                }
             }
 
             const hash = window.location.hash.replace('#', '');
