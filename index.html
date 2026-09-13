@@ -2261,7 +2261,7 @@
                 }
             });
 
-            // Hide all sections and activate the target section
+            // Hide all sections and activate target section
             document.querySelectorAll('.section').forEach(sec => {
                 sec.classList.remove('active');
                 sec.style.display = 'none';
@@ -2273,7 +2273,7 @@
                 activeSection.style.display = 'block';
             }
 
-            // Đồng bộ URL hashtag (#plans, #quizzes, #reflections...) để chia sẻ link trực tiếp
+            // Sync URL hashtag
             if (pushHash && history.replaceState) {
                 history.replaceState(null, null, '#' + tabId);
             }
@@ -2282,18 +2282,16 @@
             const navLinks = document.getElementById('navLinks');
             if (navLinks) navLinks.classList.remove('show');
 
-            // Scroll smoothly to exact top header offset of target section
+            // Scroll immediately and smoothly
             if (activeSection && tabId !== 'home') {
-                setTimeout(() => {
-                    const headerHeight = document.querySelector('header')?.offsetHeight || 76;
-                    const elementPosition = activeSection.getBoundingClientRect().top + window.pageYOffset;
-                    const offsetPosition = elementPosition - headerHeight - 15;
-                    
-                    window.scrollTo({
-                        top: Math.max(0, offsetPosition),
-                        behavior: 'smooth'
-                    });
-                }, 40);
+                const headerHeight = document.querySelector('header')?.offsetHeight || 76;
+                const elementPosition = activeSection.getBoundingClientRect().top + window.pageYOffset;
+                const offsetPosition = elementPosition - headerHeight - 10;
+                
+                window.scrollTo({
+                    top: Math.max(0, offsetPosition),
+                    behavior: 'smooth'
+                });
             } else {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
