@@ -69,12 +69,16 @@
 
         /* Section Visibility & Transitions */
         .section {
-            display: none;
+            display: block; /* Mặc định cuộn được tất cả section */
             padding: 40px 0;
         }
 
+        .section.tab-hidden {
+            display: none !important;
+        }
+
         .section.active {
-            display: block;
+            display: block !important;
             animation: fadeIn 0.3s ease;
         }
 
@@ -2252,9 +2256,11 @@
             return userId;
         }
 
-        // Tab Navigation Router
+        // Tab Navigation Router (Đơn giản hóa tuyệt đối, chống kẹt trang)
         function switchTab(tabId, pushHash = true) {
-            // Update Navigation Links
+            console.log("Kích hoạt chuyển tab sang:", tabId);
+            
+            // 1. Cập nhật trạng thái Active trên Navigation Menu
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('href') === '#' + tabId) {
@@ -2262,42 +2268,28 @@
                 }
             });
 
-            // Hide all sections and activate target section
+            // 2. Hiện section được chọn, ẩn các section khác
             document.querySelectorAll('.section').forEach(sec => {
-                sec.classList.remove('active');
-                sec.style.display = 'none';
+                if (sec.id === tabId) {
+                    sec.classList.remove('tab-hidden');
+                    sec.classList.add('active');
+                } else {
+                    sec.classList.add('tab-hidden');
+                    sec.classList.remove('active');
+                }
             });
-            
-            const activeSection = document.getElementById(tabId);
-            if (activeSection) {
-                activeSection.classList.add('active');
-                activeSection.style.display = 'block';
-            }
 
-            // Sync URL hashtag
-            if (pushHash && history.replaceState) {
-                history.replaceState(null, null, '#' + tabId);
-            }
-
-            // Close Mobile menu if open
+            // 3. Đóng Menu Mobile nếu đang mở
             const navLinks = document.getElementById('navLinks');
             if (navLinks) navLinks.classList.remove('show');
 
-            // Scroll immediately and smoothly
-            if (activeSection && tabId !== 'home') {
-                const headerHeight = document.querySelector('header')?.offsetHeight || 76;
-                const elementPosition = activeSection.getBoundingClientRect().top + window.pageYOffset;
-                const offsetPosition = elementPosition - headerHeight - 10;
-                
-                window.scrollTo({
-                    top: Math.max(0, offsetPosition),
-                    behavior: 'smooth'
-                });
-            } else {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+            // 4. Cuộn trực tiếp tới khu vực mong muốn
+            const targetEl = document.getElementById(tabId);
+            if (targetEl) {
+                targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
 
-            // Tự động kích hoạt hiển thị Tháng 1 khi người dùng mở trang Lộ Trình #plans
+            // 5. Tự động kích hoạt hiển thị Tháng 1 khi người dùng mở trang Lộ Trình #plans
             if (tabId === 'plans') {
                 setTimeout(() => {
                     const month1Btn = document.querySelector('.month-card[data-month="1"]');
