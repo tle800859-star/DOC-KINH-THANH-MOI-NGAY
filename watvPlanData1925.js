@@ -3,7 +3,7 @@
 // CHUẨN NỘI DUNG VÀ QUAN ĐIỂM HỘI HÁNH ĐỨC CHÚA TRỜI (WATV.ORG)
 // ========================================================
 
-const WATV_12_MONTHS_PLAN = [
+var WATV_12_MONTHS_PLAN = [
   {
     month: 1,
     title: "Tháng 1: Đức Chúa Trời Elohim, Ngày Sa-bát & Lễ Vượt Qua Giao Ước Mới",
@@ -527,7 +527,7 @@ const WATV_12_MONTHS_PLAN = [
 // LỘ TRÌNH 1: TIẾN TRÌNH LỊCH SỬ & LỜI TIÊN TRI ỨNG NGHIỆM (CHRONOLOGICAL PLAN)
 // (Sắp xếp các sách Cựu Ước & Tân Ước chuẩn xác theo thời gian xuất hiện & ứng nghiệm)
 // ========================================================
-const CHRONOLOGICAL_12_MONTHS_PLAN = [
+var CHRONOLOGICAL_12_MONTHS_PLAN = [
   {
     month: 1,
     title: "Tháng 1: Khởi Đầu Sáng Tạo, Thời Đại Các Tổ Phụ & Đức Tin Thử Thách",
@@ -889,7 +889,7 @@ const CHRONOLOGICAL_12_MONTHS_PLAN = [
 // LỘ TRÌNH 3: LỘ TRÌNH 6 THÁNG NHANH (TÂN ƯỚC & TIÊN TRI TRỌNG TÂM)
 // (2 chương/ngày - 10-15 phút/ngày - Tân Ước + Ê-sai, Đa-ni-ên, Sa-cha-ri)
 // ========================================================
-const FAST_6_MONTHS_PLAN = [
+var FAST_6_MONTHS_PLAN = [
   {
     month: 1,
     title: "Tháng 1: Bốn Phúc Âm (Phần 1) – Đức Chúa Giê-xu & Lễ Vượt Qua Giao Ước Mới",
@@ -1145,7 +1145,7 @@ const FAST_6_MONTHS_PLAN = [
 // LỘ TRÌNH 4: LỘ TRÌNH DÀNH CHO HỌC SINH CẤP 2 (THCS: 11 – 14 TUỔI)
 // (1-1.5 chương/ngày - 5-7 phút/ngày - Thiếu niên đức tin & Lẽ Thật)
 // ========================================================
-const STUDENT_CAP2_PLAN = [
+var STUDENT_CAP2_PLAN = [
   {
     month: 1,
     title: "Tháng 1: Những Thiếu Niên Anh Hùng Đức Tin & Lắng Nghe Tiếng Đức Chúa Trời",
@@ -1321,7 +1321,7 @@ const STUDENT_CAP2_PLAN = [
 // LỘ TRÌNH 5: LỘ TRÌNH DÀNH CHO HỌC SINH CẤP 3 (THPT: 15 – 18 TUỔI)
 // (2 chương/ngày - 10-12 phút/ngày - Định hướng tương lai & Lẽ Thật)
 // ========================================================
-const STUDENT_CAP3_PLAN = [
+var STUDENT_CAP3_PLAN = [
   {
     month: 1,
     title: "Tháng 1: Bản Sắc Con Cái Đức Chúa Trời & Lẽ Thật Elohim",
