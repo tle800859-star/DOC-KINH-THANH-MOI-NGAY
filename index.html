@@ -3303,24 +3303,30 @@ if (typeof module !== 'undefined' && module.exports) {
 
         // Tab Navigation Router (Đơn giản hóa tuyệt đối, chống kẹt trang)
         function switchTab(tabId, pushHash = true) {
-            console.log("Kích hoạt chuyển tab sang:", tabId);
-            
+            let targetId = tabId || 'home';
+            if (targetId === 'read' || targetId === 'devotionals') targetId = 'reflections';
+
+            console.log("Kích hoạt chuyển tab sang:", targetId);
+
             // 1. Cập nhật trạng thái Active trên Navigation Menu
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + tabId) {
+                const linkHref = link.getAttribute('href') || '';
+                if (linkHref === '#' + targetId || linkHref === '#' + tabId) {
                     link.classList.add('active');
                 }
             });
 
             // 2. Hiện section được chọn, ẩn các section khác
             document.querySelectorAll('.section').forEach(sec => {
-                if (sec.id === tabId) {
+                if (sec.id === targetId) {
                     sec.classList.remove('tab-hidden');
                     sec.classList.add('active');
+                    sec.style.display = 'block';
                 } else {
                     sec.classList.add('tab-hidden');
                     sec.classList.remove('active');
+                    sec.style.display = 'none';
                 }
             });
 
@@ -3328,14 +3334,16 @@ if (typeof module !== 'undefined' && module.exports) {
             const navLinks = document.getElementById('navLinks');
             if (navLinks) navLinks.classList.remove('show');
 
-            // 4. Cuộn trực tiếp tới khu vực mong muốn
-            const targetEl = document.getElementById(tabId);
-            if (targetEl) {
-                targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // 4. Cuộn trực tiếp lên đầu trang
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // 5. Cập nhật Hash trên thanh địa chỉ URL
+            if (pushHash && history.replaceState) {
+                history.replaceState(null, '', '#' + targetId);
             }
 
-            // 5. Tự động kích hoạt hiển thị Tháng 1 khi người dùng mở trang Lộ Trình #plans
-            if (tabId === 'plans') {
+            // 6. Tự động kích hoạt hiển thị Tháng 1 khi mở trang Lộ Trình #plans
+            if (targetId === 'plans') {
                 setTimeout(() => {
                     const month1Btn = document.querySelector('.month-card[data-month="1"]');
                     if (typeof filterMonthPlan === 'function') {
@@ -3345,8 +3353,21 @@ if (typeof module !== 'undefined' && module.exports) {
             }
         }
 
-        // Tự động kiểm tra & cập nhật tham số phiên bản Version (?v=1.0.2) để chống Cache cũ (Chỉ áp dụng trên HTTP/HTTPS Server)
+        // Tự động kiểm tra & xử lý hashtag URL chống kẹt trang
         const APP_VERSION = '1.0.2';
+        function handleHashRoute() {
+            let rawHash = window.location.hash.replace('#', '').trim();
+            if (!rawHash) rawHash = 'home';
+            let targetId = rawHash;
+            if (targetId === 'read' || targetId === 'devotionals') targetId = 'reflections';
+
+            if (document.getElementById(targetId)) {
+                switchTab(targetId, false);
+            } else {
+                switchTab('home', false);
+            }
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             if (window.location.protocol.startsWith('http')) {
                 const urlParams = new URLSearchParams(window.location.search);
@@ -3359,17 +3380,11 @@ if (typeof module !== 'undefined' && module.exports) {
                 }
             }
 
-            const hash = window.location.hash.replace('#', '');
-            if (hash && document.getElementById(hash)) {
-                switchTab(hash, false);
-            }
+            handleHashRoute();
         });
 
         window.addEventListener('hashchange', () => {
-            const hash = window.location.hash.replace('#', '');
-            if (hash && document.getElementById(hash)) {
-                switchTab(hash, false);
-            }
+            handleHashRoute();
         });
 
         // Toggle Mobile Menu
