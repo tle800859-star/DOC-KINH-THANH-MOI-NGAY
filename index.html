@@ -2670,13 +2670,14 @@
 
         // Tự động khởi tạo Quiz & Thẻ Lộ Trình 12 Tháng ngay khi trang nạp xong
         document.addEventListener('DOMContentLoaded', () => {
-            window.ACTIVE_12_MONTHS_PLAN = (typeof WATV_12_MONTHS_PLAN !== 'undefined' ? WATV_12_MONTHS_PLAN : []);
+            window.ACTIVE_12_MONTHS_PLAN = window.WATV_12_MONTHS_PLAN || (typeof WATV_12_MONTHS_PLAN !== 'undefined' ? WATV_12_MONTHS_PLAN : []);
             
             // Khôi phục Lộ Trình mà thầy đã chọn ở lần truy cập trước từ localStorage
             const savedPlan = localStorage.getItem('saved_reading_plan_mode');
             if (savedPlan) {
                 switchReadingPlan(savedPlan, false);
             } else {
+                window.ACTIVE_12_MONTHS_PLAN = window.WATV_12_MONTHS_PLAN || WATV_12_MONTHS_PLAN || [];
                 updateQuizSelectDropdown();
                 renderQuizForMonth(1);
                 renderMonthCardsGrid(1);
