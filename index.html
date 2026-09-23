@@ -20,6 +20,66 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <!-- html2canvas for Verse Image Card Generator -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        // Core Tab Router (Khai báo sớm 100% sẵn sàng trên window.switchTab chống đơ nút bấm)
+        window.switchTab = function(tabId, pushHash = true) {
+            let targetId = tabId || 'home';
+            if (targetId === 'read' || targetId === 'devotionals') targetId = 'reflections';
+
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                const linkHref = link.getAttribute('href') || '';
+                if (linkHref === '#' + targetId || linkHref === '#' + tabId) {
+                    link.classList.add('active');
+                }
+            });
+
+            document.querySelectorAll('.section').forEach(sec => {
+                if (sec.id === targetId) {
+                    sec.classList.remove('tab-hidden');
+                    sec.classList.add('active');
+                    sec.style.display = 'block';
+                } else {
+                    sec.classList.add('tab-hidden');
+                    sec.classList.remove('active');
+                    sec.style.display = 'none';
+                }
+            });
+
+            const navLinks = document.getElementById('navLinks');
+            if (navLinks) navLinks.classList.remove('show');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (pushHash && history.replaceState) {
+                history.replaceState(null, '', '#' + targetId);
+            }
+
+            if (targetId === 'plans') {
+                setTimeout(() => {
+                    const month1Btn = document.querySelector('.month-card[data-month="1"]');
+                    if (typeof filterMonthPlan === 'function') {
+                        filterMonthPlan(1, month1Btn);
+                    }
+                }, 50);
+            }
+        };
+
+        window.toggleMobileMenu = function() {
+            const navLinks = document.getElementById('navLinks');
+            if (navLinks) navLinks.classList.toggle('show');
+        };
+
+        window.showToast = function(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            if (toast && toastMsg) {
+                toastMsg.innerText = message;
+                toast.classList.add('show');
+                setTimeout(() => { toast.classList.remove('show'); }, 3000);
+            }
+        };
+    </script>
     <style>
         :root {
             --primary: #1b4965;
