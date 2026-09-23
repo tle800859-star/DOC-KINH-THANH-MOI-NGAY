@@ -1588,14 +1588,22 @@
                                 <input type="text" id="adminReflectTitle" required class="essay-input" style="height: 46px;" placeholder="Ví dụ: Lắng Nghe Tiếng Chúa Giữa Dông Bão">
                             </div>
                             <div style="margin-bottom: 16px;">
-                                <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">URL Hình Ảnh Minh Họa (Unsplash/Web):</label>
-                                <input type="url" id="adminReflectImage" required class="essay-input" style="height: 46px;" placeholder="https://images.unsplash.com/photo-...">
+                                <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;"><i class="fa-solid fa-image"></i> Hình Ảnh Minh Họa (Tải file từ máy hoặc dán URL):</label>
+                                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 8px;">
+                                    <input type="file" id="adminReflectFile" accept="image/*" class="essay-input" style="height: 46px; padding: 8px; flex: 1;" onchange="handleAdminImageFileSelect(event)">
+                                    <span style="font-weight: 700; color: var(--text-muted); font-size: 0.85rem;">HOẶC DÁN URL</span>
+                                    <input type="url" id="adminReflectImage" class="essay-input" style="height: 46px; flex: 1;" placeholder="https://images.unsplash.com/photo-..." onchange="handleAdminImageUrlInput(event)">
+                                </div>
+                                <div id="adminReflectImagePreviewContainer" style="display: none; margin-top: 10px; text-align: center; background: #f8fafc; padding: 12px; border-radius: 12px; border: 1px dashed var(--primary);">
+                                    <img id="adminReflectImagePreview" src="" alt="Preview" style="max-height: 160px; max-width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                                    <p style="font-size: 0.85rem; color: #059669; font-weight: 700; margin-top: 8px; margin-bottom: 0;"><i class="fa-solid fa-circle-check"></i> Đã chọn ảnh minh họa sẵn sàng đăng bài!</p>
+                                </div>
                             </div>
                             <div style="margin-bottom: 20px;">
                                 <label style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 6px;">Nội dung bài viết tĩnh nguyện ngắn:</label>
                                 <textarea id="adminReflectExcerpt" required class="essay-input" style="height: 120px;" placeholder="Viết tóm tắt hoặc bài tĩnh nguyện tại đây..."></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Đăng Bài Suy Ngẫm</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-cloud-arrow-up"></i> Tải Ảnh & Đăng Bài Suy Ngẫm</button>
                         </form>
                     </div>
 
@@ -4291,17 +4299,78 @@ if (typeof module !== 'undefined' && module.exports) {
             switchTab('quizzes');
         }
 
-        // Admin Action 4: Save Reflection into Supabase DB & LocalStorage Fallback
+        // Xử lý xem trước và tải ảnh từ máy tính
+        let uploadedImageDataUrl = '';
+
+        function handleAdminImageFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadedImageDataUrl = e.target.result;
+                const imgPrev = document.getElementById('adminReflectImagePreview');
+                const container = document.getElementById('adminReflectImagePreviewContainer');
+                if (imgPrev && container) {
+                    imgPrev.src = uploadedImageDataUrl;
+                    container.style.display = 'block';
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function handleAdminImageUrlInput(event) {
+            const url = event.target.value.trim();
+            if (!url) return;
+            uploadedImageDataUrl = url;
+            const imgPrev = document.getElementById('adminReflectImagePreview');
+            const container = document.getElementById('adminReflectImagePreviewContainer');
+            if (imgPrev && container) {
+                imgPrev.src = uploadedImageDataUrl;
+                container.style.display = 'block';
+            }
+        }
+
+        // Admin Action 4: Save Reflection into Supabase DB & LocalStorage Fallback (Có hỗ trợ tải file ảnh lên Supabase Storage)
         async function adminSaveReflection(event) {
             event.preventDefault();
             const title = document.getElementById('adminReflectTitle').value;
-            const img = document.getElementById('adminReflectImage').value;
+            const urlInput = document.getElementById('adminReflectImage').value.trim();
+            const fileInput = document.getElementById('adminReflectFile');
+            const file = fileInput?.files?.[0];
             const excerpt = document.getElementById('adminReflectExcerpt').value;
+
+            let finalImageUrl = urlInput || uploadedImageDataUrl || 'https://images.unsplash.com/photo-1507692049790-de58290a4334';
+
+            // Tự động tải file ảnh từ máy lên Supabase Storage bucket 'reflections'
+            if (supabaseClient && file) {
+                try {
+                    showToast("Đang tải ảnh lên Supabase Storage...");
+                    const fileExt = file.name.split('.').pop();
+                    const fileName = `reflection_${Date.now()}_${Math.random().toString(36).substring(2, 7)}.${fileExt}`;
+                    const { data: uploadData, error: uploadErr } = await supabaseClient.storage
+                        .from('reflections')
+                        .upload(fileName, file, { cacheControl: '3600', upsert: true });
+
+                    if (!uploadErr && uploadData) {
+                        const { data: publicUrlData } = supabaseClient.storage
+                            .from('reflections')
+                            .getPublicUrl(fileName);
+                        if (publicUrlData && publicUrlData.publicUrl) {
+                            finalImageUrl = publicUrlData.publicUrl;
+                        }
+                    } else {
+                        console.warn("Supabase Storage upload info (có thể chưa tạo bucket 'reflections'):", uploadErr);
+                    }
+                } catch (stErr) {
+                    console.warn("Storage upload exception:", stErr);
+                }
+            }
 
             const newItem = {
                 id: 'local_' + Date.now(),
                 title: title,
-                image_url: img || 'https://images.unsplash.com/photo-1507692049790-de58290a4334',
+                image_url: finalImageUrl,
                 excerpt: excerpt,
                 created_at: new Date().toISOString()
             };
@@ -4311,14 +4380,19 @@ if (typeof module !== 'undefined' && module.exports) {
                 try {
                     const { error } = await supabaseClient
                         .from('reflections')
-                        .insert([{ title: title, image_url: img, excerpt: excerpt }]);
+                        .insert([{ title: title, image_url: finalImageUrl, excerpt: excerpt }]);
                     if (!error) savedRemote = true;
                 } catch (err) { console.warn("Supabase Reflection insert warning:", err); }
             }
 
             saveLocalItem('local_reflections', newItem);
-            showToast(savedRemote ? "Đã đăng Bài suy ngẫm mới lên CSDL Supabase!" : "Đã đăng Bài suy ngẫm mới thành công!");
+            showToast(savedRemote ? "Đã tải ảnh & đăng Bài suy ngẫm mới lên CSDL Supabase!" : "Đã tải ảnh & đăng Bài suy ngẫm thành công!");
+            
             document.getElementById('adminReflectionForm').reset();
+            uploadedImageDataUrl = '';
+            const prevContainer = document.getElementById('adminReflectImagePreviewContainer');
+            if (prevContainer) prevContainer.style.display = 'none';
+
             loadReflectionsFromSupabase();
             switchTab('reflections');
         }
