@@ -1764,7 +1764,7 @@
     </footer>
 
     <!-- JavaScript Application Logic -->
-    <script src="./watvPlanData1925.js?v=20260923_v103"></script>
+    <script src="./watvPlanData1925.js?v=20260923_v103" onerror="console.warn('Using embedded dataset')"></script>
     <script>
 // ========================================================
 // LỘ TRÌNH 12 THÁNG ĐỌC KINH THÁNH (BẢN DỊCH PHAN KHÔI 1925)
@@ -4514,6 +4514,23 @@ if (typeof module !== 'undefined' && module.exports) {
             loadVideosFromSupabase();
         }
 
+        // Bản đồ dữ liệu các Câu gốc
+        window.ALL_QUOTES_MAP = {};
+
+        function copyQuoteById(quoteId) {
+            const q = window.ALL_QUOTES_MAP[quoteId];
+            if (q) {
+                copyText(`${q.scripture_text} - ${q.reference}`);
+            }
+        }
+
+        function shareQuoteById(quoteId) {
+            const q = window.ALL_QUOTES_MAP[quoteId];
+            if (q) {
+                shareQuote(q.reference, q.scripture_text);
+            }
+        }
+
         async function loadQuotesFromSupabase() {
             let remoteQuotes = [];
             if (supabaseClient) {
@@ -4533,16 +4550,23 @@ if (typeof module !== 'undefined' && module.exports) {
             const grid = document.getElementById('quotesGrid');
             if (!grid || quotes.length === 0) return;
 
+            window.ALL_QUOTES_MAP = {};
             let html = '';
-            quotes.forEach(q => {
+            quotes.forEach((q, index) => {
+                const quoteId = q.id || ('quote_' + index);
+                window.ALL_QUOTES_MAP[quoteId] = q;
+
+                const textStr = (q.scripture_text || '').replace(/"/g, '&quot;');
+                const refStr = (q.reference || '').replace(/"/g, '&quot;');
+
                 html += `
                 <div class="quote-card" data-cat="${q.category}">
-                    <p class="quote-body scripture-font">"${q.scripture_text}"</p>
+                    <p class="quote-body scripture-font">"${textStr}"</p>
                     <div class="quote-footer">
-                        <span class="quote-ref-text">${q.reference}</span>
+                        <span class="quote-ref-text">${refStr}</span>
                         <div>
-                            <button class="icon-btn" onclick="copyText('${q.scripture_text.replace(/'/g, "\\'")} - ${q.reference.replace(/'/g, "\\')}')" title="Sao chép"><i class="fa-regular fa-copy"></i></button>
-                            <button class="icon-btn" onclick="shareQuote('${q.reference.replace(/'/g, "\\')}', '${q.scripture_text.replace(/'/g, "\\')}')" title="Chia sẻ"><i class="fa-solid fa-share-nodes"></i></button>
+                            <button class="icon-btn" onclick="copyQuoteById('${quoteId}')" title="Sao chép"><i class="fa-regular fa-copy"></i></button>
+                            <button class="icon-btn" onclick="shareQuoteById('${quoteId}')" title="Chia sẻ"><i class="fa-solid fa-share-nodes"></i></button>
                         </div>
                     </div>
                 </div>`;
